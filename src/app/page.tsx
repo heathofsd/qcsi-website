@@ -161,7 +161,7 @@ export default function Home() {
               { name: "Jonathan Byrd", year: "2024", photo: "/photos/jonathan-byrd.jpg" },
               { name: "Jami Lynn", year: "2024", photo: "/photos/jami-lynn.webp" },
               { name: "Andrea von Kampen", year: "2025", photo: "/photos/andrea-von-kampen.webp" },
-              { name: "John Fullbright", year: "2025", photo: "/photos/john-fullbright.jpg" },
+              { name: "John Fullbright", year: "2025", photo: "/photos/john-fullbright.jpg", objectPosition: "center 10%" },
             ].map((artist) => (
               <div key={artist.name} className="text-center">
                 <div className="relative aspect-square rounded-xl overflow-hidden mb-4">
@@ -170,6 +170,7 @@ export default function Home() {
                     alt={`${artist.name} at the Queen City Songwriters Invitational`}
                     fill
                     className="object-cover"
+                    style={artist.objectPosition ? { objectPosition: artist.objectPosition } : undefined}
                   />
                 </div>
                 <h3 className="font-display font-bold text-charcoal">{artist.name}</h3>
