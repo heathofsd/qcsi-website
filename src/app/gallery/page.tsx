@@ -88,14 +88,14 @@ export default function GalleryPage() {
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {[
-                { src: "/photos/performer-full-house.jpg", alt: "Packed house for a songwriter performance at the 2024 Invitational" },
-                { src: "/photos/performer-matthews-audience-view.jpg", alt: "View from the audience during a Matthews performance" },
-                { src: "/photos/duo-stage-performance.jpg", alt: "Duo performing on stage at The Matthews Opera House" },
-                { src: "/photos/performer-matthews-wide.jpg", alt: "Wide shot of a performer at The Matthews Opera House", featured: true },
-                { src: "/photos/crowd-line-outside.jpg", alt: "Audience lined up outside a venue during the Invitational" },
-                { src: "/photos/venue-gallery-packed.jpg", alt: "Standing-room-only crowd at a songwriter round" },
-                { src: "/photos/performer-closeup-guitar.jpg", alt: "Close-up of a songwriter performing guitar" },
-                { src: "/photos/community-selfie.jpg", alt: "Songwriters and community members at the 2024 Invitational" },
+                { src: "/photos/2024/converted/matthews-byrd-stage-crowd.jpg", alt: "Jonathan Byrd performing on The Matthews stage with crowd visible, 2024 Invitational", featured: true },
+                { src: "/photos/2024/converted/venue-bar-crowd.jpg", alt: "Packed bar venue during a songwriter round at the 2024 Invitational" },
+                { src: "/photos/2024/converted/traveler-stage-group.jpg", alt: "Songwriters on the Traveler Whiskey Stage at the 2024 Invitational" },
+                { src: "/photos/2024/converted/coffeeshop-round.jpg", alt: "Songwriter round in a downtown Spearfish coffee shop" },
+                { src: "/photos/2024/converted/studio-621-round.jpg", alt: "Intimate songwriter round at Studio 621" },
+                { src: "/photos/2024/converted/matthews-performer-portrait.jpg", alt: "Performer on The Matthews Opera House stage, 2024 Invitational" },
+                { src: "/photos/2024/converted/matthews-performer-crowd.jpg", alt: "Songwriter performing to a full house at The Matthews" },
+                { src: "/photos/2024/converted/bar-venue-round.jpg", alt: "Songwriter round at a downtown Spearfish bar venue" },
               ].map((photo, i) => (
                 <div
                   key={i}
