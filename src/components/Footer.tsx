@@ -84,15 +84,7 @@ export function Footer() {
                   contact@qcsongwriters.com
                 </a>
               </li>
-              <li>
-                <a
-                  href="tel:+16056414103"
-                  className="hover:text-amber transition-colors"
-                >
-                  (605) 641-4103
-                </a>
-              </li>
-              <li>Spearfish, SD 57783</li>
+              <li>Spearfish, SD</li>
             </ul>
             <div className="flex gap-4 mt-6">
               <a

@@ -120,7 +120,7 @@ export default function AboutPage() {
                   <div>
                     <dt className="text-charcoal/50">Location</dt>
                     <dd className="text-charcoal font-semibold">
-                      Spearfish, SD 57783
+                      Spearfish, SD
                     </dd>
                   </div>
                 </dl>

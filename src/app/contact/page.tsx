@@ -153,22 +153,9 @@ export default function ContactPage() {
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-sm text-charcoal/50 mb-1">Phone</dt>
-                    <dd>
-                      <a
-                        href="tel:+16056414103"
-                        className="text-charcoal font-semibold"
-                      >
-                        (605) 641-4103
-                      </a>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm text-charcoal/50 mb-1">Address</dt>
+                    <dt className="text-sm text-charcoal/50 mb-1">Location</dt>
                     <dd className="text-charcoal font-semibold">
-                      810 State St.
-                      <br />
-                      Spearfish, SD 57783
+                      Spearfish, SD
                     </dd>
                   </div>
                 </dl>

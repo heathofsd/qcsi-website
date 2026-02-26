@@ -124,8 +124,7 @@ export default function SupportPage() {
               </div>
 
               <p className="text-xs text-charcoal/40 mt-6 text-center">
-                For check donations, mail to: QCSI, 810 State St., Spearfish,
-                SD 57783
+                For check donations, email contact@qcsongwriters.com for mailing details.
               </p>
             </div>
           </div>
