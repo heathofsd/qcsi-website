@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import type { Metadata } from "next";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
   return (
     <>
@@ -47,9 +48,36 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <form
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
-                    setSubmitted(true);
+                    setSending(true);
+                    setError("");
+
+                    const form = e.currentTarget;
+                    const data = {
+                      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+                      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+                      subject: (form.elements.namedItem("subject") as HTMLSelectElement).value,
+                      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+                    };
+
+                    try {
+                      const res = await fetch("/api/contact", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(data),
+                      });
+
+                      if (res.ok) {
+                        setSubmitted(true);
+                      } else {
+                        setError("Something went wrong. Please email us directly at contact@qcsongwriters.com");
+                      }
+                    } catch {
+                      setError("Something went wrong. Please email us directly at contact@qcsongwriters.com");
+                    } finally {
+                      setSending(false);
+                    }
                   }}
                   className="space-y-6"
                 >
@@ -124,11 +152,15 @@ export default function ContactPage() {
                       placeholder="Tell us what's on your mind..."
                     />
                   </div>
+                  {error && (
+                    <p className="text-red-600 text-sm">{error}</p>
+                  )}
                   <button
                     type="submit"
-                    className="rounded-full bg-denim px-8 py-4 font-bold text-cream hover:bg-denim-light transition-colors"
+                    disabled={sending}
+                    className="rounded-full bg-denim px-8 py-4 font-bold text-cream hover:bg-denim-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {sending ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               )}
