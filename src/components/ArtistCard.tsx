@@ -76,6 +76,7 @@ export default function ArtistCard({ artist, variant = "default" }: { artist: Ar
                 alt={`${artist.name}, Queen City Songwriters Invitational artist`}
                 fill
                 className="object-cover"
+                style={artist.photoPosition ? { objectPosition: artist.photoPosition } : undefined}
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center">

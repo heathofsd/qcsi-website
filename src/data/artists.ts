@@ -16,6 +16,7 @@ export interface Artist {
   instagram?: string;
   facebook?: string;
   photo?: string;
+  photoPosition?: string;
   headliner?: boolean;
 }
 
@@ -50,6 +51,7 @@ export const headliners: Artist[] = [
     year: [2025],
     bio: "Grammy-nominated singer-songwriter with raw, heartfelt lyrics and masterful musicianship. One of the finest songwriters of his generation. Headlined the 2025 Saturday night showcase at The Matthews Opera House.",
     photo: "/photos/john-fullbright.jpg",
+    photoPosition: "center 20%",
     headliner: true,
   },
 ];
