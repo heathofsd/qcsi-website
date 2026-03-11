@@ -37,7 +37,7 @@ export default function ContactPage() {
               <iframe
                 src="https://heathjohnson.notion.site/ebd/320f6ac441bb80709bfdce9af7094e60"
                 width="100%"
-                height="900"
+                height="600"
                 className="rounded-xl border border-charcoal/10"
                 title="Contact Queen City Songwriters"
                 allow="fullscreen"
