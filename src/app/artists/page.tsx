@@ -2,50 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { artists2025, artists2024Only, headliners } from "@/data/artists";
+import ArtistCard from "@/components/ArtistCard";
 
 export const metadata: Metadata = {
   title: "Artists",
   description:
     "Meet the songwriters who have been part of the Queen City Songwriters Invitational — original voices from across the region.",
 };
-
-function ArtistCard({ name, instagram, photo }: { name: string; instagram?: string; photo?: string }) {
-  return (
-    <div className="group bg-sand rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="relative aspect-square bg-charcoal/5">
-        {photo ? (
-          <Image
-            src={photo}
-            alt={`${name}, Queen City Songwriters Invitational artist`}
-            fill
-            className="object-cover"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <div className="text-charcoal/20 group-hover:text-denim/30 transition-colors">
-              <svg className="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.75} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </div>
-          </div>
-        )}
-      </div>
-      <div className="p-4">
-        <h3 className="font-display font-bold text-charcoal">{name}</h3>
-        {instagram && (
-          <a
-            href={`https://instagram.com/${instagram}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-denim hover:text-denim-light transition-colors"
-          >
-            @{instagram}
-          </a>
-        )}
-      </div>
-    </div>
-  );
-}
 
 export default function ArtistsPage() {
   return (
@@ -144,12 +107,7 @@ export default function ArtistsPage() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {artists2025.map((artist) => (
-              <ArtistCard
-                key={artist.slug}
-                name={artist.name}
-                instagram={artist.instagram}
-                photo={artist.photo}
-              />
+              <ArtistCard key={artist.slug} artist={artist} />
             ))}
           </div>
         </div>
