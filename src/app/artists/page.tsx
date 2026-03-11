@@ -65,30 +65,7 @@ export default function ArtistsPage() {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {headliners.map((artist) => (
-              <div key={artist.name} className="bg-charcoal rounded-xl overflow-hidden">
-                <div className="relative aspect-square">
-                  {artist.photo ? (
-                    <Image
-                      src={artist.photo}
-                      alt={`${artist.name}, headliner at the Queen City Songwriters Invitational`}
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <svg className="w-16 h-16 text-cream/10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.75} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                      </svg>
-                    </div>
-                  )}
-                </div>
-                <div className="p-4">
-                  <h3 className="font-display font-bold text-cream">{artist.name}</h3>
-                  <p className="text-amber text-sm">
-                    {artist.year.join(", ")}
-                  </p>
-                </div>
-              </div>
+              <ArtistCard key={artist.slug} artist={artist} variant="headliner" />
             ))}
           </div>
         </div>

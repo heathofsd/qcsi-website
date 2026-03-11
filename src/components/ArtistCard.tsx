@@ -44,7 +44,7 @@ function DetailRow({ label, value }: { label: string; value?: string }) {
   );
 }
 
-export default function ArtistCard({ artist }: { artist: Artist }) {
+export default function ArtistCard({ artist, variant = "default" }: { artist: Artist; variant?: "default" | "headliner" }) {
   const [flipped, setFlipped] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const hasBack = !!(artist.fullBio || artist.bio);
@@ -68,7 +68,7 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
         className="cursor-pointer"
         onClick={() => hasBack && setFlipped(true)}
       >
-        <div className="bg-sand rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+        <div className={`${variant === "headliner" ? "bg-charcoal" : "bg-sand"} rounded-xl overflow-hidden hover:shadow-lg transition-shadow`}>
           <div className="relative aspect-square bg-charcoal/5">
             {artist.photo ? (
               <Image
@@ -79,19 +79,25 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
-                <svg className="w-16 h-16 text-charcoal/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.75} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                <svg className={`w-16 h-16 ${variant === "headliner" ? "text-cream/10" : "text-charcoal/20"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.75} d={variant === "headliner" ? "M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" : "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"} />
                 </svg>
               </div>
             )}
           </div>
           <div className="p-4">
-            <h3 className="font-display font-bold text-charcoal">{artist.name}</h3>
-            {artist.hometown && (
-              <p className="text-xs text-charcoal/50">{artist.hometown}</p>
-            )}
-            {!artist.hometown && artist.instagram && (
-              <p className="text-sm text-denim">@{artist.instagram}</p>
+            <h3 className={`font-display font-bold ${variant === "headliner" ? "text-cream" : "text-charcoal"}`}>{artist.name}</h3>
+            {variant === "headliner" ? (
+              <p className="text-amber text-sm">{artist.year.join(", ")}</p>
+            ) : (
+              <>
+                {artist.hometown && (
+                  <p className="text-xs text-charcoal/50">{artist.hometown}</p>
+                )}
+                {!artist.hometown && artist.instagram && (
+                  <p className="text-sm text-denim">@{artist.instagram}</p>
+                )}
+              </>
             )}
           </div>
         </div>
