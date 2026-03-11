@@ -1,12 +1,12 @@
-"use client";
+import type { Metadata } from "next";
 
-import { useState } from "react";
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Get in touch with Queen City Songwriters — whether you're a songwriter, sponsor, or music lover.",
+};
 
 export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [error, setError] = useState("");
-
   return (
     <>
       {/* Hero */}
@@ -32,138 +32,16 @@ export default function ContactPage() {
       <section className="bg-cream py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
-            {/* Form */}
+            {/* Notion Form Embed */}
             <div className="lg:col-span-3">
-              {submitted ? (
-                <div className="bg-sage/10 border border-sage/20 rounded-xl p-10 text-center">
-                  <svg className="w-12 h-12 mx-auto text-sage mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <h3 className="font-display text-2xl font-bold text-charcoal mb-2">
-                    Message Sent
-                  </h3>
-                  <p className="text-charcoal/60">
-                    Thanks for reaching out. We&apos;ll get back to you soon.
-                  </p>
-                </div>
-              ) : (
-                <form
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    setSending(true);
-                    setError("");
-
-                    const form = e.currentTarget;
-                    const data = {
-                      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-                      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-                      subject: (form.elements.namedItem("subject") as HTMLSelectElement).value,
-                      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-                    };
-
-                    try {
-                      const res = await fetch("/api/contact", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(data),
-                      });
-
-                      if (res.ok) {
-                        setSubmitted(true);
-                      } else {
-                        setError("Something went wrong. Please email us directly at contact@qcsongwriters.com");
-                      }
-                    } catch {
-                      setError("Something went wrong. Please email us directly at contact@qcsongwriters.com");
-                    } finally {
-                      setSending(false);
-                    }
-                  }}
-                  className="space-y-6"
-                >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label
-                        htmlFor="name"
-                        className="block text-sm font-semibold text-charcoal mb-2"
-                      >
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        className="w-full rounded-lg border border-charcoal/10 bg-cream px-4 py-3 text-charcoal placeholder:text-charcoal/30 focus:border-denim focus:ring-1 focus:ring-denim transition-colors"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-semibold text-charcoal mb-2"
-                      >
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        className="w-full rounded-lg border border-charcoal/10 bg-cream px-4 py-3 text-charcoal placeholder:text-charcoal/30 focus:border-denim focus:ring-1 focus:ring-denim transition-colors"
-                        placeholder="you@email.com"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="subject"
-                      className="block text-sm font-semibold text-charcoal mb-2"
-                    >
-                      I&apos;m reaching out as a...
-                    </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      className="w-full rounded-lg border border-charcoal/10 bg-cream px-4 py-3 text-charcoal focus:border-denim focus:ring-1 focus:ring-denim transition-colors"
-                    >
-                      <option value="">Select one</option>
-                      <option value="songwriter">Songwriter</option>
-                      <option value="audience">Music lover / Attendee</option>
-                      <option value="sponsor">Potential sponsor</option>
-                      <option value="media">Media / Press</option>
-                      <option value="volunteer">Volunteer</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-semibold text-charcoal mb-2"
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={6}
-                      required
-                      className="w-full rounded-lg border border-charcoal/10 bg-cream px-4 py-3 text-charcoal placeholder:text-charcoal/30 focus:border-denim focus:ring-1 focus:ring-denim transition-colors resize-none"
-                      placeholder="Tell us what's on your mind..."
-                    />
-                  </div>
-                  {error && (
-                    <p className="text-red-600 text-sm">{error}</p>
-                  )}
-                  <button
-                    type="submit"
-                    disabled={sending}
-                    className="rounded-full bg-denim px-8 py-4 font-bold text-cream hover:bg-denim-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {sending ? "Sending..." : "Send Message"}
-                  </button>
-                </form>
-              )}
+              <iframe
+                src="https://heathjohnson.notion.site/ebd/320f6ac441bb80709bfdce9af7094e60"
+                width="100%"
+                height="600"
+                className="rounded-xl border border-charcoal/10"
+                title="Contact Queen City Songwriters"
+                allow="fullscreen"
+              />
             </div>
 
             {/* Contact Info */}
@@ -223,19 +101,6 @@ export default function ContactPage() {
                     <span className="text-sm text-charcoal/50">Facebook</span>
                   </a>
                 </div>
-              </div>
-
-              <div className="bg-charcoal rounded-xl p-8 text-cream">
-                <h3 className="font-display text-lg font-bold text-amber mb-3">
-                  Newsletter
-                </h3>
-                <p className="text-cream/60 text-sm mb-4">
-                  Get updates on the 2026 Invitational, lineup announcements,
-                  and community events.
-                </p>
-                <p className="text-cream/40 text-xs">
-                  Newsletter signup coming soon.
-                </p>
               </div>
             </div>
           </div>
