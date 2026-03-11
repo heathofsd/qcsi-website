@@ -35,7 +35,7 @@ export default function ContactPage() {
             {/* Notion Form Embed */}
             <div className="lg:col-span-3">
               <iframe
-                src="https://heathjohnson.notion.site/ebd/320f6ac441bb80709bfdce9af7094e60"
+                src="https://heathjohnson.notion.site/ebd//320f6ac441bb80709bfdce9af7094e60"
                 width="100%"
                 height="600"
                 className="rounded-xl border border-charcoal/10"
