@@ -64,9 +64,11 @@ export default function ArtistsPage() {
             </p>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {headliners.map((artist) => (
-              <ArtistCard key={artist.slug} artist={artist} variant="headliner" />
-            ))}
+            {[...headliners]
+              .sort((a, b) => Math.max(...b.year) - Math.max(...a.year))
+              .map((artist) => (
+                <ArtistCard key={artist.slug} artist={artist} variant="headliner" />
+              ))}
           </div>
         </div>
       </section>
