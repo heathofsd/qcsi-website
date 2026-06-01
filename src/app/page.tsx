@@ -145,6 +145,47 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 2026 Headliner Announcement */}
+      <section className="bg-charcoal text-cream py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+              <Image
+                src="/photos/jeffrey-foucault.jpg"
+                alt="Jeffrey Foucault, 2026 Queen City Songwriters Invitational headliner"
+                fill
+                className="object-cover"
+                style={{ objectPosition: "center 20%" }}
+              />
+              <span className="absolute bottom-2 right-3 text-[10px] tracking-wide text-cream/40">
+                Photo: Joe Navas
+              </span>
+            </div>
+            <div>
+              <p className="text-amber font-semibold tracking-widest uppercase text-sm mb-4">
+                Announcing Our 2026 Headliner
+              </p>
+              <h2 className="font-display text-4xl lg:text-6xl font-bold mb-6">
+                Jeffrey Foucault
+              </h2>
+              <p className="text-lg text-cream/80 leading-relaxed mb-6">
+                One of the most distinctive voices in American music —
+                &ldquo;contemporary and timeless&rdquo; (The New York Times) —
+                headlines The Matthews Opera House on Saturday, September 26,
+                2026. Two decades on the road have refined a sound recognizable
+                for its simplicity and emotional power.
+              </p>
+              <Link
+                href="/invitational"
+                className="inline-block rounded-full bg-amber px-8 py-4 text-base font-bold text-cream hover:bg-amber-light transition-colors"
+              >
+                The 2026 Invitational
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Past Headliners */}
       <section className="bg-cream py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">

@@ -37,9 +37,60 @@ export default function InvitationalPage() {
               Headliner showcases at The Matthews Opera House by night. Downtown
               Spearfish, South Dakota.
             </p>
-            <p className="text-cream/50 text-sm uppercase tracking-wide">
-              Lineup &amp; tickets announced soon
+            <p className="text-cream/90 text-lg mb-2">
+              Saturday night headliner:{" "}
+              <span className="text-amber font-semibold">Jeffrey Foucault</span>
             </p>
+            <p className="text-cream/50 text-sm uppercase tracking-wide">
+              Full lineup &amp; tickets announced soon
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 2026 Headliner Announcement */}
+      <section className="bg-charcoal text-cream py-20 lg:py-28 border-t border-cream/10">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden order-1 lg:order-none">
+              <Image
+                src="/photos/jeffrey-foucault.jpg"
+                alt="Jeffrey Foucault, 2026 Queen City Songwriters Invitational headliner"
+                fill
+                className="object-cover"
+                style={{ objectPosition: "center 20%" }}
+              />
+              <span className="absolute bottom-2 right-3 text-[10px] tracking-wide text-cream/40">
+                Photo: Joe Navas
+              </span>
+            </div>
+            <div>
+              <p className="text-amber font-semibold tracking-widest uppercase text-sm mb-4">
+                2026 Headliner &middot; Saturday, September 26
+              </p>
+              <h2 className="font-display text-4xl lg:text-5xl font-bold mb-6">
+                Jeffrey Foucault
+              </h2>
+              <p className="text-lg text-cream/80 leading-relaxed mb-4">
+                We&apos;re honored to welcome Jeffrey Foucault to The Matthews
+                Opera House stage for the third annual Invitational. In two
+                decades on the road, he&apos;s become one of the most distinctive
+                voices in American music — a sound instantly recognizable for its
+                simplicity and emotional power.
+              </p>
+              <p className="text-lg text-cream/80 leading-relaxed mb-8">
+                &ldquo;Contemporary and timeless,&rdquo; wrote The New York Times.
+                &ldquo;Pure songwriter,&rdquo; said NPR. &ldquo;His songs are
+                simple and powerful.&rdquo; It&apos;s exactly the kind of voice the
+                Invitational was built to celebrate.
+              </p>
+              <Link
+                href="/artists"
+                className="inline-block rounded-full bg-amber px-8 py-4 text-base font-bold text-cream hover:bg-amber-light transition-colors"
+              >
+                Meet the Artists
+              </Link>
+            </div>
           </div>
         </div>
       </section>

@@ -43,7 +43,7 @@ export default function ArtistsPage() {
       <section className="bg-amber py-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
           <p className="text-cream text-lg font-semibold">
-            The 2026 Invitational lineup will be announced soon.{" "}
+            Jeffrey Foucault headlines the 2026 Invitational — Saturday, September 26.{" "}
             <Link href="/contact" className="underline underline-offset-4 hover:text-cream/80">
               Get notified
             </Link>

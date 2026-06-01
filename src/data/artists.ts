@@ -22,6 +22,19 @@ export interface Artist {
 
 export const headliners: Artist[] = [
   {
+    name: "Jeffrey Foucault",
+    slug: "jeffrey-foucault",
+    year: [2026],
+    hometown: "Native Midwest",
+    bio: "One of the most distinctive voices in American music — \"contemporary and timeless\" (The New York Times). Headlining the 2026 Invitational at The Matthews Opera House on Saturday, September 26.",
+    fullBio: "In two decades on the road, Jeffrey Foucault has become one of the most distinctive voices in American music, refining a sound instantly recognizable for its simplicity and emotional power. Across a string of critically acclaimed studio albums he has built a brick-and-mortar international touring career and a devoted following — one that includes luminaries like Van Dyke Parks, Greil Marcus, and Don Henley. His latest album, The Universal Fire (Fluff & Gravy, 2024), his first of entirely new material since 2018, was cut live in one room: both a working wake for his late friend and drummer Billy Conway and a meditation on the nature of beauty, artifact, and loss.",
+    instrument: "Guitar / Vocals",
+    signatureSong: "The Universal Fire",
+    photo: "/photos/jeffrey-foucault.jpg",
+    photoPosition: "center 20%",
+    headliner: true,
+  },
+  {
     name: "Jonathan Byrd",
     slug: "jonathan-byrd",
     year: [2024],
