@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import DonateCard from "@/components/DonateCard";
 
 export const metadata: Metadata = {
   title: "Support QCSI",
@@ -8,9 +9,30 @@ export const metadata: Metadata = {
     "Support Queen City Songwriters Inc. — a 501(c)(3) nonprofit fostering the art of songwriting in Spearfish, South Dakota. Your donation funds artists, venues, and community programming.",
 };
 
-export default function SupportPage() {
+export default async function SupportPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ donation?: string }>;
+}) {
+  const { donation } = await searchParams;
   return (
     <>
+      {donation === "success" && (
+        <div className="bg-sage text-charcoal">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4 text-center font-semibold">
+            Thank you for supporting original music. A receipt is on its way to
+            your inbox.
+          </div>
+        </div>
+      )}
+      {donation === "cancelled" && (
+        <div className="bg-sand text-charcoal">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4 text-center font-semibold">
+            Your donation was cancelled — no charge was made. You&rsquo;re
+            welcome back anytime.
+          </div>
+        </div>
+      )}
       {/* Hero */}
       <section className="relative bg-charcoal text-cream py-20 lg:py-28 overflow-hidden">
         <Image
@@ -83,50 +105,7 @@ export default function SupportPage() {
             </div>
 
             {/* Donate Card */}
-            <div className="bg-sand rounded-2xl p-10">
-              <h3 className="font-display text-2xl font-bold text-charcoal mb-2">
-                Make a Donation
-              </h3>
-              <p className="text-charcoal/60 text-sm mb-8">
-                Queen City Songwriters Inc. is a 501(c)(3) tax-exempt nonprofit.
-                EIN: 99-3218012. All donations are tax-deductible.
-              </p>
-
-              {/* Suggested amounts */}
-              <div className="grid grid-cols-3 gap-3 mb-6">
-                {["$25", "$50", "$100", "$250", "$500", "$1,000"].map(
-                  (amount) => (
-                    <button
-                      key={amount}
-                      className="rounded-lg border-2 border-charcoal/10 bg-cream px-4 py-3 text-center font-bold text-charcoal hover:border-denim hover:text-denim transition-colors"
-                    >
-                      {amount}
-                    </button>
-                  )
-                )}
-              </div>
-
-              <div className="space-y-4 mt-8">
-                <a
-                  href="https://venmo.com/HeathofSD"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full rounded-full bg-denim px-6 py-4 font-bold text-cream hover:bg-denim-light transition-colors"
-                >
-                  Donate via Venmo
-                </a>
-                <a
-                  href="mailto:contact@qcsongwriters.com?subject=Donation%20to%20QCSI"
-                  className="flex items-center justify-center gap-2 w-full rounded-full border-2 border-charcoal/20 px-6 py-4 font-bold text-charcoal hover:border-charcoal/40 transition-colors"
-                >
-                  Contact Us to Donate
-                </a>
-              </div>
-
-              <p className="text-xs text-charcoal/40 mt-6 text-center">
-                For check donations, email contact@qcsongwriters.com for mailing details.
-              </p>
-            </div>
+            <DonateCard />
           </div>
         </div>
       </section>
