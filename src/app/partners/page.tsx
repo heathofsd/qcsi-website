@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { sponsorTiers, currentSponsors } from "@/data/sponsors";
 
@@ -108,12 +107,12 @@ export default function PartnersPage() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Link
-              href="/contact"
+            <a
+              href="https://app.getpulley.app/donate/qcsi/c/qcsi2026"
               className="inline-block rounded-full bg-denim px-8 py-4 font-bold text-cream hover:bg-denim-light transition-colors"
             >
               Become a Sponsor
-            </Link>
+            </a>
           </div>
         </div>
       </section>

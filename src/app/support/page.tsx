@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import DonateCard from "@/components/DonateCard";
 
 export const metadata: Metadata = {
   title: "Support QCSI",
@@ -9,30 +8,9 @@ export const metadata: Metadata = {
     "Support Queen City Songwriters Inc. — a 501(c)(3) nonprofit fostering the art of songwriting in Spearfish, South Dakota. Your donation funds artists, venues, and community programming.",
 };
 
-export default async function SupportPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ donation?: string }>;
-}) {
-  const { donation } = await searchParams;
+export default function SupportPage() {
   return (
     <>
-      {donation === "success" && (
-        <div className="bg-sage text-charcoal">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4 text-center font-semibold">
-            Thank you for supporting original music. A receipt is on its way to
-            your inbox.
-          </div>
-        </div>
-      )}
-      {donation === "cancelled" && (
-        <div className="bg-sand text-charcoal">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4 text-center font-semibold">
-            Your donation was cancelled — no charge was made. You&rsquo;re
-            welcome back anytime.
-          </div>
-        </div>
-      )}
       {/* Hero */}
       <section className="relative bg-charcoal text-cream py-20 lg:py-28 overflow-hidden">
         <Image
@@ -105,7 +83,37 @@ export default async function SupportPage({
             </div>
 
             {/* Donate Card */}
-            <DonateCard />
+            <div className="bg-sand rounded-2xl p-10">
+              <h3 className="font-display text-2xl font-bold text-charcoal mb-2">
+                Make a Donation
+              </h3>
+              <p className="text-charcoal/60 text-sm mb-8">
+                Queen City Songwriters Inc. is a 501(c)(3) tax-exempt nonprofit.
+                EIN: 99-3218012. All donations are tax-deductible.
+              </p>
+
+              <a
+                href="https://app.getpulley.app/donate/qcsi"
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-denim px-6 py-4 font-bold text-cream transition-colors hover:bg-denim-light"
+              >
+                Donate Now
+              </a>
+
+              <p className="mt-4 text-center text-xs text-charcoal/50">
+                Give once or monthly — secure checkout powered by Stripe. A
+                receipt and thank-you follow every gift.
+              </p>
+              <p className="mt-2 text-center text-xs text-charcoal/40">
+                Prefer to mail a check?{" "}
+                <a
+                  href="https://app.getpulley.app/donate/qcsi/by-check"
+                  className="underline hover:text-charcoal/60"
+                >
+                  Get mailing details
+                </a>
+                .
+              </p>
+            </div>
           </div>
         </div>
       </section>
