@@ -41,39 +41,84 @@ export default function AboutPage() {
       <section className="bg-cream py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
-            <div className="lg:col-span-3 space-y-6 text-lg text-charcoal/80 leading-relaxed">
-              <p>
+            <div className="lg:col-span-3">
+              <p className="text-amber font-semibold tracking-widest uppercase text-sm mb-4">
+                Our Story
+              </p>
+              <p className="text-xl lg:text-2xl text-charcoal leading-relaxed mb-12 text-justify hyphens-auto">
                 Queen City Songwriters Incorporated was born in 2024 from
                 kitchen-table conversations between songwriters who believed
                 Spearfish, South Dakota could be more than a dot on the map — it
                 could be a destination for original music.
               </p>
-              <p>
-                Founded by Heath Johnson and Jason Guthmiller, QCSI was
-                incorporated as a 501(c)(3) nonprofit on May 24, 2024 with a
-                clear mission: provide songwriters a vibrant platform to present
-                their work, engage the community, and inspire a lasting
-                appreciation for original music.
-              </p>
-              <p>
-                Our flagship event, the Queen City Songwriters Invitational,
-                debuted that September — transforming downtown Spearfish into a
-                two-day celebration of original voices. Songwriter rounds in
-                intimate venues by day. Headliner showcases at The Matthews
-                Opera House by night. No covers. No backing tracks. Just artists
-                and their songs.
-              </p>
-              <p>
-                What started as an ambitious idea has grown into something with
-                real momentum. With 96+ songwriters in our network, partnerships
-                with venues and businesses across Spearfish, and year-round
-                programming including Lucky&apos;s Rounds and Summer Rounds,
-                QCSI is building a creative ecosystem — not just an event.
-              </p>
-              <p>
-                We believe that when artists are supported, entire communities
-                are enriched. That&apos;s what we&apos;re building here.
-              </p>
+
+              <div className="space-y-10">
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="font-display text-lg font-bold text-amber">
+                      01
+                    </span>
+                    <span className="h-0.5 w-10 rounded-full bg-amber" />
+                  </div>
+                  <h2 className="font-display text-2xl font-bold text-charcoal mb-3">
+                    Founded on a Mission
+                  </h2>
+                  <p className="text-lg text-charcoal/80 leading-relaxed text-justify hyphens-auto">
+                    Founded by Heath Johnson and Jason Guthmiller, QCSI was
+                    incorporated as a 501(c)(3) nonprofit on May 24, 2024 with a
+                    clear mission: provide songwriters a vibrant platform to
+                    present their work, engage the community, and inspire a
+                    lasting appreciation for original music.
+                  </p>
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="font-display text-lg font-bold text-amber">
+                      02
+                    </span>
+                    <span className="h-0.5 w-10 rounded-full bg-amber" />
+                  </div>
+                  <h2 className="font-display text-2xl font-bold text-charcoal mb-3">
+                    The Invitational
+                  </h2>
+                  <p className="text-lg text-charcoal/80 leading-relaxed text-justify hyphens-auto">
+                    Our flagship event, the Queen City Songwriters Invitational,
+                    debuted that September — transforming downtown Spearfish into
+                    a two-day celebration of original voices. Songwriter rounds
+                    in intimate venues by day, main-stage showcases at The
+                    Matthews Opera House by night. No covers. No backing tracks.
+                    Just artists and their songs.
+                  </p>
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="font-display text-lg font-bold text-amber">
+                      03
+                    </span>
+                    <span className="h-0.5 w-10 rounded-full bg-amber" />
+                  </div>
+                  <h2 className="font-display text-2xl font-bold text-charcoal mb-3">
+                    More Than an Event
+                  </h2>
+                  <p className="text-lg text-charcoal/80 leading-relaxed text-justify hyphens-auto">
+                    What started as an ambitious idea has grown into something
+                    with real momentum. With 96+ songwriters in our network,
+                    partnerships with venues and businesses across Spearfish, and
+                    year-round programming including Lucky&apos;s Rounds and
+                    Summer Rounds, QCSI is building a creative ecosystem — not
+                    just an event.
+                  </p>
+                </div>
+              </div>
+
+              <blockquote className="mt-12 border-l-4 border-amber pl-6">
+                <p className="font-display text-2xl lg:text-3xl text-charcoal leading-snug">
+                  When artists are supported, entire communities are enriched.
+                  That&apos;s what we&apos;re building here.
+                </p>
+              </blockquote>
             </div>
             <div className="lg:col-span-2 space-y-8">
               {/* Mission */}
