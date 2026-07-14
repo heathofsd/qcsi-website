@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact",
+  alternates: { canonical: "/contact" },
   description:
     "Get in touch with Queen City Songwriters — whether you're a songwriter, sponsor, or music lover.",
 };

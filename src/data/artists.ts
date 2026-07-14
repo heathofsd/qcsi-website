@@ -390,18 +390,8 @@ export const artists2024Only: Artist[] = [
 export const venues = [
   {
     name: "The Matthews Opera House & Arts Center",
-    description: "Historic downtown venue for evening headliner showcases. Every participating songwriter performs one original song before the headliner takes the stage.",
+    description: "Historic downtown venue and home of both evening events — Friday night's Songwriters Showcase, where invited writers take the stage, and Saturday night's headliner performance.",
     type: "headliner" as const,
-  },
-  {
-    name: "Blackbird Espresso",
-    description: "Intimate coffee shop setting for morning and early afternoon songwriter rounds.",
-    type: "round" as const,
-  },
-  {
-    name: "Studio 621",
-    description: "Creative studio space hosting afternoon listening-room rounds.",
-    type: "round" as const,
   },
   {
     name: "Spearfish Creek Wine Bar",
@@ -410,12 +400,12 @@ export const venues = [
   },
   {
     name: "False Bottom Bar",
-    description: "Local craft beer spot featuring lively afternoon rounds.",
+    description: "Local craft beer spot featuring lively daytime rounds.",
     type: "round" as const,
   },
   {
     name: "Spearfish Public House",
-    description: "Downtown gathering place for late afternoon songwriter sessions.",
+    description: "Downtown gathering place for daytime songwriter rounds.",
     type: "round" as const,
   },
 ];

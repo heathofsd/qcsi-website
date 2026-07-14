@@ -4,6 +4,7 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About",
+  alternates: { canonical: "/about" },
   description:
     "Queen City Songwriters Inc. was founded in 2024 to foster the art of songwriting and establish Spearfish, South Dakota as a beacon for original music in the Black Hills.",
 };

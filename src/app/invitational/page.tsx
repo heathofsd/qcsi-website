@@ -4,7 +4,8 @@ import Image from "next/image";
 import { venues } from "@/data/artists";
 
 export const metadata: Metadata = {
-  title: "The Invitational",
+  title: "The Invitational — September 25–26, 2026",
+  alternates: { canonical: "/invitational" },
   description:
     "The Queen City Songwriters Invitational is a two-day celebration of original music across downtown Spearfish, SD. September 25-26, 2026.",
 };
@@ -33,9 +34,10 @@ export default function InvitationalPage() {
               September 25 &ndash; 26, 2026
             </p>
             <p className="text-xl text-cream/80 leading-relaxed mb-8">
-              Two days of original music. Intimate songwriter rounds by day.
-              Headliner showcases at The Matthews Opera House by night. Downtown
-              Spearfish, South Dakota.
+              Two days of original music. Intimate songwriter rounds by day, a
+              Friday night Songwriters Showcase, and a Saturday headliner — both
+              on the stage at The Matthews Opera House. Downtown Spearfish,
+              South Dakota.
             </p>
             <p className="text-cream/90 text-lg mb-2">
               Saturday night headliner:{" "}
@@ -162,14 +164,14 @@ export default function InvitationalPage() {
                 Evening Showcases
               </h3>
               <p className="text-charcoal/70 leading-relaxed mb-4">
-                As the sun sets, everyone gathers at The Matthews Opera House &
-                Arts Center. Every participating songwriter performs one original
-                song on the historic stage before the evening&apos;s headliner takes
-                over.
+                Friday night, every invited songwriter takes the stage at The
+                Matthews Opera House & Arts Center for the Songwriters Showcase —
+                a chance to open the weekend on the historic stage.
               </p>
               <p className="text-charcoal/70 leading-relaxed">
-                It&apos;s the moment where the whole community comes together — local
-                voices on the same stage as nationally recognized artists.
+                Saturday night, the community returns to The Matthews for the
+                headliner — the weekend&apos;s marquee performance on that same
+                stage.
               </p>
               </div>
             </div>
@@ -253,7 +255,8 @@ export default function InvitationalPage() {
             </h2>
             <p className="text-charcoal/60 max-w-xl mx-auto">
               The Invitational transforms downtown Spearfish into a walkable
-              music circuit. Every venue is within a few blocks.
+              music circuit — daytime rounds at three venues, two rounds each
+              per day, all within a few blocks of The Matthews.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

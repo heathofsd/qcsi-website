@@ -118,8 +118,9 @@ export default function Home() {
               <p className="text-lg text-charcoal/70 leading-relaxed mb-4">
                 The Queen City Songwriters Invitational is a two-day celebration
                 of original music across downtown Spearfish. Intimate daytime
-                songwriter rounds at local venues. Evening headliner showcases at
-                The Matthews Opera House.
+                songwriter rounds at local venues, plus a Friday night
+                Songwriters Showcase and a Saturday headliner — both at The
+                Matthews Opera House.
               </p>
               <p className="text-lg text-charcoal/70 leading-relaxed mb-8">
                 No covers. No setlists. Just original voices sharing the stories

@@ -4,6 +4,7 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "For Audiences",
+  alternates: { canonical: "/for-audiences" },
   description:
     "What to expect at the Queen City Songwriters Invitational — a guide for music lovers attending songwriter rounds and headliner showcases in Spearfish, SD.",
 };
@@ -71,7 +72,7 @@ export default function ForAudiencesPage() {
                 {[
                   {
                     time: "11:30 AM",
-                    event: "Grab a coffee at Blackbird Espresso",
+                    event: "Grab a coffee downtown",
                     desc: "Settle in before the first round.",
                   },
                   {
@@ -92,7 +93,7 @@ export default function ForAudiencesPage() {
                   {
                     time: "7:00 PM",
                     event: "Evening showcase at The Matthews",
-                    desc: "Every songwriter performs one song, then the headliner takes the stage.",
+                    desc: "Friday it's the Songwriters Showcase; Saturday, the headliner takes the historic stage.",
                   },
                 ].map((item) => (
                   <div key={item.time} className="flex gap-4">

@@ -4,6 +4,7 @@ import { sponsorTiers, currentSponsors } from "@/data/sponsors";
 
 export const metadata: Metadata = {
   title: "Partners & Sponsors",
+  alternates: { canonical: "/partners" },
   description:
     "Support original music in Spearfish, SD. Become a sponsor of the Queen City Songwriters Invitational and invest in your community's creative culture.",
 };
@@ -157,8 +158,6 @@ export default function PartnersPage() {
           <div className="flex flex-wrap justify-center gap-4">
             {[
               "The Matthews Opera House",
-              "Blackbird Espresso",
-              "Studio 621",
               "Spearfish Creek Wine Bar",
               "False Bottom Bar",
               "Spearfish Public House",

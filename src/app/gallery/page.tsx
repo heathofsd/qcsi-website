@@ -3,7 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Gallery",
+  title: "Photo & Video Gallery",
+  alternates: { canonical: "/gallery" },
   description:
     "Photos and videos from the Queen City Songwriters Invitational — original music in downtown Spearfish, South Dakota.",
 };
@@ -123,24 +124,36 @@ export default function GalleryPage() {
             Video Highlights
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {[
-              "Lacy Nelson at the 2024 Invitational",
-              "Heath Johnson live performance",
-              "Clayton Ryan & Ryan LittleEagle at The Matthews",
-            ].map((title) => (
-              <div
-                key={title}
-                className="aspect-video rounded-xl bg-cream/5 border border-cream/10 flex items-center justify-center"
-              >
-                <div className="text-center p-4">
-                  <svg className="w-12 h-12 mx-auto text-cream/20 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <p className="text-xs text-cream/40">{title}</p>
-                </div>
-              </div>
-            ))}
+            {/* Clayton Ryan & Ryan LittleEagle */}
+            <div className="aspect-video rounded-xl overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/ixqDpS2RXkc"
+                title="Clayton Ryan & Ryan LittleEagle at The Matthews"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
+            {/* Lacy Nelson */}
+            <div className="aspect-video rounded-xl overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/HfreoKuUsa0"
+                title="Lacy Nelson at the 2024 Invitational"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
+            {/* Heath Johnson */}
+            <div className="aspect-video rounded-xl overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/gugGfwwZe0k"
+                title="Heath Johnson live performance"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
           </div>
         </div>
       </section>

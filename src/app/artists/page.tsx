@@ -5,7 +5,8 @@ import { artists2025, artists2024Only, headliners } from "@/data/artists";
 import ArtistCard from "@/components/ArtistCard";
 
 export const metadata: Metadata = {
-  title: "Artists",
+  title: "Artists & Headliners",
+  alternates: { canonical: "/artists" },
   description:
     "Meet the songwriters who have been part of the Queen City Songwriters Invitational — original voices from across the region.",
 };

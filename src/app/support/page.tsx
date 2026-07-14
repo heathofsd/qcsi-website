@@ -4,6 +4,7 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Support QCSI",
+  alternates: { canonical: "/support" },
   description:
     "Support Queen City Songwriters Inc. — a 501(c)(3) nonprofit fostering the art of songwriting in Spearfish, South Dakota. Your donation funds artists, venues, and community programming.",
 };

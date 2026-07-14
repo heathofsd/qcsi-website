@@ -4,6 +4,7 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "For Songwriters",
+  alternates: { canonical: "/for-songwriters" },
   description:
     "Learn how to get involved with Queen City Songwriters — from the annual Invitational to year-round rounds and community events.",
 };
@@ -109,8 +110,8 @@ export default function ForSongwritersPage() {
                   a: "Three songwriters take turns performing original songs in an intimate venue setting. You play a song, share the story behind it, then pass to the next writer. It's conversational, collaborative, and audience-focused. Rounds last about 45 minutes.",
                 },
                 {
-                  q: "What about the evening showcase?",
-                  a: "Every invited songwriter gets to perform one original song on the Matthews Opera House stage before the headliner. It's your moment in front of the full audience — the community hears your voice alongside nationally touring artists.",
+                  q: "What about the evening showcases?",
+                  a: "Friday night is the Songwriters Showcase at The Matthews Opera House — every invited songwriter takes the historic stage, opening the weekend alongside the community and the touring artists. Saturday night, the headliner closes things out on that same stage.",
                 },
                 {
                   q: "Is it competitive?",
