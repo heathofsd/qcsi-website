@@ -83,7 +83,7 @@ export default function PartnersPage() {
               <div
                 key={tier.name}
                 className={`bg-cream rounded-xl p-8 ${
-                  tier.name === "Title Sponsor"
+                  tier.name === "Legend"
                     ? "md:col-span-2 lg:col-span-1 ring-2 ring-amber"
                     : ""
                 }`}
@@ -91,9 +91,10 @@ export default function PartnersPage() {
                 <p className="text-sm font-bold uppercase tracking-widest text-denim mb-1">
                   {tier.name}
                 </p>
-                <p className="text-3xl font-display font-bold text-charcoal mb-6">
+                <p className="text-3xl font-display font-bold text-charcoal mb-1">
                   {tier.amount}
                 </p>
+                <p className="text-sm text-charcoal/60 mb-6">{tier.tagline}</p>
                 <ul className="space-y-3">
                   {tier.benefits.map((benefit) => (
                     <li key={benefit} className="flex items-start gap-2 text-sm text-charcoal/70">
@@ -107,7 +108,11 @@ export default function PartnersPage() {
               </div>
             ))}
           </div>
-          <div className="text-center mt-12">
+          <p className="text-center text-charcoal/60 max-w-2xl mx-auto mt-12 text-sm">
+            Prefer to give in kind? Sound, lodging, printing, food, or a venue are
+            welcome too &mdash; and recognized at the matching package level.
+          </p>
+          <div className="text-center mt-8">
             <a
               href="https://app.getpulley.app/donate/qcsi/c/qcsi2026"
               className="inline-block rounded-full bg-denim px-8 py-4 font-bold text-cream hover:bg-denim-light transition-colors"
@@ -138,7 +143,9 @@ export default function PartnersPage() {
                 <p className="font-semibold text-charcoal text-sm">
                   {sponsor.name}
                 </p>
-                <p className="text-xs text-charcoal/50 mt-1">{sponsor.tier}</p>
+                {sponsor.tier && (
+                  <p className="text-xs text-charcoal/50 mt-1">{sponsor.tier}</p>
+                )}
               </div>
             ))}
           </div>
