@@ -81,10 +81,11 @@ export default function InvitationalPage() {
                 simplicity and emotional power.
               </p>
               <p className="text-lg text-cream/80 leading-relaxed mb-8">
-                &ldquo;Contemporary and timeless,&rdquo; wrote The New York Times.
-                &ldquo;Pure songwriter,&rdquo; said NPR. &ldquo;His songs are
-                simple and powerful.&rdquo; It&apos;s exactly the kind of voice the
-                Invitational was built to celebrate.
+                &ldquo;Stark, literate songs that are as wide open as the
+                landscape of his native Midwest,&rdquo; wrote The New Yorker.
+                &ldquo;Songwriting brilliance,&rdquo; said the Irish Times.
+                It&apos;s exactly the kind of voice the Invitational was built to
+                celebrate.
               </p>
               <Link
                 href="/artists"
