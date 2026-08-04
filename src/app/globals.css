@@ -254,11 +254,10 @@
     transition: color 160ms var(--ease-pull);
   }
 
-  @media (min-width: 768px) {
-    .run-cue {
-      white-space: nowrap;
-    }
-  }
+  /* No nowrap here. The 128px track already holds a full single cue
+     ("SAT 11:00 AM") on one line, and a cue that genuinely exceeds it —
+     a range — must wrap inside its own track rather than overrun the
+     subject column. */
 
   /* On mobile the row stacks, so the meta has to read as a different kind of
      thing from the venue line above it rather than a second venue. */

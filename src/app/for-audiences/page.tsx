@@ -22,7 +22,7 @@ const day = [
     meta: "Doors open",
   },
   {
-    time: "11:00 AM – 5:00 PM",
+    time: "11 AM – 5 PM",
     event: "Walk between venues",
     desc: "A new round starts on the hour, every hour, at venues a few blocks apart. Follow the whole circuit or settle in wherever you land.",
     meta: "Six rounds",
