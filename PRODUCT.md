@@ -56,7 +56,7 @@ This is the claim a neighboring arts nonprofit cannot truthfully copy: not "we p
 ## Brand Commitments
 
 - Name: **Queen City Songwriters Incorporated** (QCSI). Spearfish is "the Queen City."
-- Logo mark: `public/logo.png` / `logo-512.png` — a crown over "QUEEN CITY SONGWRITERS."
+- Logo mark: a crown over "QUEEN CITY SONGWRITERS." Redrawn as vector 2026-08-04, replacing the AI-generated raster original (which had no vector source and irregular letterforms). Lockups live in `public/brand/` — `qcsi-mark.svg` (crown alone), `qcsi-logo-stacked.svg`, `qcsi-logo-horizontal.svg`, plus `qcsi-logo-512.png` for consumers that cannot take SVG. In-app, use the inline components in `src/components/Logo.tsx` so `currentColor` inherits. The wordmark is Archivo outlined at `wght 800 / wdth 88`, matching the site's own type.
 - 501(c)(3), **EIN 99-3218012**. 810 State St., Spearfish, SD 57783.
 - Socials: `@qcsongwriters` on Instagram and Facebook.
 - **Voice** is documented and binding: `ventures/qcsi/fundraising/qcsi-voice-profile.md`. Warm, plain-spoken, craft-reverent. Speaks as *songwriters about songs*. "We" and "our community," almost never "I."
