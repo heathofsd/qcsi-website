@@ -1,0 +1,13 @@
+{
+  "name": "qcsi-brand-tooling",
+  "private": true,
+  "type": "module",
+  "description": "Regenerates the QCSI vector logo lockups and the app icon set. Isolated from the site's own package.json so these devDeps never reach a Vercel build.",
+  "scripts": {
+    "build": "node build-logo.mjs && node emit.mjs"
+  },
+  "devDependencies": {
+    "opentype.js": "^2.0.0",
+    "playwright-core": "^1.49.0"
+  }
+}

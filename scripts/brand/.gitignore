@@ -1,0 +1,7 @@
+node_modules/
+package-lock.json
+# intermediates — the real outputs land in public/brand/ and src/app/
+logo-stacked.svg
+logo-horizontal.svg
+mark.svg
+icon-preview.svg
