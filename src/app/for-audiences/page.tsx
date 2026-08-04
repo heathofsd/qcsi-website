@@ -33,7 +33,7 @@ const day = [
     desc: "Downtown Spearfish has you covered. Grab a bite before the evening show.",
   },
   {
-    time: "7:00 PM",
+    time: "7:30 PM",
     event: "Evening showcase at The Matthews",
     desc: "Friday it's the Songwriters Showcase; Saturday, the headliner takes the historic stage.",
     meta: "Main stage",

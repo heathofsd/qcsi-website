@@ -10,8 +10,9 @@ export const metadata: Metadata = {
     "The Queen City Songwriters Invitational is a two-day celebration of original music across downtown Spearfish, SD. September 25-26, 2026.",
 };
 
-/* Only times QCSI already publishes: six rounds a day from 11, done by 5;
-   evenings at 7. */
+/* Six rounds a day from 11, done by 5. Evening curtain is 7:30 — the
+   figure in Foucault's contract, which supersedes the 7:00 published
+   earlier. */
 const runSheet = [
   {
     day: "Friday, September 25",
@@ -23,7 +24,7 @@ const runSheet = [
         meta: "Six rounds, on the hour",
       },
       {
-        cue: "7:00 PM",
+        cue: "7:30 PM",
         subject: "Songwriters Showcase",
         where: "The Matthews Opera House",
         meta: "Every invited writer",
@@ -40,7 +41,7 @@ const runSheet = [
         meta: "Three writers, one hour",
       },
       {
-        cue: "7:00 PM",
+        cue: "7:30 PM",
         subject: "Jeffrey Foucault",
         where: "The Matthews Opera House",
         meta: "Main stage",
@@ -251,7 +252,7 @@ export default function InvitationalPage() {
               note={
                 <>
                   <span className="block text-ink font-bold">Evenings</span>
-                  <span className="block mt-1">7:00 PM</span>
+                  <span className="block mt-1">7:30 PM</span>
                   <span className="block mt-1">The Matthews</span>
                 </>
               }

@@ -23,7 +23,8 @@ const testimonials = [
 ];
 
 /* The weekend's shape, drawn only from times QCSI already publishes:
-   six one-hour rounds a day, on the hour from 11 until 5; showcases at 7. */
+   six one-hour rounds a day, on the hour from 11 until 5; evening
+   shows at 7:30, per the headliner contract. */
 const weekend = [
   {
     cue: "Fri 11:00 AM",
@@ -32,7 +33,7 @@ const weekend = [
     meta: "Six rounds, on the hour",
   },
   {
-    cue: "Fri 7:00 PM",
+    cue: "Fri 7:30 PM",
     subject: "Songwriters Showcase",
     where: "The Matthews Opera House",
     meta: "Every invited writer",
@@ -44,7 +45,7 @@ const weekend = [
     meta: "Three writers, one hour",
   },
   {
-    cue: "Sat 7:00 PM",
+    cue: "Sat 7:30 PM",
     subject: "Jeffrey Foucault",
     where: "The Matthews Opera House",
     meta: "Main stage",
