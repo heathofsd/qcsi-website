@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
+import { Tape, RunRow, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
   title: "For Audiences",
@@ -9,203 +9,215 @@ export const metadata: Metadata = {
     "What to expect at the Queen City Songwriters Invitational — a guide for music lovers attending songwriter rounds and headliner showcases in Spearfish, SD.",
 };
 
+const day = [
+  {
+    time: "10:30 AM",
+    event: "Grab a coffee downtown",
+    desc: "Settle in before the first round.",
+  },
+  {
+    time: "11:00 AM",
+    event: "First songwriter round begins",
+    desc: "Three songwriters, one intimate venue, one hour. Pull up a chair.",
+    meta: "Doors open",
+  },
+  {
+    time: "11:00 AM – 5:00 PM",
+    event: "Walk between venues",
+    desc: "A new round starts on the hour, every hour, at venues a few blocks apart. Follow the whole circuit or settle in wherever you land.",
+    meta: "Six rounds",
+  },
+  {
+    time: "5:00 PM",
+    event: "Break for dinner",
+    desc: "Downtown Spearfish has you covered. Grab a bite before the evening show.",
+  },
+  {
+    time: "7:00 PM",
+    event: "Evening showcase at The Matthews",
+    desc: "Friday it's the Songwriters Showcase; Saturday, the headliner takes the historic stage.",
+    meta: "Main stage",
+  },
+];
+
+const goodToKnow = [
+  {
+    cue: "Tickets",
+    title: "Tickets",
+    desc: "Daytime rounds are typically free or low-cost. Evening headliner shows at The Matthews require tickets, available through Eventbrite when announced.",
+  },
+  {
+    cue: "On foot",
+    title: "Walkable",
+    desc: "Every venue is within a few blocks in downtown Spearfish. No car needed once you're here.",
+  },
+  {
+    cue: "Ages",
+    title: "All ages welcome",
+    desc: "Daytime rounds at coffee shops and most venues are all-ages. Evening shows at bar venues may be 21+. The Matthews is all-ages.",
+  },
+  {
+    cue: "Etiquette",
+    title: "Listening room etiquette",
+    desc: "Songwriter rounds are intimate. Keep conversation low, phones on silent, and give the artists your attention. They're sharing something personal.",
+  },
+  {
+    cue: "Stay over",
+    title: "Lodging",
+    desc: "Spearfish has hotels, motels, and vacation rentals. September is beautiful in the Black Hills — book early.",
+  },
+  {
+    cue: "Company",
+    title: "Bring friends",
+    desc: "The best way to experience the Invitational is with people you love. It's a weekend you'll talk about.",
+  },
+];
+
 export default function ForAudiencesPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-charcoal text-cream py-20 lg:py-28 overflow-hidden">
-        <Image
-          src="/photos/venue-gallery-audience.jpg"
-          alt="Audience enjoying a songwriter performance at a downtown Spearfish venue"
-          fill
-          className="object-cover opacity-25"
-          priority
-        />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-amber font-semibold tracking-widest uppercase text-sm mb-4">
-              For Music Lovers
-            </p>
-            <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6">
-              Experience Music the Way It Was Meant to Be Heard
-            </h1>
-            <p className="text-xl text-cream/80 leading-relaxed">
-              Forget arenas and algorithms. This is original music, up close, in
-              the places where songs were meant to live — coffee shops, bars,
-              wine bars, and a 110-year-old opera house.
-            </p>
-          </div>
+      <section className="shell pt-14 pb-16 md:pt-20 md:pb-20">
+        <Tape land tilt="b" className="mb-10">
+          Sep 25–26 2026 · downtown
+        </Tape>
+        <h1 className="t-display text-chalk max-w-[17ch]">
+          Experience music the way it was meant to be heard
+        </h1>
+        <p className="t-lead text-chalk-dim mt-8">
+          Forget arenas and algorithms. This is original music, up close, in the
+          places where songs were meant to live &mdash; coffee shops, bars, wine
+          bars, and a 110-year-old opera house.
+        </p>
+        <div className="flex flex-wrap gap-4 mt-10">
+          <Action href="/contact">Get notified</Action>
+          <Action href="/invitational" variant="ghost">
+            September 25&ndash;26, 2026
+          </Action>
         </div>
       </section>
 
-      {/* What Are Songwriter Rounds */}
-      <section className="bg-cream py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div>
-              <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal mb-6">
-                What Are Songwriter Rounds?
-              </h2>
-              <p className="text-lg text-charcoal/70 leading-relaxed mb-4">
+      <figure>
+        <div className="relative aspect-[16/9] md:aspect-[21/8]">
+          <Image
+            src="/photos/venue-gallery-audience.jpg"
+            alt="Audience enjoying a songwriter performance at a downtown Spearfish venue"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </div>
+        <figcaption className="shell py-4 t-run-sm text-chalk-dim border-b border-floor-line">
+          Close enough to hear the story between the songs
+        </figcaption>
+      </figure>
+
+      {/* ------------------------------------------------------------ the format */}
+      <section className="shell py-20 md:py-[var(--spacing-act)]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="lg:col-span-6">
+            <Slug cue="The format" title="What are songwriter rounds?" />
+            <div className="t-body text-chalk-dim space-y-5">
+              <p>
                 A songwriter round is an intimate performance format where three
-                artists sit together and take turns playing original songs. After
-                each song, the writer shares the story behind it — where it came
-                from, what it means, the line that almost didn&apos;t make the
-                cut.
+                artists sit together and take turns playing original songs.
+                After each song, the writer shares the story behind it &mdash;
+                where it came from, what it means, the line that almost
+                didn&apos;t make the cut.
               </p>
-              <p className="text-lg text-charcoal/70 leading-relaxed mb-4">
+              <p>
                 It&apos;s the Nashville tradition brought to the Black Hills. No
-                drum kits, no light shows — just a guitar, a voice, and a story.
-                You hear music the way it was written: raw, honest, and right in
-                front of you.
-              </p>
-              <p className="text-lg text-charcoal/70 leading-relaxed">
-                Most people who attend their first round say the same thing:
-                &ldquo;I had no idea music could feel like this.&rdquo;
+                drum kits, no light shows &mdash; just a guitar, a voice, and a
+                story. You hear music the way it was written: raw, honest, and
+                right in front of you.
               </p>
             </div>
-            <div className="bg-sand rounded-2xl p-10">
-              <h3 className="font-display text-xl font-bold text-charcoal mb-6">
-                Your Invitational Day
-              </h3>
-              <div className="space-y-6">
-                {[
-                  {
-                    time: "11:30 AM",
-                    event: "Grab a coffee downtown",
-                    desc: "Settle in before the first round.",
-                  },
-                  {
-                    time: "12:00 PM",
-                    event: "First songwriter round begins",
-                    desc: "Three songwriters, one intimate venue. Pull up a chair.",
-                  },
-                  {
-                    time: "12:30 - 5:00 PM",
-                    event: "Walk between venues",
-                    desc: "New rounds start every 30 minutes at different downtown spots. Wander at your own pace.",
-                  },
-                  {
-                    time: "5:00 PM",
-                    event: "Break for dinner",
-                    desc: "Downtown Spearfish has you covered. Grab a bite before the evening show.",
-                  },
-                  {
-                    time: "7:00 PM",
-                    event: "Evening showcase at The Matthews",
-                    desc: "Friday it's the Songwriters Showcase; Saturday, the headliner takes the historic stage.",
-                  },
-                ].map((item) => (
-                  <div key={item.time} className="flex gap-4">
-                    <div className="w-28 flex-shrink-0">
-                      <p className="text-sm font-bold text-denim">{item.time}</p>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-charcoal">{item.event}</p>
-                      <p className="text-sm text-charcoal/60">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <p className="t-headline text-tape mt-10 max-w-[20ch]">
+              &ldquo;I had no idea music could feel like this.&rdquo;
+            </p>
+            <p className="t-run text-chalk-dim mt-4">
+              What most people say after their first round
+            </p>
+          </div>
+
+          <div className="lg:col-span-6">
+            <p className="t-run text-tape mb-1">Your Invitational day</p>
+            <div className="border-t border-floor-line">
+              {day.map((item) => (
+                <RunRow key={item.time} cue={item.time} meta={item.meta}>
+                  <span className="t-title text-chalk block">{item.event}</span>
+                  <span className="t-body text-chalk-dim block mt-1.5 text-[0.9375rem]">
+                    {item.desc}
+                  </span>
+                </RunRow>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Why Spearfish */}
-      <section className="bg-charcoal text-cream py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="font-display text-3xl lg:text-4xl font-bold mb-8">
-                Why Spearfish?
-              </h2>
-              <p className="text-lg text-cream/70 leading-relaxed mb-6">
-                Spearfish sits at the northern edge of the Black Hills — a small
-                town with big creative energy. Every venue in the Invitational is
-                within walking distance downtown. You can spend a September
-                afternoon wandering from coffee shop to wine bar to brewpub,
-                catching original music at every stop.
-              </p>
-              <p className="text-lg text-cream/70 leading-relaxed">
-                It&apos;s the kind of town where the bartender knows the songwriter
-                and the songwriter knows your name by the second verse. That&apos;s
-                not marketing — that&apos;s just Spearfish.
-              </p>
-            </div>
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
-              <Image
-                src="/photos/community-downtown.jpg"
-                alt="Downtown Spearfish community during the Invitational"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Practical Info */}
-      <section className="bg-sand py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="font-display text-3xl font-bold text-charcoal mb-12 text-center">
-            Good to Know
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Tickets",
-                desc: "Daytime rounds are typically free or low-cost. Evening headliner shows at The Matthews require tickets, available through Eventbrite when announced.",
-              },
-              {
-                title: "Walkable",
-                desc: "Every venue is within a few blocks in downtown Spearfish. No car needed once you're here.",
-              },
-              {
-                title: "All Ages Welcome",
-                desc: "Daytime rounds at coffee shops and most venues are all-ages. Evening shows at bar venues may be 21+. The Matthews is all-ages.",
-              },
-              {
-                title: "Listening Room Etiquette",
-                desc: "Songwriter rounds are intimate. Keep conversation low, phones on silent, and give the artists your attention. They're sharing something personal.",
-              },
-              {
-                title: "Lodging",
-                desc: "Spearfish has hotels, motels, and vacation rentals. September is beautiful in the Black Hills — book early.",
-              },
-              {
-                title: "Bring Friends",
-                desc: "The best way to experience the Invitational is with people you love. It's a weekend you'll talk about.",
-              },
-            ].map((item) => (
-              <div key={item.title} className="bg-cream rounded-xl p-6">
-                <h3 className="font-display font-bold text-charcoal mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-charcoal/70 leading-relaxed">
-                  {item.desc}
+      {/* -------------------------------------------------------- why spearfish */}
+      <section className="bg-paper">
+        <div className="shell py-20 md:py-[var(--spacing-act)]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-6">
+              <Slug cue="The town" title="Why Spearfish?" paper />
+              <div className="t-body text-ink space-y-5">
+                <p>
+                  Spearfish sits at the northern edge of the Black Hills &mdash;
+                  a small town with big creative energy. Every venue in the
+                  Invitational is within walking distance downtown. You can
+                  spend a September afternoon wandering from coffee shop to wine
+                  bar to brewpub, catching original music at every stop.
+                </p>
+                <p>
+                  It&apos;s the kind of town where the bartender knows the
+                  songwriter and the songwriter knows your name by the second
+                  verse. That&apos;s not marketing &mdash; that&apos;s just
+                  Spearfish.
                 </p>
               </div>
-            ))}
+            </div>
+            <div className="lg:col-span-6">
+              <div className="relative aspect-[4/3]">
+                <Image
+                  src="/photos/community-downtown.jpg"
+                  alt="Downtown Spearfish community during the Invitational"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-denim py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <h2 className="font-display text-2xl lg:text-3xl font-bold text-cream mb-4">
-            September 25-26, 2026
-          </h2>
-          <p className="text-cream/70 mb-8 max-w-xl mx-auto">
-            Be the first to know when tickets go on sale and the lineup drops.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block rounded-full bg-amber px-8 py-4 font-bold text-cream hover:bg-amber-light transition-colors"
-          >
-            Stay Connected
-          </Link>
+      {/* ------------------------------------------------------------ practical */}
+      <section className="shell py-20 md:py-[var(--spacing-act)]">
+        <Slug cue="Practical" title="Good to know" />
+        <div className="border-t border-floor-line">
+          {goodToKnow.map((item) => (
+            <RunRow key={item.title} cue={item.cue}>
+              <span className="t-title text-chalk block mb-2">
+                {item.title}
+              </span>
+              <span className="t-body text-chalk-dim block">{item.desc}</span>
+            </RunRow>
+          ))}
+        </div>
+      </section>
+
+      <section className="shell pb-20 md:pb-[var(--spacing-act)]">
+        <h2 className="t-display text-chalk">September 25&ndash;26, 2026</h2>
+        <p className="t-body text-chalk-dim mt-6">
+          Be the first to know when tickets go on sale and the lineup drops.
+        </p>
+        <div className="flex flex-wrap gap-4 mt-10">
+          <Action href="/contact">Stay connected</Action>
+          <Action href="/invitational" variant="ghost">
+            The Invitational
+          </Action>
         </div>
       </section>
     </>

@@ -1,57 +1,449 @@
 @import "tailwindcss";
 
-@theme inline {
-  --color-denim: #4A6D8C;
-  --color-denim-light: #6B8DAC;
-  --color-denim-dark: #3A5670;
-  --color-charcoal: #1C1612;
-  --color-cream: #F5F0E8;
-  --color-cream-dark: #E8DFD0;
-  --color-amber: #C4923A;
-  --color-amber-light: #D4A854;
-  --color-leather: #6B4226;
-  --color-sage: #7D8C6E;
-  --color-sand: #E8DFD0;
+/* =============================================================================
+   DIRECTION CONTRACT — "The Running Order"
 
-  --font-display: var(--font-playfair);
-  --font-body: var(--font-source-sans);
+   THESIS: A round is a running order — play a song, tell the story, pass. The
+   setlist is the artifact that holds it, and the story lives in the margin
+   beside the title. This site is that document. It refuses the arts-festival
+   arrangement: photo-behind-a-scrim hero, alternating color bands, icon cards.
+
+   OWN-WORLD: Matte stage-floor black ground with bright copier-white paper cut
+   into it, and hand-torn fluorescent spike-tape orange as the only accent.
+   Condensed Archivo caps for subjects, Courier Prime for every run-sheet datum.
+   Zero radius, zero shadow, ruled rows instead of cards.
+
+   STORY: This is a curated listening room in Spearfish where an original song
+   and its story are the whole point — the visitor understands the format,
+   believes it is real and well-run, and either gets notified, gives, or asks in.
+
+   FIRST VIEWPORT: The running order on the floor. A torn tape strip carrying
+   a fact (never the nav label), the page's claim in condensed caps filling the
+   measure, the tape action immediately beneath it, then the two-day order as
+   ruled rows (time / subject / venue) with the Foucault line flagged in the
+   margin. /invitational sets the date itself in display; / leads with the
+   belief line and keeps the date on the tape.
+
+   FORM: The setlist — candidate 6 of 7, seed key f0ce0434. Staged as a folded
+   continuous route: one unbroken running order creased into chapters.
+   ============================================================================= */
+
+@theme {
+  /* --- the floor --- */
+  --color-floor: #0f0f11;
+  --color-floor-raised: #1a1a1e;
+  --color-floor-line: #2e2e34;
+  --color-chalk: #e9e9e5;
+  --color-chalk-dim: #9c9c98;
+
+  /* --- the paper --- */
+  --color-paper: #f4f5f2;
+  --color-paper-edge: #d8d9d3;
+  --color-ink: #17171a;
+  --color-pencil: #6c6c66;
+  --color-ballpoint: #2b3a8f;
+
+  /* --- the tape --- */
+  --color-tape: #ff5a26;
+  --color-tape-press: #d8410f;
+  /* Same orange, darkened only where it has to carry small text on paper.
+     tape-press reads 4.10:1 on copier white; this reads 4.73:1. */
+  --color-tape-ink: #c63c0c;
+
+  --font-display: var(--font-archivo), "Arial Narrow", Arial, sans-serif;
+  --font-body: var(--font-archivo), Arial, sans-serif;
+  --font-run: var(--font-courier-prime), ui-monospace, "Courier New", monospace;
+
+  --spacing-band: 72px;
+  --spacing-act: 120px;
+
+  --ease-pull: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-body {
-  background: var(--color-cream);
-  color: var(--color-charcoal);
-  font-family: var(--font-body), system-ui, sans-serif;
+@layer base {
+  html {
+    background: var(--color-floor);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-floor);
+    color: var(--color-chalk);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background: var(--color-tape);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-tape);
+    outline-offset: 3px;
+  }
+
+  /* Nothing in this system is round. */
+  img,
+  iframe,
+  input,
+  textarea,
+  select,
+  button {
+    border-radius: 0;
+  }
 }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-display), Georgia, serif;
+@layer components {
+  /* ---------------------------------------------------------------- type --- */
+  .t-display {
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 70;
+    font-weight: 800;
+    font-size: clamp(2.75rem, 9vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .t-headline {
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 78;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .t-title {
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 92;
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.2;
+  }
+
+  /* Courier Prime — every datum that would be typed onto a run sheet. */
+  .t-run {
+    font-family: var(--font-run);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .t-run-sm {
+    font-family: var(--font-run);
+    font-size: 0.6875rem;
+    line-height: 1.5;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .t-body {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    max-width: 68ch;
+  }
+
+  .t-lead {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    line-height: 1.5;
+    max-width: 60ch;
+  }
+
+  /* Off-screen until focused — the first stop behind a sticky 8-item nav. */
+  .skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 100;
+    transform: translateY(-200%);
+    background: var(--color-tape);
+    color: var(--color-ink);
+    font-family: var(--font-run);
+    font-size: 0.8125rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    transition: transform 160ms var(--ease-pull);
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  /* --------------------------------------------------------------- tape --- */
+  /* Hand-torn ends, straight top and bottom — cut by the roll width. */
+  .tape {
+    background: var(--color-tape);
+    color: var(--color-ink);
+    clip-path: polygon(
+      3px 0%,
+      100% 0%,
+      calc(100% - 2px) 14%,
+      100% 30%,
+      calc(100% - 3px) 46%,
+      calc(100% - 1px) 62%,
+      calc(100% - 4px) 78%,
+      calc(100% - 1px) 92%,
+      calc(100% - 2px) 100%,
+      2px 100%,
+      4px 88%,
+      1px 74%,
+      5px 58%,
+      0 44%,
+      4px 28%,
+      1px 14%
+    );
+  }
+
+  .tape-tilt-a {
+    transform: rotate(-0.5deg);
+  }
+  .tape-tilt-b {
+    transform: rotate(0.4deg);
+  }
+
+  /* ---------------------------------------------------------- run row --- */
+  .run-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--color-floor-line);
+    transition:
+      background-color 160ms var(--ease-pull),
+      transform 160ms var(--ease-pull),
+      padding-left 160ms var(--ease-pull);
+  }
+
+  @media (min-width: 768px) {
+    .run-row {
+      /* wide enough for a full 12-hour cue ("SAT 12:00 PM") on one line */
+      grid-template-columns: 128px minmax(0, 1fr) auto;
+      align-items: baseline;
+      padding: 22px 0;
+    }
+  }
+
+  .run-row--link:hover,
+  .run-row--link:focus-visible {
+    background-color: var(--color-floor-raised);
+    padding-left: 12px;
+  }
+
+  .run-row--link:hover .run-cue,
+  .run-row--link:focus-visible .run-cue {
+    color: var(--color-tape);
+  }
+
+  .run-arrow {
+    transition: transform 160ms var(--ease-pull);
+  }
+  .run-row--link:hover .run-arrow,
+  .run-row--link:focus-visible .run-arrow {
+    transform: translateX(5px);
+  }
+
+  .run-cue {
+    color: var(--color-chalk-dim);
+    transition: color 160ms var(--ease-pull);
+  }
+
+  @media (min-width: 768px) {
+    .run-cue {
+      white-space: nowrap;
+    }
+  }
+
+  /* On mobile the row stacks, so the meta has to read as a different kind of
+     thing from the venue line above it rather than a second venue. */
+  .run-meta {
+    font-family: var(--font-run);
+    font-size: 0.6875rem;
+    line-height: 1.5;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  @media (min-width: 768px) {
+    .run-meta {
+      font-size: 0.8125rem;
+      line-height: 1.4;
+      letter-spacing: 0.06em;
+      opacity: 1;
+    }
+  }
+
+  /* A count on a run sheet is still typed, just bigger. */
+  .run-cue--lg {
+    font-size: 1.5rem;
+    letter-spacing: 0.01em;
+    color: var(--color-chalk);
+  }
+
+  /* Rows on paper take the paper field's own pair. */
+  .run-row--paper {
+    border-bottom-color: var(--color-paper-edge);
+  }
+  .run-row--paper .run-cue {
+    color: var(--color-pencil);
+  }
+
+  /* -------------------------------------------------------- margin note --- */
+  .margin-note {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .margin-note {
+      grid-template-columns: 164px minmax(0, 1fr);
+      gap: 32px;
+    }
+    .margin-note > .margin-note__gutter {
+      border-right: 1px solid var(--color-paper-edge);
+      padding-right: 24px;
+      text-align: right;
+    }
+  }
+
+  /* ------------------------------------------------------------ buttons --- */
+  .btn {
+    display: inline-block;
+    font-family: var(--font-run);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 18px 34px;
+    transition:
+      background-color 160ms var(--ease-pull),
+      transform 160ms var(--ease-pull),
+      color 160ms var(--ease-pull),
+      border-color 160ms var(--ease-pull);
+  }
+
+  /* The torn edge lives on a pseudo-element so clip-path never eats the
+     focus outline, which is painted on the element itself. */
+  .btn-tape {
+    position: relative;
+    isolation: isolate;
+    background: transparent;
+    color: var(--color-ink);
+    transform: rotate(-0.5deg);
+  }
+  .btn-tape::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--color-tape);
+    clip-path: polygon(
+      3px 0%,
+      100% 0%,
+      calc(100% - 2px) 14%,
+      100% 30%,
+      calc(100% - 3px) 46%,
+      calc(100% - 1px) 62%,
+      calc(100% - 4px) 78%,
+      calc(100% - 1px) 92%,
+      calc(100% - 2px) 100%,
+      2px 100%,
+      4px 88%,
+      1px 74%,
+      5px 58%,
+      0 44%,
+      4px 28%,
+      1px 14%
+    );
+    transition: background-color 160ms var(--ease-pull);
+  }
+  .btn-tape:hover,
+  .btn-tape:focus-visible {
+    transform: rotate(0deg);
+  }
+  .btn-tape:hover::before,
+  .btn-tape:focus-visible::before {
+    background: var(--color-tape-press);
+  }
+
+  .btn-ghost {
+    border: 1px solid var(--color-floor-line);
+    color: var(--color-chalk);
+  }
+  .btn-ghost:hover,
+  .btn-ghost:focus-visible {
+    background: var(--color-floor-raised);
+    color: var(--color-tape);
+    border-color: var(--color-tape);
+  }
+
 }
 
-::selection {
-  background: var(--color-amber);
-  color: var(--color-cream);
+@layer utilities {
+  .shell {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+  @media (min-width: 1024px) {
+    .shell {
+      padding-inline: 32px;
+    }
+  }
 }
 
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* ------------------------------------------------------------------ motion --- */
+/* One authored device: rows rule in as they are read down the page. Content is
+   visible by default — the scroll timeline only runs where it is supported. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* Completes early in the entry range so a row that is only partly on
+       screen is never left half-drawn at rest. */
+    .rule-in {
+      animation: rule-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+
+  /* Rows already on screen at load draw themselves in sequence instead. */
+  .rule-in-load {
+    animation: rule-in 620ms var(--ease-pull) both;
+    animation-delay: calc(var(--row-index, 0) * 90ms + 180ms);
+  }
+
+  .tape-land {
+    animation: tape-land 560ms var(--ease-pull) both;
+  }
 }
 
-@keyframes flip-in {
+@keyframes rule-in {
   from {
     opacity: 0;
-    transform: scale(0.6) rotateY(0deg);
+    transform: translate3d(-14px, 0, 0);
+    clip-path: inset(0 100% 0 0);
   }
   to {
     opacity: 1;
-    transform: scale(1) rotateY(0deg);
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
   }
 }
 
-.animate-fade-in {
-  animation: fade-in 0.3s ease-out forwards;
-}
-
-.animate-flip-in {
-  animation: flip-in 0.5s ease-out forwards;
+@keyframes tape-land {
+  from {
+    opacity: 0;
+    transform: rotate(-2.6deg) translate3d(-10px, -8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-0.5deg) translate3d(0, 0, 0);
+  }
 }

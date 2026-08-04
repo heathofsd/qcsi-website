@@ -2,160 +2,141 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const navLinks = [
-  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/invitational", label: "The Invitational" },
+  { href: "/invitational", label: "Invitational" },
   { href: "/artists", label: "Artists" },
-  {
-    label: "Get Involved",
-    children: [
-      { href: "/for-songwriters", label: "For Songwriters" },
-      { href: "/for-audiences", label: "For Audiences" },
-      { href: "/partners", label: "Partners & Sponsors" },
-    ],
-  },
-  { href: "/support", label: "Support" },
+  { href: "/for-songwriters", label: "Songwriters" },
+  { href: "/for-audiences", label: "Audiences" },
+  { href: "/partners", label: "Partners" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];
 
 export function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // The mobile panel is a real panel: Escape closes it and the page behind
+  // it does not scroll.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-sand">
-      <nav className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
+    <header className="sticky top-0 z-50 bg-floor border-b border-floor-line">
+      <nav className="shell">
+        <div className="flex h-[74px] items-center justify-between gap-6">
+          <Link href="/" className="flex-shrink-0" aria-label="Queen City Songwriters — home">
             <Image
               src="/logo.png"
               alt="Queen City Songwriters"
               width={60}
               height={60}
-              className="h-14 w-auto"
+              className="h-11 w-auto brightness-0 invert"
               priority
             />
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden lg:flex lg:items-center lg:gap-1">
-            {navLinks.map((link) =>
-              link.children ? (
-                <div
-                  key={link.label}
-                  className="relative"
-                  onMouseEnter={() => setDropdownOpen(true)}
-                  onMouseLeave={() => setDropdownOpen(false)}
-                >
-                  <button className="px-4 py-2 text-sm font-semibold tracking-wide text-charcoal hover:text-denim transition-colors">
-                    {link.label}
-                    <svg
-                      className="ml-1 inline-block h-3 w-3"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
-                  {dropdownOpen && (
-                    <div className="absolute left-0 top-full mt-0 w-52 rounded-md bg-cream border border-sand shadow-lg py-2">
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className="block px-4 py-2 text-sm text-charcoal hover:bg-sand hover:text-denim transition-colors"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
+          {/* Desktop — the nav is a run sheet, active marked by a tape strip. */}
+          <div className="hidden xl:flex xl:items-center xl:gap-1">
+            {navLinks.map((link) => {
+              const active = pathname === link.href;
+              return (
                 <Link
                   key={link.href}
-                  href={link.href!}
-                  className="px-4 py-2 text-sm font-semibold tracking-wide text-charcoal hover:text-denim transition-colors"
+                  href={link.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`relative px-3 py-2 t-run transition-colors ${
+                    active ? "text-chalk" : "text-chalk-dim hover:text-tape"
+                  }`}
                 >
                   {link.label}
+                  {active && (
+                    <span className="tape absolute left-3 right-3 -bottom-0.5 h-[3px]" />
+                  )}
                 </Link>
-              )
-            )}
-            <Link
-              href="/support"
-              className="ml-4 rounded-full bg-amber px-5 py-2.5 text-sm font-bold text-cream hover:bg-amber-light transition-colors"
+              );
+            })}
+            <a
+              href="https://app.getpulley.app/donate/qcsi"
+              className="btn btn-tape font-bold ml-4 !py-3 !px-6"
             >
-              Donate
-            </Link>
+              Give
+            </a>
           </div>
 
-          {/* Mobile menu button */}
           <button
-            className="lg:hidden p-2 text-charcoal"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            className="xl:hidden p-3 -mr-3 text-chalk"
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
           >
-            {mobileOpen ? (
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
+            <span className="block w-6 space-y-[5px]">
+              <span
+                className={`block h-[2px] bg-current transition-transform duration-200 ${
+                  open ? "translate-y-[7px] rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`block h-[2px] bg-current transition-opacity duration-200 ${
+                  open ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block h-[2px] bg-current transition-transform duration-200 ${
+                  open ? "-translate-y-[7px] -rotate-45" : ""
+                }`}
+              />
+            </span>
           </button>
         </div>
 
-        {/* Mobile nav */}
-        {mobileOpen && (
-          <div className="lg:hidden pb-6 border-t border-sand pt-4">
-            {navLinks.map((link) =>
-              link.children ? (
-                <div key={link.label}>
-                  <p className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-denim">
-                    {link.label}
-                  </p>
-                  {link.children.map((child) => (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      className="block pl-8 py-2 text-sm text-charcoal hover:text-denim"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
-              ) : (
+        {open && (
+          <div className="xl:hidden min-h-[calc(100vh-74px)] flex flex-col pt-2 pb-10 border-t border-floor-line">
+            {navLinks.map((link) => {
+              const active = pathname === link.href;
+              return (
                 <Link
                   key={link.href}
-                  href={link.href!}
-                  className="block px-4 py-3 text-sm font-semibold text-charcoal hover:text-denim"
-                  onClick={() => setMobileOpen(false)}
+                  href={link.href}
+                  aria-current={active ? "page" : undefined}
+                  onClick={() => setOpen(false)}
+                  className="run-row run-row--link"
                 >
-                  {link.label}
+                  <span
+                    className={`t-title ${active ? "text-tape" : "text-chalk"}`}
+                  >
+                    {link.label}
+                  </span>
+                  {active && (
+                    <span className="t-run text-tape md:text-right">Here</span>
+                  )}
                 </Link>
-              )
-            )}
-            <div className="mt-4 px-4">
-              <Link
-                href="/support"
-                className="block w-full rounded-full bg-amber py-3 text-center text-sm font-bold text-cream"
-                onClick={() => setMobileOpen(false)}
+              );
+            })}
+            {/* the strip that closes the list */}
+            <div className="mt-auto pt-10">
+              <a
+                href="https://app.getpulley.app/donate/qcsi"
+                className="btn btn-tape font-bold block text-center"
+                onClick={() => setOpen(false)}
               >
-                Donate
-              </Link>
+                Give
+              </a>
             </div>
           </div>
         )}

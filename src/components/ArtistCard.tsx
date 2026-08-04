@@ -1,178 +1,303 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import type { Artist } from "@/data/artists";
 
-function SocialLinks({ artist }: { artist: Artist }) {
-  if (!artist.instagram && !artist.facebook) return null;
-  return (
-    <div className="flex gap-4 mt-4">
-      {artist.instagram && (
-        <a
-          href={`https://instagram.com/${artist.instagram}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-denim hover:text-denim-light transition-colors text-sm font-semibold"
-          onClick={(e) => e.stopPropagation()}
-        >
-          Instagram
-        </a>
-      )}
-      {artist.facebook && (
-        <a
-          href={`https://facebook.com/${artist.facebook}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-denim hover:text-denim-light transition-colors text-sm font-semibold"
-          onClick={(e) => e.stopPropagation()}
-        >
-          Facebook
-        </a>
-      )}
-    </div>
-  );
+function hasRecord(a: Artist) {
+  return !!(a.fullBio || a.bio);
 }
 
-function DetailRow({ label, value }: { label: string; value?: string }) {
-  if (!value) return null;
-  return (
-    <div className="mb-2">
-      <span className="text-charcoal/50 text-xs font-semibold uppercase tracking-wider">{label}: </span>
-      <span className="text-charcoal/80 text-sm">{value}</span>
-    </div>
-  );
-}
+/* ------------------------------------------------------------------ overlay --- */
 
-export default function ArtistCard({ artist, variant = "default" }: { artist: Artist; variant?: "default" | "headliner" }) {
-  const [flipped, setFlipped] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const hasBack = !!(artist.fullBio || artist.bio);
+const FOCUSABLE =
+  'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-  const close = useCallback(() => setFlipped(false), []);
+function Record({ artist, onClose }: { artist: Artist; onClose: () => void }) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!flipped) return;
-    function handleEscape(e: KeyboardEvent) {
-      if (e.key === "Escape") close();
-    }
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [flipped, close]);
+    // remember where focus came from so it can be handed back on close
+    const opener = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !panelRef.current) return;
+      // keep Tab inside the panel — an aria-modal that leaks focus is not modal
+      const items = Array.from(
+        panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE)
+      ).filter((el) => el.offsetParent !== null || el === closeRef.current);
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey && (active === first || !panelRef.current.contains(active))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+      opener?.focus?.();
+    };
+  }, [onClose]);
+
+  const details: [string, string | undefined][] = [
+    ["Hometown", artist.hometown],
+    ["Instrument", artist.instrument],
+    ["Influences", artist.influences],
+    ["Signature song", artist.signatureSong],
+    ["First performance", artist.firstPerformance],
+    ["Biggest achievement", artist.biggestAchievement],
+    ["Dream collab", artist.dreamCollaboration],
+    ["Fun fact", artist.funFact],
+  ];
+  const shown = details.filter(([, v]) => !!v);
 
   return (
-    <>
-      {/* Grid placeholder — the card in the grid */}
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 md:p-8"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${artist.name} — full record`}
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-[rgba(15,15,17,0.86)]" />
+
       <div
-        ref={cardRef}
-        className="cursor-pointer"
-        onClick={() => hasBack && setFlipped(true)}
+        ref={panelRef}
+        className="relative w-full max-w-4xl max-h-[88vh] bg-paper text-ink overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
       >
-        <div className={`${variant === "headliner" ? "bg-charcoal" : "bg-sand"} rounded-xl overflow-hidden hover:shadow-lg transition-shadow`}>
-          <div className="relative aspect-square bg-charcoal/5">
-            {artist.photo ? (
+        <div className="sticky top-0 z-10 flex items-start justify-between gap-4 bg-paper border-b border-paper-edge px-6 py-4 md:px-8">
+          <div>
+            <h3 className="t-headline text-ink">{artist.name}</h3>
+            <p className="t-run text-pencil mt-2">
+              {artist.year.join(", ")}
+              {artist.hometown ? ` · ${artist.hometown}` : ""}
+            </p>
+          </div>
+          <button
+            ref={closeRef}
+            onClick={onClose}
+            aria-label="Close"
+            className="t-run border border-paper-edge px-3 py-2 text-pencil hover:text-tape-ink hover:border-tape transition-colors shrink-0"
+          >
+            Close
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-5">
+          {artist.photo && (
+            <div className="md:col-span-2 relative aspect-square md:aspect-auto md:min-h-[320px]">
               <Image
                 src={artist.photo}
                 alt={`${artist.name}, Queen City Songwriters Invitational artist`}
                 fill
                 className="object-cover"
-                style={artist.photoPosition ? { objectPosition: artist.photoPosition } : undefined}
+                style={
+                  artist.photoPosition
+                    ? { objectPosition: artist.photoPosition }
+                    : undefined
+                }
+                sizes="(min-width: 768px) 40vw, 100vw"
               />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <svg className={`w-16 h-16 ${variant === "headliner" ? "text-cream/10" : "text-charcoal/20"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.75} d={variant === "headliner" ? "M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" : "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"} />
-                </svg>
-              </div>
+            </div>
+          )}
+
+          <div
+            className={`p-6 md:p-8 ${
+              artist.photo ? "md:col-span-3" : "md:col-span-5"
+            }`}
+          >
+            {(artist.fullBio || artist.bio) && (
+              <p className="t-body text-ink">{artist.fullBio || artist.bio}</p>
             )}
-          </div>
-          <div className="p-4">
-            <h3 className={`font-display font-bold ${variant === "headliner" ? "text-cream" : "text-charcoal"}`}>{artist.name}</h3>
-            {variant === "headliner" ? (
-              <p className="text-amber text-sm">{artist.year.join(", ")}</p>
-            ) : (
-              <>
-                {artist.hometown && (
-                  <p className="text-xs text-charcoal/50">{artist.hometown}</p>
+
+            {artist.favoriteLyric && (
+              <figure className="mt-8 border-t border-paper-edge pt-6">
+                <p className="t-run-sm text-pencil mb-3">A favorite line</p>
+                <blockquote className="text-xl leading-snug text-ink max-w-[36ch]">
+                  &ldquo;{artist.favoriteLyric}&rdquo;
+                </blockquote>
+              </figure>
+            )}
+
+            {shown.length > 0 && (
+              <dl className="mt-8 border-t border-paper-edge">
+                {shown.map(([label, value]) => (
+                  <div
+                    key={label}
+                    className="grid grid-cols-1 md:grid-cols-[140px_minmax(0,1fr)] gap-1 md:gap-5 py-3 border-b border-paper-edge"
+                  >
+                    <dt className="t-run text-pencil">{label}</dt>
+                    <dd className="text-ink text-[0.9375rem]">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+
+            {(artist.instagram || artist.facebook) && (
+              <div className="flex gap-3 mt-8">
+                {artist.instagram && (
+                  <a
+                    href={`https://instagram.com/${artist.instagram}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="t-run border border-paper-edge px-4 py-2.5 text-ballpoint hover:border-tape hover:text-tape-ink transition-colors"
+                  >
+                    Instagram
+                  </a>
                 )}
-                {!artist.hometown && artist.instagram && (
-                  <p className="text-sm text-denim">@{artist.instagram}</p>
+                {artist.facebook && (
+                  <a
+                    href={`https://facebook.com/${artist.facebook}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="t-run border border-paper-edge px-4 py-2.5 text-ballpoint hover:border-tape hover:text-tape-ink transition-colors"
+                  >
+                    Facebook
+                  </a>
                 )}
-              </>
+              </div>
             )}
           </div>
         </div>
       </div>
+    </div>
+  );
+}
 
-      {/* Expanded flipped card — modal overlay */}
-      {flipped && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          onClick={close}
-        >
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-charcoal/60 animate-fade-in" />
+/* --------------------------------------------------------------- roster row --- */
 
-          {/* Card */}
-          <div
-            className="relative w-full max-w-lg animate-flip-in [perspective:1200px]"
-            onClick={(e) => e.stopPropagation()}
+export function ArtistRow({
+  artist,
+  index,
+  paper = false,
+}: {
+  artist: Artist;
+  index: number;
+  paper?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const openable = hasRecord(artist);
+  const close = useCallback(() => setOpen(false), []);
+
+  const meta = artist.instrument || artist.signatureSong || "";
+  const cue = String(index + 1).padStart(2, "0");
+
+  const body = (
+    <>
+      <span className="run-cue t-run" aria-hidden="true">
+        {cue}
+      </span>
+      <span className="min-w-0">
+        <span className={`t-title ${paper ? "text-ink" : "text-chalk"}`}>
+          {artist.name}
+        </span>
+        {artist.hometown && (
+          <span
+            className={`t-run block mt-1.5 ${
+              paper ? "text-pencil" : "text-chalk-dim"
+            }`}
           >
-            <div className="[transform:rotateY(180deg)] [transform-style:preserve-3d]">
-              {/* Back face (visible after flip) */}
-              <div className="[backface-visibility:hidden] [transform:rotateY(180deg)]">
-                <div className="bg-sand rounded-2xl overflow-hidden shadow-2xl max-h-[85vh] flex flex-col">
-                  {/* Header */}
-                  <div className="bg-charcoal px-6 py-4 flex items-center justify-between shrink-0">
-                    <div>
-                      <h3 className="font-display font-bold text-cream text-xl">{artist.name}</h3>
-                      {artist.hometown && (
-                        <p className="text-amber text-sm">{artist.hometown}</p>
-                      )}
-                    </div>
-                    <button
-                      onClick={close}
-                      className="text-cream/60 hover:text-cream transition-colors ml-4"
-                      aria-label="Close"
-                    >
-                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
-                  </div>
+            {artist.hometown}
+          </span>
+        )}
+      </span>
+      <span
+        className={`run-meta md:text-right md:max-w-[24ch] ${
+          paper ? "text-pencil" : "text-chalk-dim"
+        }`}
+      >
+        {openable ? meta || "Read record" : meta}
+      </span>
+    </>
+  );
 
-                  {/* Scrollable body */}
-                  <div className="p-6 overflow-y-auto">
-                    {(artist.fullBio || artist.bio) && (
-                      <p className="text-charcoal/80 text-sm leading-relaxed mb-5">
-                        {artist.fullBio || artist.bio}
-                      </p>
-                    )}
+  const cls = `run-row rule-in ${paper ? "run-row--paper" : ""} ${
+    openable ? "run-row--link w-full text-left" : ""
+  }`;
 
-                    <div className="border-t border-charcoal/10 pt-4">
-                      <DetailRow label="Instrument" value={artist.instrument} />
-                      <DetailRow label="Influences" value={artist.influences} />
-                      <DetailRow label="Signature Song" value={artist.signatureSong} />
-                      <DetailRow label="First Performance" value={artist.firstPerformance} />
-                      <DetailRow label="Biggest Achievement" value={artist.biggestAchievement} />
-                      <DetailRow label="Dream Collab" value={artist.dreamCollaboration} />
-                      {artist.favoriteLyric && (
-                        <div className="mb-2">
-                          <span className="text-charcoal/50 text-xs font-semibold uppercase tracking-wider">Favorite Lyric: </span>
-                          <span className="text-charcoal/80 text-sm italic">&ldquo;{artist.favoriteLyric}&rdquo;</span>
-                        </div>
-                      )}
-                      <DetailRow label="Fun Fact" value={artist.funFact} />
-                    </div>
-
-                    <SocialLinks artist={artist} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  return (
+    <>
+      {openable ? (
+        <button type="button" className={cls} onClick={() => setOpen(true)}>
+          {body}
+        </button>
+      ) : (
+        <div className={cls}>{body}</div>
       )}
+      {open && <Record artist={artist} onClose={close} />}
     </>
   );
 }
+
+/* ---------------------------------------------------------- headliner card --- */
+
+export function HeadlinerCard({ artist }: { artist: Artist }) {
+  const [open, setOpen] = useState(false);
+  const openable = hasRecord(artist);
+  const close = useCallback(() => setOpen(false), []);
+
+  const inner = (
+    <>
+      <div className="relative aspect-[3/4]">
+        {artist.photo ? (
+          <Image
+            src={artist.photo}
+            alt={`${artist.name}, Queen City Songwriters Invitational headliner`}
+            fill
+            className="object-cover"
+            style={
+              artist.photoPosition
+                ? { objectPosition: artist.photoPosition }
+                : undefined
+            }
+            sizes="(min-width: 1024px) 25vw, 50vw"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-floor-raised" />
+        )}
+      </div>
+      <div className="pt-3 mt-3 border-t border-floor-line flex items-baseline justify-between gap-3">
+        <span className="t-title text-chalk group-hover:text-tape transition-colors">
+          {artist.name}
+        </span>
+        <span className="t-run text-chalk-dim">{artist.year.join(", ")}</span>
+      </div>
+    </>
+  );
+
+  return (
+    <>
+      {openable ? (
+        <button
+          type="button"
+          className="group text-left w-full"
+          onClick={() => setOpen(true)}
+        >
+          {inner}
+        </button>
+      ) : (
+        <div className="group">{inner}</div>
+      )}
+      {open && <Record artist={artist} onClose={close} />}
+    </>
+  );
+}
+
+export default ArtistRow;

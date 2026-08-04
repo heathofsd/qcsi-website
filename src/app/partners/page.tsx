@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { sponsorTiers, currentSponsors } from "@/data/sponsors";
+import { Tape, RunRow, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
   title: "Partners & Sponsors",
@@ -9,174 +10,166 @@ export const metadata: Metadata = {
     "Support original music in Spearfish, SD. Become a sponsor of the Queen City Songwriters Invitational and invest in your community's creative culture.",
 };
 
+const investment = [
+  { cue: "300+", subject: "Attendees over two days" },
+  { cue: "$20K", subject: "Annual event budget" },
+  { cue: "6+", subject: "Downtown venues activated" },
+  { cue: "30+", subject: "Artists supported" },
+];
+
+const venuePartners = [
+  "The Matthews Opera House",
+  "Spearfish Creek Wine Bar",
+  "False Bottom Bar",
+  "Spearfish Public House",
+];
+
 export default function PartnersPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-charcoal text-cream py-20 lg:py-28 overflow-hidden">
-        <Image
-          src="/photos/sponsor-board-2025.jpg"
-          alt="Sponsor board at the 2025 Queen City Songwriters Invitational"
-          fill
-          className="object-cover opacity-20"
-          priority
-        />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-amber font-semibold tracking-widest uppercase text-sm mb-4">
-              Partners & Sponsors
-            </p>
-            <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6">
-              Invest in Original Music
-            </h1>
-            <p className="text-xl text-cream/80 leading-relaxed">
-              The Invitational doesn&apos;t happen without community partners.
-              Your sponsorship directly funds artist fees, venue production, and
-              the infrastructure that makes this event possible.
-            </p>
-          </div>
+      <section className="shell pt-14 pb-16 md:pt-20 md:pb-20">
+        <Tape land tilt="a" className="mb-10">
+          $20K event budget
+        </Tape>
+        <h1 className="t-display text-chalk max-w-[14ch]">
+          Invest in original music
+        </h1>
+        <p className="t-lead text-chalk-dim mt-8">
+          The Invitational doesn&apos;t happen without community partners. Your
+          sponsorship directly funds artist fees, venue production, and the
+          infrastructure that makes this event possible.
+        </p>
+        <div className="mt-10">
+          <Action
+            href="https://app.getpulley.app/donate/qcsi/c/qcsi2026"
+            external
+          >
+            Become a sponsor
+          </Action>
         </div>
       </section>
 
-      {/* Impact */}
-      <section className="bg-cream py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal mb-4">
-              Your Investment at Work
-            </h2>
-            <p className="text-charcoal/60 max-w-2xl mx-auto text-lg">
+      <figure>
+        <div className="relative aspect-[16/9] md:aspect-[21/8]">
+          <Image
+            src="/photos/sponsor-board-2025.jpg"
+            alt="Sponsor board at the 2025 Queen City Songwriters Invitational"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </div>
+        <figcaption className="shell py-4 t-run-sm text-chalk-dim border-b border-floor-line">
+          The 2025 sponsor board &middot; every name on it made the weekend
+          happen
+        </figcaption>
+      </figure>
+
+      <section className="shell py-20 md:py-[var(--spacing-act)]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <Slug cue="The return" title="Your investment at work">
               Every dollar goes directly toward creating an experience that
               draws visitors, supports artists, and activates downtown.
-            </p>
+            </Slug>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            {[
-              { stat: "300+", label: "Attendees over two days" },
-              { stat: "$20K", label: "Annual event budget" },
-              { stat: "6+", label: "Downtown venues activated" },
-              { stat: "30+", label: "Artists supported" },
-            ].map((item) => (
-              <div key={item.label}>
-                <p className="text-4xl font-display font-bold text-denim">{item.stat}</p>
-                <p className="text-sm text-charcoal/60 mt-2">{item.label}</p>
-              </div>
-            ))}
+          <div className="lg:col-span-6 lg:col-start-7">
+            <div className="border-t border-floor-line">
+              {investment.map((row) => (
+                <RunRow key={row.subject} cue={row.cue} cueLarge>
+                  <span className="t-title text-chalk">{row.subject}</span>
+                </RunRow>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Sponsor Tiers */}
-      <section className="bg-sand py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal mb-4">
-              Sponsorship Tiers
-            </h2>
-            <p className="text-charcoal/60 max-w-xl mx-auto">
-              Choose the level that fits your business. Every tier makes a real
-              difference.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* ---------------------------------------------------------------- tiers */}
+      <section className="bg-paper">
+        <div className="shell py-20 md:py-[var(--spacing-act)]">
+          <Slug cue="The packages" title="Sponsorship tiers" paper>
+            Choose the level that fits your business. Every tier makes a real
+            difference.
+          </Slug>
+
+          <div className="space-y-14 md:space-y-16">
             {sponsorTiers.map((tier) => (
-              <div
-                key={tier.name}
-                className={`bg-cream rounded-xl p-8 ${
-                  tier.name === "Legend"
-                    ? "md:col-span-2 lg:col-span-1 ring-2 ring-amber"
-                    : ""
-                }`}
-              >
-                <p className="text-sm font-bold uppercase tracking-widest text-denim mb-1">
-                  {tier.name}
-                </p>
-                <p className="text-3xl font-display font-bold text-charcoal mb-1">
-                  {tier.amount}
-                </p>
-                <p className="text-sm text-charcoal/60 mb-6">{tier.tagline}</p>
-                <ul className="space-y-3">
-                  {tier.benefits.map((benefit) => (
-                    <li key={benefit} className="flex items-start gap-2 text-sm text-charcoal/70">
-                      <svg className="w-4 h-4 text-amber mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
+              <div key={tier.name} className="margin-note">
+                <div className="margin-note__gutter">
+                  <p className="t-run text-tape-ink">{tier.name}</p>
+                  <p className="t-run text-ink font-bold text-2xl mt-2 tracking-normal">
+                    {tier.amount}
+                  </p>
+                  <p className="t-run-sm text-pencil mt-2">{tier.tagline}</p>
+                </div>
+                <div>
+                  <ul className="border-t border-paper-edge">
+                    {tier.benefits.map((benefit) => (
+                      <li
+                        key={benefit}
+                        className="grid grid-cols-[14px_minmax(0,1fr)] gap-4 py-3 border-b border-paper-edge text-ink text-[0.9375rem]"
+                      >
+                        {/* a marked-off line on a run sheet */}
+                        <span
+                          className="mt-[0.55em] h-[7px] w-[7px] bg-tape shrink-0"
+                          aria-hidden="true"
+                        />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
-          <p className="text-center text-charcoal/60 max-w-2xl mx-auto mt-12 text-sm">
-            Prefer to give in kind? Sound, lodging, printing, food, or a venue are
-            welcome too &mdash; and recognized at the matching package level.
+
+          <p className="t-body text-pencil mt-14">
+            Prefer to give in kind? Sound, lodging, printing, food, or a venue
+            are welcome too &mdash; and recognized at the matching package
+            level.
           </p>
-          <div className="text-center mt-8">
-            <a
+          <div className="mt-10">
+            <Action
               href="https://app.getpulley.app/donate/qcsi/c/qcsi2026"
-              className="inline-block rounded-full bg-denim px-8 py-4 font-bold text-cream hover:bg-denim-light transition-colors"
+              external
             >
-              Become a Sponsor
-            </a>
+              Become a sponsor
+            </Action>
           </div>
         </div>
       </section>
 
-      {/* Current Sponsors */}
-      <section className="bg-cream py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal mb-4">
-              Our Sponsors & Partners
-            </h2>
-            <p className="text-charcoal/60 max-w-xl mx-auto">
-              These businesses and organizations make the Invitational possible.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {currentSponsors.map((sponsor) => (
-              <div
-                key={sponsor.name}
-                className="bg-sand rounded-lg p-6 text-center"
-              >
-                <p className="font-semibold text-charcoal text-sm">
-                  {sponsor.name}
-                </p>
-                {sponsor.tier && (
-                  <p className="text-xs text-charcoal/50 mt-1">{sponsor.tier}</p>
-                )}
-              </div>
-            ))}
-          </div>
+      {/* -------------------------------------------------------- the credits */}
+      <section className="shell py-20 md:py-[var(--spacing-act)]">
+        <Slug cue="With thanks" title="Our sponsors & partners">
+          These businesses and organizations make the Invitational possible.
+        </Slug>
+        <div className="border-t border-floor-line">
+          {currentSponsors.map((sponsor) => (
+            <RunRow
+              key={sponsor.name}
+              cue={sponsor.tier ?? "Sponsor"}
+              meta={sponsor.tier ? undefined : "Spearfish, SD"}
+            >
+              <span className="t-title text-chalk">{sponsor.name}</span>
+            </RunRow>
+          ))}
         </div>
       </section>
 
-      {/* Venue Partners */}
-      <section className="bg-charcoal text-cream py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <h2 className="font-display text-2xl font-bold mb-4">
-            Venue Partners
-          </h2>
-          <p className="text-cream/60 mb-8 max-w-xl mx-auto text-sm">
-            The downtown businesses that open their doors to original music
-            every September.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
-              "The Matthews Opera House",
-              "Spearfish Creek Wine Bar",
-              "False Bottom Bar",
-              "Spearfish Public House",
-            ].map((venue) => (
-              <span
-                key={venue}
-                className="bg-cream/10 border border-cream/10 rounded-full px-5 py-2 text-sm text-cream/70"
-              >
-                {venue}
-              </span>
-            ))}
-          </div>
+      <section className="shell pb-20 md:pb-[var(--spacing-act)]">
+        <Slug cue="The rooms" title="Venue partners">
+          The downtown businesses that open their doors to original music every
+          September.
+        </Slug>
+        <div className="border-t border-floor-line">
+          {venuePartners.map((venue) => (
+            <RunRow key={venue} cue="Venue">
+              <span className="t-title text-chalk">{venue}</span>
+            </RunRow>
+          ))}
         </div>
       </section>
     </>

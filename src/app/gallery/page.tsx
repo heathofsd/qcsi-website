@@ -1,183 +1,224 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
+import { Tape, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
-  title: "Photo & Video Gallery",
+  title: "Photo & Video 2024 &amp; 2025",
   alternates: { canonical: "/gallery" },
   description:
     "Photos and videos from the Queen City Songwriters Invitational — original music in downtown Spearfish, South Dakota.",
 };
 
+const editions = [
+  {
+    year: "2025",
+    label: "Second annual",
+    blurb:
+      "Andrea von Kampen, John Fullbright, and 20+ songwriters across downtown Spearfish.",
+    photos: [
+      {
+        src: "/photos/headliner-matthews-wide.jpg",
+        alt: "Headliner performing at The Matthews Opera House, 2025 Invitational",
+        caption: "Headliner · The Matthews",
+      },
+      {
+        src: "/photos/2025/converted/IMG_4473.jpg",
+        alt: "Songwriter round at a downtown Spearfish venue",
+        caption: "A round downtown",
+      },
+      {
+        src: "/photos/2025/converted/IMG_4488.jpg",
+        alt: "Intimate songwriter performance during the 2025 Invitational",
+        caption: "Up close",
+      },
+      {
+        src: "/photos/2025/converted/IMG_4514.jpg",
+        alt: "Artists sharing songs at a daytime round",
+        caption: "Daytime round",
+      },
+      {
+        src: "/photos/2025/converted/IMG_4545.jpg",
+        alt: "Audience enjoying original music at a downtown venue",
+        caption: "The room, listening",
+      },
+      {
+        src: "/photos/2025/converted/IMG_4601.jpg",
+        alt: "Songwriter on stage at The Matthews Opera House",
+        caption: "On the Matthews stage",
+      },
+      {
+        src: "/photos/2025/converted/IMG_4602.jpg",
+        alt: "Evening showcase crowd at The Matthews",
+        caption: "Evening showcase",
+      },
+      {
+        src: "/photos/2025/converted/IMG_4616.jpg",
+        alt: "Performers at the 2025 Queen City Songwriters Invitational",
+        caption: "Performers, 2025",
+      },
+    ],
+  },
+  {
+    year: "2024",
+    label: "Inaugural",
+    blurb: "Jonathan Byrd, Jami Lynn, and 27 songwriters launched something special.",
+    photos: [
+      {
+        src: "/photos/2024/converted/matthews-byrd-stage-crowd.jpg",
+        alt: "Jonathan Byrd performing on The Matthews stage with crowd visible, 2024 Invitational",
+        caption: "Jonathan Byrd · The Matthews",
+      },
+      {
+        src: "/photos/2024/converted/venue-bar-crowd.jpg",
+        alt: "Packed bar venue during a songwriter round at the 2024 Invitational",
+        caption: "A packed bar",
+      },
+      {
+        src: "/photos/2024/converted/traveler-stage-group.jpg",
+        alt: "Songwriters on the Traveler Whiskey Stage at the 2024 Invitational",
+        caption: "Traveler Whiskey Stage",
+      },
+      {
+        src: "/photos/2024/converted/coffeeshop-round.jpg",
+        alt: "Songwriter round in a downtown Spearfish coffee shop",
+        caption: "Coffee shop round",
+      },
+      {
+        src: "/photos/2024/converted/studio-621-round.jpg",
+        alt: "Intimate songwriter round at Studio 621",
+        caption: "Studio 621",
+      },
+      {
+        src: "/photos/2024/converted/matthews-performer-portrait.jpg",
+        alt: "Performer on The Matthews Opera House stage, 2024 Invitational",
+        caption: "On stage",
+      },
+      {
+        src: "/photos/2024/converted/matthews-performer-crowd.jpg",
+        alt: "Songwriter performing to a full house at The Matthews",
+        caption: "A full house",
+      },
+      {
+        src: "/photos/2024/converted/bar-venue-round.jpg",
+        alt: "Songwriter round at a downtown Spearfish bar venue",
+        caption: "Bar venue round",
+      },
+    ],
+  },
+];
+
+const videos = [
+  {
+    id: "ixqDpS2RXkc",
+    title: "Clayton Ryan & Ryan LittleEagle at The Matthews",
+    cue: "The Matthews",
+  },
+  {
+    id: "HfreoKuUsa0",
+    title: "Lacy Nelson at the 2024 Invitational",
+    cue: "2024",
+  },
+  { id: "gugGfwwZe0k", title: "Heath Johnson live performance", cue: "Live" },
+];
+
 export default function GalleryPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-charcoal text-cream py-20 lg:py-28 overflow-hidden">
-        <Image
-          src="/photos/venue-gallery-packed.jpg"
-          alt="Packed venue during a songwriter round at the Invitational"
-          fill
-          className="object-cover opacity-20"
-          priority
-        />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-amber font-semibold tracking-widest uppercase text-sm mb-4">
-              Gallery
-            </p>
-            <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6">
-              Moments Worth Remembering
-            </h1>
-            <p className="text-xl text-cream/80 leading-relaxed">
-              Scenes from the Invitational — songwriter rounds in coffee shops,
-              headliner nights at The Matthews, and the community that makes it
-              all happen.
-            </p>
-          </div>
+      <section className="shell pt-14 pb-16 md:pt-20 md:pb-20">
+        <Tape land tilt="b" className="mb-10">
+          Gallery
+        </Tape>
+        <h1 className="t-display text-chalk max-w-[14ch]">
+          Moments worth remembering
+        </h1>
+        <p className="t-lead text-chalk-dim mt-8">
+          Scenes from the Invitational &mdash; songwriter rounds in coffee
+          shops, headliner nights at The Matthews, and the community that makes
+          it all happen.
+        </p>
+        <div className="flex flex-wrap gap-4 mt-10">
+          <Action href="/invitational">The 2026 Invitational</Action>
+          <Action href="/for-songwriters" variant="ghost">
+            Apply as a songwriter
+          </Action>
         </div>
       </section>
 
-      {/* Photo Grid Placeholder */}
-      <section className="bg-cream py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          {/* 2025 */}
-          <div className="mb-20">
-            <h2 className="font-display text-3xl font-bold text-charcoal mb-2">
-              2025 Invitational
-            </h2>
-            <p className="text-charcoal/60 mb-8">
-              Andrea von Kampen, John Fullbright, and 20+ songwriters across
-              downtown Spearfish.
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {[
-                { src: "/photos/headliner-matthews-wide.jpg", alt: "Headliner performing at The Matthews Opera House, 2025 Invitational", featured: true },
-                { src: "/photos/2025/converted/IMG_4473.jpg", alt: "Songwriter round at a downtown Spearfish venue" },
-                { src: "/photos/2025/converted/IMG_4488.jpg", alt: "Intimate songwriter performance during the 2025 Invitational" },
-                { src: "/photos/2025/converted/IMG_4514.jpg", alt: "Artists sharing songs at a daytime round" },
-                { src: "/photos/2025/converted/IMG_4545.jpg", alt: "Audience enjoying original music at a downtown venue" },
-                { src: "/photos/2025/converted/IMG_4601.jpg", alt: "Songwriter on stage at The Matthews Opera House" },
-                { src: "/photos/2025/converted/IMG_4602.jpg", alt: "Evening showcase crowd at The Matthews" },
-                { src: "/photos/2025/converted/IMG_4616.jpg", alt: "Performers at the 2025 Queen City Songwriters Invitational" },
-              ].map((photo, i) => (
-                <div
-                  key={i}
-                  className={`relative rounded-xl overflow-hidden ${
-                    photo.featured ? "md:col-span-2 md:row-span-2" : ""
-                  } aspect-square`}
-                >
+      {editions.map((ed) => (
+        <section key={ed.year} className="shell pb-20 md:pb-[var(--spacing-act)]">
+          <div className="flex items-baseline gap-4 mb-3">
+            <span className="t-run text-tape">{ed.year}</span>
+            <span className="t-run text-chalk-dim">{ed.label}</span>
+          </div>
+          <h2 className="t-headline text-chalk mb-4">
+            {ed.year} Invitational
+          </h2>
+          <p className="t-body text-chalk-dim mb-10">{ed.blurb}</p>
+
+          {/* a contact sheet: every frame numbered and named in the margin
+              beneath it, because the story beside the picture is the point */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3 gap-y-8 md:gap-x-4">
+            {ed.photos.map((photo, i) => (
+              <figure key={photo.src}>
+                <div className="relative aspect-square">
                   <Image
                     src={photo.src}
                     alt={photo.alt}
                     fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
+                    className="object-cover"
+                    sizes="(min-width: 768px) 25vw, 50vw"
                   />
                 </div>
-              ))}
-            </div>
+                <figcaption className="pt-2.5 mt-2.5 border-t border-floor-line flex items-baseline gap-3">
+                  <span className="t-run-sm text-chalk-dim shrink-0">
+                    {ed.year}.{String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="t-run-sm text-chalk-dim">
+                    {photo.caption}
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
           </div>
+        </section>
+      ))}
 
-          {/* 2024 */}
-          <div>
-            <h2 className="font-display text-3xl font-bold text-charcoal mb-2">
-              2024 Inaugural Invitational
-            </h2>
-            <p className="text-charcoal/60 mb-8">
-              Jonathan Byrd, Jami Lynn, and 27 songwriters launched something
-              special.
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {[
-                { src: "/photos/2024/converted/matthews-byrd-stage-crowd.jpg", alt: "Jonathan Byrd performing on The Matthews stage with crowd visible, 2024 Invitational", featured: true },
-                { src: "/photos/2024/converted/venue-bar-crowd.jpg", alt: "Packed bar venue during a songwriter round at the 2024 Invitational" },
-                { src: "/photos/2024/converted/traveler-stage-group.jpg", alt: "Songwriters on the Traveler Whiskey Stage at the 2024 Invitational" },
-                { src: "/photos/2024/converted/coffeeshop-round.jpg", alt: "Songwriter round in a downtown Spearfish coffee shop" },
-                { src: "/photos/2024/converted/studio-621-round.jpg", alt: "Intimate songwriter round at Studio 621" },
-                { src: "/photos/2024/converted/matthews-performer-portrait.jpg", alt: "Performer on The Matthews Opera House stage, 2024 Invitational" },
-                { src: "/photos/2024/converted/matthews-performer-crowd.jpg", alt: "Songwriter performing to a full house at The Matthews" },
-                { src: "/photos/2024/converted/bar-venue-round.jpg", alt: "Songwriter round at a downtown Spearfish bar venue" },
-              ].map((photo, i) => (
-                <div
-                  key={i}
-                  className={`relative rounded-xl overflow-hidden ${
-                    photo.featured ? "md:col-span-2 md:row-span-2" : ""
-                  } aspect-square`}
-                >
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
+      <section className="bg-paper">
+        <div className="shell py-20 md:py-[var(--spacing-act)]">
+          <Slug cue="On tape" title="Video highlights" paper />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {videos.map((v) => (
+              <figure key={v.id}>
+                <div className="aspect-video bg-floor">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${v.id}`}
+                    title={v.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full border-0"
                   />
                 </div>
-              ))}
-            </div>
+                <figcaption className="pt-3 mt-3 border-t border-paper-edge">
+                  <span className="t-run text-tape-ink block mb-1.5">
+                    {v.cue}
+                  </span>
+                  <span className="t-title text-ink">{v.title}</span>
+                </figcaption>
+              </figure>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Video Section */}
-      <section className="bg-charcoal text-cream py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="font-display text-3xl font-bold mb-8 text-center">
-            Video Highlights
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {/* Clayton Ryan & Ryan LittleEagle */}
-            <div className="aspect-video rounded-xl overflow-hidden">
-              <iframe
-                src="https://www.youtube.com/embed/ixqDpS2RXkc"
-                title="Clayton Ryan & Ryan LittleEagle at The Matthews"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            </div>
-            {/* Lacy Nelson */}
-            <div className="aspect-video rounded-xl overflow-hidden">
-              <iframe
-                src="https://www.youtube.com/embed/HfreoKuUsa0"
-                title="Lacy Nelson at the 2024 Invitational"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            </div>
-            {/* Heath Johnson */}
-            <div className="aspect-video rounded-xl overflow-hidden">
-              <iframe
-                src="https://www.youtube.com/embed/gugGfwwZe0k"
-                title="Heath Johnson live performance"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="bg-denim py-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <h2 className="font-display text-2xl lg:text-3xl font-bold text-cream mb-4">
-            Want to Be in Next Year&apos;s Gallery?
-          </h2>
-          <div className="flex flex-wrap justify-center gap-4 mt-6">
-            <Link
-              href="/for-songwriters"
-              className="rounded-full bg-amber px-8 py-3 font-bold text-cream hover:bg-amber-light transition-colors"
-            >
-              Apply as a Songwriter
-            </Link>
-            <Link
-              href="/invitational"
-              className="rounded-full bg-cream px-8 py-3 font-bold text-charcoal hover:bg-cream-dark transition-colors"
-            >
-              Attend the Invitational
-            </Link>
-          </div>
+      <section className="shell py-20 md:py-[var(--spacing-act)]">
+        <h2 className="t-headline text-chalk">
+          Want to be in next year&apos;s gallery?
+        </h2>
+        <div className="flex flex-wrap gap-4 mt-10">
+          <Action href="/for-songwriters">Apply as a songwriter</Action>
+          <Action href="/invitational" variant="ghost">
+            Attend the Invitational
+          </Action>
         </div>
       </section>
     </>

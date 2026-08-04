@@ -1,186 +1,177 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
+import { Tape, RunRow, MarginNote, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
-  title: "Support QCSI",
+  title: "501(c)(3) · EIN 99-3218012",
   alternates: { canonical: "/support" },
   description:
     "Support Queen City Songwriters Inc. — a 501(c)(3) nonprofit fostering the art of songwriting in Spearfish, South Dakota. Your donation funds artists, venues, and community programming.",
 };
 
+const split = [
+  {
+    cue: "67%",
+    title: "Artist fees & support",
+    desc: "Headliner contracts, participating songwriter compensation, travel support, and sound production. We pay artists because their work has value.",
+  },
+  {
+    cue: "22%",
+    title: "Production & venues",
+    desc: "Venue rental at The Matthews Opera House, sound equipment, stage setup, and event production across all downtown locations.",
+  },
+  {
+    cue: "11%",
+    title: "Marketing & community",
+    desc: "Printed materials, artist booklets, digital marketing, and community outreach to grow awareness of original music in the Black Hills.",
+  },
+];
+
+const impact = [
+  {
+    amount: "$25",
+    impact:
+      "Covers printed materials for one songwriter — their artist card, booklet entry, and event signage.",
+  },
+  {
+    amount: "$100",
+    impact:
+      "Funds a full songwriter round at a downtown venue — sound setup, promotion, and artist support.",
+  },
+  {
+    amount: "$500",
+    impact:
+      "Sponsors an entire venue for the Invitational — two days of rounds, sound, and production.",
+  },
+];
+
 export default function SupportPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-charcoal text-cream py-20 lg:py-28 overflow-hidden">
-        <Image
-          src="/photos/venue-patio-crowd.jpg"
-          alt="Community enjoying live music on a Spearfish patio during the Invitational"
-          fill
-          className="object-cover opacity-25"
-          priority
-        />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-amber font-semibold tracking-widest uppercase text-sm mb-4">
-              Support QCSI
-            </p>
-            <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6">
-              Keep Original Music Alive
-            </h1>
-            <p className="text-xl text-cream/80 leading-relaxed">
-              Your donation directly supports songwriters, funds community
-              events, and helps build Spearfish into a destination for original
-              music. Every dollar matters.
-            </p>
-          </div>
+      <section className="shell pt-14 pb-16 md:pt-20 md:pb-20">
+        <Tape land tilt="b" className="mb-10">
+          Support QCSI
+        </Tape>
+        <h1 className="t-display text-chalk max-w-[14ch]">
+          Keep original music alive
+        </h1>
+        <p className="t-lead text-chalk-dim mt-8">
+          Your donation directly supports songwriters, funds community events,
+          and helps build Spearfish into a destination for original music. Every
+          dollar matters.
+        </p>
+        <div className="flex flex-wrap gap-4 mt-10">
+          <Action href="https://app.getpulley.app/donate/qcsi" external>
+            Donate now
+          </Action>
+          <Action href="/partners" variant="ghost">
+            Become a sponsor
+          </Action>
         </div>
+        <p className="t-run-sm text-chalk-dim mt-6">
+          Give once or monthly &middot; secure checkout powered by Stripe
+        </p>
       </section>
 
-      {/* Where Your Money Goes */}
-      <section className="bg-cream py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div>
-              <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal mb-8">
-                Where Your Donation Goes
-              </h2>
-              <div className="space-y-6">
-                {[
-                  {
-                    title: "Artist Fees & Support",
-                    amount: "67%",
-                    desc: "Headliner contracts, participating songwriter compensation, travel support, and sound production. We pay artists because their work has value.",
-                  },
-                  {
-                    title: "Production & Venues",
-                    amount: "22%",
-                    desc: "Venue rental at The Matthews Opera House, sound equipment, stage setup, and event production across all downtown locations.",
-                  },
-                  {
-                    title: "Marketing & Community",
-                    amount: "11%",
-                    desc: "Printed materials, artist booklets, digital marketing, and community outreach to grow awareness of original music in the Black Hills.",
-                  },
-                ].map((item) => (
-                  <div key={item.title} className="flex gap-6">
-                    <div className="flex-shrink-0 w-16 h-16 rounded-full bg-denim/10 flex items-center justify-center">
-                      <span className="font-display font-bold text-denim text-lg">
-                        {item.amount}
-                      </span>
-                    </div>
-                    <div>
-                      <h3 className="font-display font-bold text-charcoal mb-1">
-                        {item.title}
-                      </h3>
-                      <p className="text-charcoal/70 text-sm leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+      <figure>
+        <div className="relative aspect-[16/9] md:aspect-[21/8]">
+          <Image
+            src="/photos/venue-patio-crowd.jpg"
+            alt="Community enjoying live music on a Spearfish patio during the Invitational"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </div>
+        <figcaption className="shell py-4 t-run-sm text-chalk-dim border-b border-floor-line">
+          A downtown patio, mid-afternoon &middot; this is what the money buys
+        </figcaption>
+      </figure>
+
+      {/* --------------------------------------------------------- the split */}
+      <section className="shell py-20 md:py-[var(--spacing-act)]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="lg:col-span-7">
+            <Slug cue="The model" title="Where your donation goes" />
+            <div className="border-t border-floor-line">
+              {split.map((row) => (
+                <RunRow key={row.title} cue={row.cue} cueLarge>
+                  <span className="t-title text-chalk block mb-2">
+                    {row.title}
+                  </span>
+                  <span className="t-body text-chalk-dim block">
+                    {row.desc}
+                  </span>
+                </RunRow>
+              ))}
             </div>
+          </div>
 
-            {/* Donate Card */}
-            <div className="bg-sand rounded-2xl p-10">
-              <h3 className="font-display text-2xl font-bold text-charcoal mb-2">
-                Make a Donation
-              </h3>
-              <p className="text-charcoal/60 text-sm mb-8">
+          <aside className="lg:col-span-4 lg:col-start-9">
+            <div className="bg-paper text-ink p-6 md:p-8">
+              <p className="t-run text-tape-ink mb-4">Make a donation</p>
+              <p className="t-body text-pencil text-[0.9375rem]">
                 Queen City Songwriters Inc. is a 501(c)(3) tax-exempt nonprofit.
-                EIN: 99-3218012. All donations are tax-deductible.
+                EIN 99-3218012. All donations are tax-deductible.
               </p>
-
-              <a
-                href="https://app.getpulley.app/donate/qcsi"
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-denim px-6 py-4 font-bold text-cream transition-colors hover:bg-denim-light"
-              >
-                Donate Now
-              </a>
-
-              <p className="mt-4 text-center text-xs text-charcoal/50">
-                Give once or monthly — secure checkout powered by Stripe. A
-                receipt and thank-you follow every gift.
+              <div className="mt-8">
+                <Action href="https://app.getpulley.app/donate/qcsi" external>
+                  Donate now
+                </Action>
+              </div>
+              <p className="t-run-sm text-pencil mt-6">
+                A receipt and thank-you follow every gift.
               </p>
-              <p className="mt-2 text-center text-xs text-charcoal/40">
+              <p className="t-run-sm text-pencil mt-3">
                 Prefer to mail a check?{" "}
                 <a
                   href="https://app.getpulley.app/donate/qcsi/by-check"
-                  className="underline hover:text-charcoal/60"
+                  className="text-ballpoint underline underline-offset-4 hover:text-tape-ink"
                 >
                   Get mailing details
                 </a>
-                .
               </p>
             </div>
-          </div>
+          </aside>
         </div>
       </section>
 
-      {/* Impact */}
-      <section className="bg-charcoal text-cream py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
-              Your Impact
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                amount: "$25",
-                impact: "Covers printed materials for one songwriter — their artist card, booklet entry, and event signage.",
-              },
-              {
-                amount: "$100",
-                impact: "Funds a full songwriter round at a downtown venue — sound setup, promotion, and artist support.",
-              },
-              {
-                amount: "$500",
-                impact: "Sponsors an entire venue for the Invitational — two days of rounds, sound, and production.",
-              },
-            ].map((item) => (
-              <div key={item.amount} className="bg-cream/5 border border-cream/10 rounded-xl p-8 text-center">
-                <p className="text-3xl font-display font-bold text-amber mb-4">
-                  {item.amount}
-                </p>
-                <p className="text-cream/70 text-sm leading-relaxed">
+      {/* -------------------------------------------------------- your impact */}
+      <section className="bg-paper">
+        <div className="shell py-20 md:py-[var(--spacing-act)]">
+          <Slug cue="In real terms" title="Your impact" paper />
+          <div className="space-y-12">
+            {impact.map((item) => (
+              <MarginNote
+                key={item.amount}
+                note={
+                  <span className="block text-ink font-bold text-2xl tracking-normal">
+                    {item.amount}
+                  </span>
+                }
+              >
+                <p className="text-ink text-xl md:text-2xl leading-snug max-w-[42ch]">
                   {item.impact}
                 </p>
-              </div>
+              </MarginNote>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Other Ways */}
-      <section className="bg-sand py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <h2 className="font-display text-2xl lg:text-3xl font-bold text-charcoal mb-4">
-            Other Ways to Help
-          </h2>
-          <p className="text-charcoal/60 max-w-2xl mx-auto mb-8">
-            Not in a position to donate? You can still make a huge difference.
-            Attend events and bring friends. Share our posts on social media.
-            Tell a songwriter about us. Volunteer during the Invitational.
-            Word of mouth is our most powerful tool.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/partners"
-              className="rounded-full bg-denim px-8 py-3 font-bold text-cream hover:bg-denim-light transition-colors"
-            >
-              Become a Sponsor
-            </Link>
-            <Link
-              href="/contact"
-              className="rounded-full border-2 border-charcoal/20 px-8 py-3 font-bold text-charcoal hover:border-charcoal/40 transition-colors"
-            >
-              Volunteer
-            </Link>
-          </div>
+      <section className="shell py-20 md:py-[var(--spacing-act)]">
+        <Slug cue="Not just money" title="Other ways to help">
+          Not in a position to donate? You can still make a huge difference.
+          Attend events and bring friends. Share our posts on social media. Tell
+          a songwriter about us. Volunteer during the Invitational. Word of
+          mouth is our most powerful tool.
+        </Slug>
+        <div className="flex flex-wrap gap-4">
+          <Action href="/partners">Become a sponsor</Action>
+          <Action href="/contact" variant="ghost">
+            Volunteer
+          </Action>
         </div>
       </section>
     </>

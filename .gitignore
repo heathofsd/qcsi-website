@@ -42,3 +42,9 @@ next-env.d.ts
 
 # Raw photo/video originals
 /originals/
+
+# claude code — personal, machine-specific
+.claude/settings.local.json
+
+# impeccable — transient decision-page daemon state (pid/port/heartbeat)
+.impeccable/questions/

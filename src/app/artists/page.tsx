@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { artists2025, artists2024Only, headliners } from "@/data/artists";
-import ArtistCard from "@/components/ArtistCard";
+import { ArtistRow, HeadlinerCard } from "@/components/ArtistCard";
+import { Tape, RunRow, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
   title: "Artists & Headliners",
@@ -12,127 +12,105 @@ export const metadata: Metadata = {
 };
 
 export default function ArtistsPage() {
+  const sortedHeadliners = [...headliners].sort(
+    (a, b) => Math.max(...b.year) - Math.max(...a.year)
+  );
+
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-charcoal text-cream py-20 lg:py-28 overflow-hidden">
-        <Image
-          src="/photos/artists-backstage-jam.jpg"
-          alt="Songwriters jamming backstage at the Queen City Songwriters Invitational"
-          fill
-          className="object-cover opacity-20"
-          priority
-        />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-amber font-semibold tracking-widest uppercase text-sm mb-4">
-              The Artists
-            </p>
-            <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6">
-              Original Voices of the Invitational
-            </h1>
-            <p className="text-xl text-cream/80 leading-relaxed">
-              Every year, we invite a curated group of songwriters to share
-              their original music across downtown Spearfish. These are the
-              artists who have answered the call.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 2026 Teaser */}
-      <section className="bg-amber py-12">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <p className="text-cream text-lg font-semibold">
-            Jeffrey Foucault headlines the 2026 Invitational — Saturday, September 26.{" "}
-            <Link href="/contact" className="underline underline-offset-4 hover:text-cream/80">
-              Get notified
-            </Link>
+      <section className="shell pt-14 pb-16 md:pt-20 md:pb-20">
+        <Tape land tilt="a" className="mb-10">
+          Curated, not competitive
+        </Tape>
+        <h1 className="t-display text-chalk max-w-[18ch]">
+          Original voices of the Invitational
+        </h1>
+        <p className="t-lead text-chalk-dim mt-8">
+          Every year, we invite a curated group of songwriters to share their
+          original music across downtown Spearfish. These are the artists who
+          have answered the call.
+        </p>
+        <div className="mt-10 border-t border-floor-line pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+          <p className="t-run text-chalk-dim max-w-[52ch]">
+            Jeffrey Foucault headlines the 2026 Invitational &mdash; Saturday,
+            September 26.
           </p>
-        </div>
-      </section>
-
-      {/* Headliners */}
-      <section className="bg-cream py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mb-16">
-            <h2 className="font-display text-3xl font-bold text-charcoal mb-2">
-              Headliners
-            </h2>
-            <p className="text-charcoal/60">
-              The artists who have headlined our evening showcases at The
-              Matthews Opera House.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {[...headliners]
-              .sort((a, b) => Math.max(...b.year) - Math.max(...a.year))
-              .map((artist) => (
-                <ArtistCard key={artist.slug} artist={artist} variant="headliner" />
-              ))}
+          <div className="flex flex-wrap gap-4">
+            <Action href="/contact">Get notified</Action>
+            <Action href="/invitational" variant="ghost">
+              The Invitational
+            </Action>
           </div>
         </div>
       </section>
 
-      {/* 2025 Artists */}
-      <section className="bg-sand py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mb-16">
-            <h2 className="font-display text-3xl font-bold text-charcoal mb-2">
-              2025 Invitational Artists
-            </h2>
-            <p className="text-charcoal/60">
-              The songwriters who performed at the second annual Invitational.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {artists2025.map((artist) => (
-              <ArtistCard key={artist.slug} artist={artist} />
+      <figure>
+        <div className="relative aspect-[16/9] md:aspect-[21/8]">
+          <Image
+            src="/photos/artists-backstage-jam.jpg"
+            alt="Songwriters jamming backstage at the Queen City Songwriters Invitational"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </div>
+        <figcaption className="shell py-4 t-run-sm text-chalk-dim border-b border-floor-line">
+          Backstage, between rounds
+        </figcaption>
+      </figure>
+
+      {/* ----------------------------------------------------------- headliners */}
+      <section className="shell py-20 md:py-[var(--spacing-act)]">
+        <Slug cue="Evening showcases" title="Headliners">
+          The artists who have headlined our evening showcases at The Matthews
+          Opera House. Open a name for the full record.
+        </Slug>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 md:gap-6">
+          {sortedHeadliners.map((artist) => (
+            <HeadlinerCard key={artist.slug} artist={artist} />
+          ))}
+        </div>
+      </section>
+
+      {/* --------------------------------------------------------- 2025 roster */}
+      <section className="bg-paper">
+        <div className="shell py-20 md:py-[var(--spacing-act)]">
+          <Slug cue="2025 Invitational" title="The call sheet" paper>
+            The songwriters who performed at the second annual Invitational.
+            Open a name for the bio, the influences, and a favorite line.
+          </Slug>
+          <div className="border-t border-paper-edge">
+            {artists2025.map((artist, i) => (
+              <ArtistRow key={artist.slug} artist={artist} index={i} paper />
             ))}
           </div>
         </div>
       </section>
 
-      {/* 2024 Alumni */}
-      <section className="bg-cream py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mb-16">
-            <h2 className="font-display text-3xl font-bold text-charcoal mb-2">
-              2024 Inaugural Artists
-            </h2>
-            <p className="text-charcoal/60">
-              The original lineup who launched the Invitational. Artists who also
-              performed in 2025 are listed above.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-            {artists2024Only.map((artist) => (
-              <div key={artist.slug} className="bg-sand rounded-lg p-4">
-                <h3 className="font-display font-bold text-charcoal text-sm">
-                  {artist.name}
-                </h3>
-              </div>
-            ))}
-          </div>
+      {/* --------------------------------------------------------- 2024 alumni */}
+      <section className="shell py-20 md:py-[var(--spacing-act)]">
+        <Slug cue="2024 Inaugural" title="The original lineup">
+          The artists who launched the Invitational. Those who also performed in
+          2025 are listed above.
+        </Slug>
+        <div className="border-t border-floor-line">
+          {artists2024Only.map((artist, i) => (
+            <RunRow key={artist.slug} cue={String(i + 1).padStart(2, "0")}>
+              <span className="t-title text-chalk">{artist.name}</span>
+            </RunRow>
+          ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-denim py-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <h2 className="font-display text-2xl lg:text-3xl font-bold text-cream mb-4">
-            Are You a Songwriter?
-          </h2>
-          <p className="text-cream/70 mb-8 max-w-xl mx-auto">
-            We&apos;re always looking for original voices. Learn how to get
-            involved with QCSI.
-          </p>
-          <Link
-            href="/for-songwriters"
-            className="inline-block rounded-full bg-amber px-8 py-4 font-bold text-cream hover:bg-amber-light transition-colors"
-          >
-            For Songwriters
-          </Link>
+      <section className="shell pb-20 md:pb-[var(--spacing-act)]">
+        <h2 className="t-headline text-chalk">Are you a songwriter?</h2>
+        <p className="t-body text-chalk-dim mt-6">
+          We&apos;re always looking for original voices. Learn how to get
+          involved with QCSI.
+        </p>
+        <div className="mt-10">
+          <Action href="/for-songwriters">For songwriters</Action>
         </div>
       </section>
     </>

@@ -1,23 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Source_Sans_3 } from "next/font/google";
+import { Archivo, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+// Archivo carries display and body from one family via its width axis.
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
+  axes: ["wdth"],
   display: "swap",
 });
 
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
+// Courier Prime carries every run-sheet datum: times, rooms, numbers, credits.
+const courierPrime = Courier_Prime({
+  variable: "--font-courier-prime",
   subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
 export const viewport: Viewport = {
-  themeColor: "#1C1612",
+  themeColor: "#0F0F11",
 };
 
 export const metadata: Metadata = {
@@ -60,10 +65,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${playfair.variable} ${sourceSans.variable} antialiased`}
-      >
+    // The font variables live on <html> so the :root theme tokens that
+    // reference them resolve. Declaring them on <body> leaves --font-display
+    // empty at :root and silently drops the whole type system.
+    <html lang="en" className={`${archivo.variable} ${courierPrime.variable}`}>
+      <body className="antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -141,8 +147,11 @@ export default function RootLayout({
             }),
           }}
         />
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <Header />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <Footer />
       </body>
     </html>

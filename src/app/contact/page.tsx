@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { Tape, RunRow, Action } from "@/components/run";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "810 State St, Spearfish SD",
   alternates: { canonical: "/contact" },
   description:
     "Get in touch with Queen City Songwriters — whether you're a songwriter, sponsor, or music lover.",
@@ -10,101 +11,82 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-charcoal text-cream py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-amber font-semibold tracking-widest uppercase text-sm mb-4">
-              Contact
-            </p>
-            <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6">
-              Let&apos;s Connect
-            </h1>
-            <p className="text-xl text-cream/80 leading-relaxed">
-              Whether you&apos;re a songwriter looking to get involved, a
-              business interested in sponsoring, or a music lover with a
-              question — we want to hear from you.
-            </p>
-          </div>
+      <section className="shell pt-14 pb-16 md:pt-20 md:pb-20">
+        <Tape land tilt="a" className="mb-10">
+          Contact
+        </Tape>
+        <h1 className="t-display text-chalk max-w-[12ch]">Let&apos;s connect</h1>
+        <p className="t-lead text-chalk-dim mt-8">
+          Whether you&apos;re a songwriter looking to get involved, a business
+          interested in sponsoring, or a music lover with a question &mdash; we
+          want to hear from you.
+        </p>
+        {/* a real action outside the embed, so the page is never a dead end
+            if the iframe is slow or blocked */}
+        <div className="flex flex-wrap gap-4 mt-10">
+          <Action href="mailto:contact@qcsongwriters.com" external>
+            Email us directly
+          </Action>
         </div>
       </section>
 
-      {/* Contact Form + Info */}
-      <section className="bg-cream py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
-            {/* Notion Form Embed */}
-            <div className="lg:col-span-3">
+      <section className="shell pb-20 md:pb-[var(--spacing-act)]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div className="lg:col-span-7">
+            <div className="flex flex-wrap items-baseline justify-between gap-3 mb-4">
+              <p className="t-run text-tape">Send a note</p>
+              <p className="t-run-sm text-chalk-dim">Form hosted by Notion</p>
+            </div>
+            <div className="bg-paper">
               <iframe
                 src="https://heathjohnson.notion.site/ebd//320f6ac441bb80709bfdce9af7094e60"
                 width="100%"
-                height="600"
-                className="rounded-xl border border-charcoal/10"
+                height="620"
                 title="Contact Queen City Songwriters"
                 allow="fullscreen"
+                className="block w-full border-0"
               />
             </div>
-
-            {/* Contact Info */}
-            <div className="lg:col-span-2 space-y-8">
-              <div className="bg-sand rounded-xl p-8">
-                <h3 className="font-display text-xl font-bold text-charcoal mb-6">
-                  Get in Touch
-                </h3>
-                <dl className="space-y-4">
-                  <div>
-                    <dt className="text-sm text-charcoal/50 mb-1">Email</dt>
-                    <dd>
-                      <a
-                        href="mailto:contact@qcsongwriters.com"
-                        className="text-denim hover:text-denim-light font-semibold transition-colors"
-                      >
-                        contact@qcsongwriters.com
-                      </a>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm text-charcoal/50 mb-1">Location</dt>
-                    <dd className="text-charcoal font-semibold">
-                      Spearfish, SD
-                    </dd>
-                  </div>
-                </dl>
-              </div>
-
-              <div className="bg-sand rounded-xl p-8">
-                <h3 className="font-display text-xl font-bold text-charcoal mb-4">
-                  Follow Us
-                </h3>
-                <div className="space-y-3">
-                  <a
-                    href="https://www.instagram.com/qcsongwriters"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-charcoal hover:text-denim transition-colors"
-                  >
-                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                    </svg>
-                    <span className="font-semibold">@qcsongwriters</span>
-                    <span className="text-sm text-charcoal/50">Instagram</span>
-                  </a>
-                  <a
-                    href="https://www.facebook.com/qcsongwriters"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-charcoal hover:text-denim transition-colors"
-                  >
-                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                    </svg>
-                    <span className="font-semibold">@qcsongwriters</span>
-                    <span className="text-sm text-charcoal/50">Facebook</span>
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
+
+          <aside className="lg:col-span-4 lg:col-start-9">
+            <p className="t-run text-tape mb-1">Direct</p>
+            <div className="border-t border-floor-line">
+              <RunRow
+                cue="Email"
+                href="mailto:contact@qcsongwriters.com"
+                external
+                enter="none"
+              >
+                <span className="t-title text-chalk break-words">
+                  contact@qcsongwriters.com
+                </span>
+              </RunRow>
+              <RunRow cue="Where" enter="none">
+                <span className="t-title text-chalk">Spearfish, SD</span>
+              </RunRow>
+            </div>
+
+            <p className="t-run text-tape mb-1 mt-12">Follow</p>
+            <div className="border-t border-floor-line">
+              <RunRow
+                cue="Instagram"
+                href="https://www.instagram.com/qcsongwriters"
+                external
+                enter="none"
+              >
+                <span className="t-title text-chalk">@qcsongwriters</span>
+              </RunRow>
+              <RunRow
+                cue="Facebook"
+                href="https://www.facebook.com/qcsongwriters"
+                external
+                enter="none"
+              >
+                <span className="t-title text-chalk">@qcsongwriters</span>
+              </RunRow>
+            </div>
+          </aside>
         </div>
       </section>
     </>
