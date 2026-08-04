@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 116" fill="#17171A">
+  <title>Queen City Songwriters</title>
+  <g transform="translate(0 0) scale(1)">
+    <path d="M 19 90 L 10 42 C 17 55, 27 58, 36 58 C 46 57, 53 40, 59 21 L 71 21 C 77 40, 84 57, 94 58 C 103 58, 113 55, 120 42 L 111 90 Q 65 78, 19 90 Z"/>
+    <circle cx="10" cy="42" r="10"/><circle cx="120" cy="42" r="10"/>
+    <circle cx="65" cy="12" r="12"/>
+    <path d="M 21 106 Q 65 98 109 106" fill="none" stroke="#17171A"
+      stroke-width="12" stroke-linecap="round"/>
+  </g>
+</svg>

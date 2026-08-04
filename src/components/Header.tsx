@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { LogoHorizontal } from "@/components/Logo";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -40,15 +40,12 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-floor border-b border-floor-line">
       <nav className="shell">
         <div className="flex h-[74px] items-center justify-between gap-6">
-          <Link href="/" className="flex-shrink-0" aria-label="Queen City Songwriters — home">
-            <Image
-              src="/logo.png"
-              alt="Queen City Songwriters"
-              width={60}
-              height={60}
-              className="h-11 w-auto brightness-0 invert"
-              priority
-            />
+          <Link
+            href="/"
+            className="flex-shrink-0 text-chalk hover:text-tape transition-colors"
+            aria-label="Queen City Songwriters — home"
+          >
+            <LogoHorizontal className="h-10 w-auto" />
           </Link>
 
           {/* Desktop — the nav is a run sheet, active marked by a tape strip. */}

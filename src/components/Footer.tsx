@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { LogoStacked } from "@/components/Logo";
 
 const explore = [
   { href: "/about", label: "About QCSI" },
@@ -25,13 +25,7 @@ export function Footer() {
             wide, which no email address fits into */}
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12">
           <div className="md:col-span-2 lg:col-span-4">
-            <Image
-              src="/logo.png"
-              alt="Queen City Songwriters"
-              width={80}
-              height={80}
-              className="h-14 w-auto brightness-0 invert mb-6"
-            />
+            <LogoStacked className="h-24 w-auto text-chalk mb-7" />
             <p className="t-body text-chalk-dim">
               A nonprofit supporting the art of songwriting in Spearfish, South
               Dakota.

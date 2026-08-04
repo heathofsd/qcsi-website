@@ -90,7 +90,7 @@ export default function RootLayout({
                   "@id": "https://qcsongwriters.com/#organization",
                   name: "Queen City Songwriters Inc.",
                   url: "https://qcsongwriters.com",
-                  logo: "https://qcsongwriters.com/logo-512.png",
+                  logo: "https://qcsongwriters.com/brand/qcsi-logo-512.png",
                   image: "https://qcsongwriters.com/opengraph-image.jpg",
                   email: "contact@qcsongwriters.com",
                   description:
