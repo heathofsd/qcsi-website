@@ -9,7 +9,7 @@ import {
   type Artist,
 } from "@/data/artists";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
-import { CopyBlock } from "@/components/CopyBlock";
+import { CopyButton } from "@/components/CopyButton";
 
 /* Every artist with a written record gets a page, plus the whole 2026 bill.
    The page is the artist's entry in the running order blown up to a full
@@ -259,38 +259,23 @@ export default async function ArtistPage({
                   ))}
                 </dl>
 
-                {/* the press kit is why a working writer links this page */}
-                <div className="max-w-3xl mt-14">
-                  <Slug cue="Press kit" title="Copy-ready" paper>
-                    For venues, press, and programs — lift it verbatim.
-                  </Slug>
-                  <div className="space-y-8">
-                    {artist.bio && artist.fullBio && (
-                      <CopyBlock label="Short bio" text={artist.bio} />
-                    )}
-                    <CopyBlock
-                      label={artist.fullBio ? "Full bio" : "Bio"}
-                      text={artist.fullBio || artist.bio || ""}
-                    />
+                {/* one quiet service row — the bio is already on the page,
+                    so nothing repeats; press and bookers get the buttons */}
+                <div className="max-w-3xl mt-10 pt-5 border-t border-paper-edge flex flex-wrap items-center justify-between gap-4">
+                  <p className="t-run text-pencil">For press &amp; bookers</p>
+                  <div className="flex flex-wrap gap-3">
+                    <CopyButton text={artist.fullBio || artist.bio || ""}>
+                      Copy bio
+                    </CopyButton>
                     {artist.photo && (
-                      <div className="border-t border-paper-edge pt-5">
-                        <div className="flex items-baseline justify-between gap-4">
-                          <p className="t-run text-pencil">Photo</p>
-                          <a
-                            href={artist.photo}
-                            download
-                            aria-label={`Download photo of ${artist.name}`}
-                            className="t-run border border-paper-edge px-3 py-1.5 text-pencil hover:text-tape-ink hover:border-tape transition-colors"
-                          >
-                            Download
-                          </a>
-                        </div>
-                        {artist.photoCredit && (
-                          <p className="t-run-sm text-pencil mt-2">
-                            Credit: {artist.photoCredit}
-                          </p>
-                        )}
-                      </div>
+                      <a
+                        href={artist.photo}
+                        download
+                        aria-label={`Download photo of ${artist.name}`}
+                        className="t-run border border-paper-edge px-4 py-2.5 text-pencil hover:text-tape-ink hover:border-tape transition-colors"
+                      >
+                        Download photo
+                      </a>
                     )}
                   </div>
                 </div>

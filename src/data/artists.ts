@@ -71,7 +71,7 @@ export const headliners: Artist[] = [
   },
 ];
 
-export const artists2025: Artist[] = [
+export const profiledArtists: Artist[] = [
   {
     name: "Abbey Leach",
     slug: "abbey-leach",
@@ -376,7 +376,6 @@ export const artists2024Only: Artist[] = [
   { name: "Bubba Startz", slug: "bubba-startz", year: [2024] },
   { name: "Cody Henson Hullinger", slug: "cody-henson-hullinger", year: [2024] },
   { name: "J Shogren", slug: "j-shogren", year: [2024] },
-  { name: "Jackson Holte", slug: "jackson-holte", year: [2024, 2026] },
   { name: "JJ Kent", slug: "jj-kent", year: [2024] },
   { name: "Lonesome Jones", slug: "lonesome-jones", year: [2024] },
   { name: "Lucas Olson", slug: "lucas-olson", year: [2024] },
@@ -395,7 +394,6 @@ export const artists2024Only: Artist[] = [
  * point they graduate into `artists` above with a full profile.
  */
 export const rosterNoProfile: Artist[] = [
-  { name: "Brad McKim", slug: "brad-mckim", year: [2026] },
   { name: "Clint Hahn", slug: "clint-hahn", year: [2026] },
   { name: "Daron Lacina", slug: "daron-lacina", year: [2026] },
   { name: "Ian Gall", slug: "ian-gall", year: [2026] },
@@ -408,7 +406,7 @@ export const rosterNoProfile: Artist[] = [
  * rather than adding another hand-maintained per-year array.
  */
 const allRostered: Artist[] = [
-  ...artists2025,
+  ...profiledArtists,
   ...artists2024Only,
   ...rosterNoProfile,
 ];
@@ -420,6 +418,16 @@ const allRostered: Artist[] = [
 export const artists2026: Artist[] = allRostered
   .filter((a) => a.year.includes(2026))
   .sort((a, b) => a.name.localeCompare(b.name));
+
+/**
+ * The 2025 roster. Derived, not the raw store: `profiledArtists` is "everyone
+ * with a full record", which is not the same set as "everyone who played 2025"
+ * — Jackson Holte has a full record and played 2024 and 2026 but never 2025.
+ * Reading the store directly would have put him in the 2025 section.
+ */
+export const artists2025: Artist[] = allRostered.filter((a) =>
+  a.year.includes(2025)
+);
 
 /** 2024 artists who have not appeared on a later roster. */
 export const artists2024Unreturned: Artist[] = artists2024Only.filter(
