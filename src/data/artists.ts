@@ -73,7 +73,7 @@ export const artists2025: Artist[] = [
   {
     name: "Abbey Leach",
     slug: "abbey-leach",
-    year: [2025],
+    year: [2025, 2026],
     instagram: "abbeylleach",
     facebook: "AbbeyLeachMusic",
     photo: "/photos/artists/abbey-leach.png",
@@ -91,7 +91,7 @@ export const artists2025: Artist[] = [
   {
     name: "Chris Graves",
     slug: "chris-graves",
-    year: [2025],
+    year: [2025, 2026],
     instagram: "iamchrisgraves",
     photo: "/photos/artists/chris-graves.png",
     hometown: "Sturgis, SD (now based in Rapid City)",
@@ -126,7 +126,7 @@ export const artists2025: Artist[] = [
   {
     name: "Craig Winquist",
     slug: "craig-winquist",
-    year: [2025],
+    year: [2025, 2026],
     photo: "/photos/artists/craig-winquist.jpg",
     hometown: "Canton, SD",
     fullBio: "Craig Winquist is a songwriter from Canton, South Dakota whose career reflects a deep love for melody and story. He spent eight years in Nashville writing songs and has had more than thirty songs recorded by artists worldwide, with some featured on television. A career highlight was performing at the legendary Bluebird Cafe. He continues to write and perform while raising his family in South Dakota as a cattle and sheep rancher.",
@@ -142,7 +142,7 @@ export const artists2025: Artist[] = [
   {
     name: "Devon Sants",
     slug: "devon-sants",
-    year: [2024, 2025],
+    year: [2024, 2025, 2026],
     instagram: "devonsants",
     facebook: "devonsants",
     photo: "/photos/artists/devon-sants.jpg",
@@ -175,7 +175,7 @@ export const artists2025: Artist[] = [
   {
     name: "Janice Gilbert",
     slug: "janice-gilbert",
-    year: [2025],
+    year: [2025, 2026],
     instagram: "janicegilbertmusic",
     facebook: "janicegilbertmusic",
     photo: "/photos/artists/janice-gilbert.jpg",
@@ -193,7 +193,7 @@ export const artists2025: Artist[] = [
   {
     name: "Cody Neeb",
     slug: "cody-neeb",
-    year: [2024, 2025],
+    year: [2024, 2025, 2026],
     photo: "/photos/artists/cody-neeb.jpg",
     hometown: "Indianapolis, IN",
     fullBio: "Cody Neeb is a pianist and songwriter based in Indianapolis with ties to the Black Hills. With over 20 years of piano experience, he creates songs that blend wit, heart, and honesty. His work ranges from humorous parenting compositions to fan favorites. He describes his greatest achievement as \"Stickin' with it for this long.\"",
@@ -224,7 +224,7 @@ export const artists2025: Artist[] = [
   {
     name: "Heath Johnson",
     slug: "heath-johnson",
-    year: [2024, 2025],
+    year: [2024, 2025, 2026],
     instagram: "throughtheheath",
     facebook: "heathjohnsonmusic",
     photo: "/photos/artists/heath-johnson.png",
@@ -241,7 +241,7 @@ export const artists2025: Artist[] = [
   {
     name: "Laura Mills",
     slug: "laura-mills",
-    year: [2025],
+    year: [2025, 2026],
     facebook: "lauramillsmusic",
     photo: "/photos/artists/laura-mills.jpg",
     hometown: "Rapid City, SD",
@@ -257,7 +257,7 @@ export const artists2025: Artist[] = [
   {
     name: "Lawren Erickson",
     slug: "lawren-erickson",
-    year: [2024, 2025],
+    year: [2024, 2025, 2026],
     photo: "/photos/artists/lawren-erickson.jpg",
     hometown: "Rapid City, SD",
     fullBio: "Lawren Erickson is a Rapid City-based songwriter and performer whose career stretches back to his teenage years. He started guitar at 12, performed in bars and Las Vegas venues, majored in music in college, and has released two albums of original material featuring melodic and lyrical work.",
@@ -317,7 +317,7 @@ export const artists2025: Artist[] = [
   {
     name: "Lacy Hotchkiss",
     slug: "lacy-hotchkiss",
-    year: [2024, 2025],
+    year: [2024, 2025, 2026],
     instagram: "lacynelsonmusic",
     facebook: "lacynelsonmusic",
     photo: "/photos/artists/lacy-hotchkiss.png",
@@ -335,7 +335,7 @@ export const artists2025: Artist[] = [
   {
     name: "Sarah Carper",
     slug: "sarah-carper",
-    year: [2024, 2025],
+    year: [2024, 2025, 2026],
     instagram: "sarah_carper",
     facebook: "sarahcarpermusic",
     photo: "/photos/artists/sarah-carper.jpg",
@@ -374,7 +374,7 @@ export const artists2024Only: Artist[] = [
   { name: "Bubba Startz", slug: "bubba-startz", year: [2024] },
   { name: "Cody Henson Hullinger", slug: "cody-henson-hullinger", year: [2024] },
   { name: "J Shogren", slug: "j-shogren", year: [2024] },
-  { name: "Jackson Holte", slug: "jackson-holte", year: [2024] },
+  { name: "Jackson Holte", slug: "jackson-holte", year: [2024, 2026] },
   { name: "JJ Kent", slug: "jj-kent", year: [2024] },
   { name: "Lonesome Jones", slug: "lonesome-jones", year: [2024] },
   { name: "Lucas Olson", slug: "lucas-olson", year: [2024] },
@@ -384,8 +384,45 @@ export const artists2024Only: Artist[] = [
   { name: "Ryan Little Eagle", slug: "ryan-little-eagle", year: [2024] },
   { name: "Scott Simpson", slug: "scott-simpson", year: [2024] },
   { name: "Tanner Johns", slug: "tanner-johns", year: [2024] },
-  { name: "Wayne P. Baye", slug: "wayne-p-baye", year: [2024] },
+  { name: "Wayne P. Baye", slug: "wayne-p-baye", year: [2024, 2026] },
 ];
+
+/**
+ * Confirmed for a given year but no intake on file yet — name only, no bio or
+ * photo. They render as plain rows until their intake form comes back, at which
+ * point they graduate into `artists` above with a full profile.
+ */
+export const rosterNoProfile: Artist[] = [
+  { name: "Brad McKim", slug: "brad-mckim", year: [2026] },
+  { name: "Clint Hahn", slug: "clint-hahn", year: [2026] },
+  { name: "Daron Lacina", slug: "daron-lacina", year: [2026] },
+  { name: "Ian Gall", slug: "ian-gall", year: [2026] },
+  { name: "Quinlan Valdez", slug: "quinlan-valdez", year: [2026] },
+];
+
+/**
+ * Everyone who has ever been on a roster, headliners excluded. The `year` field
+ * is the source of truth for which edition someone belongs to — derive from it
+ * rather than adding another hand-maintained per-year array.
+ */
+const allRostered: Artist[] = [
+  ...artists2025,
+  ...artists2024Only,
+  ...rosterNoProfile,
+];
+
+/**
+ * The 2026 roster — locked at 18 on 2026-08-06. Alphabetical by first name, the
+ * same convention the 2024 list uses: a lineup should not imply a ranking.
+ */
+export const artists2026: Artist[] = allRostered
+  .filter((a) => a.year.includes(2026))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+/** 2024 artists who have not appeared on a later roster. */
+export const artists2024Unreturned: Artist[] = artists2024Only.filter(
+  (a) => !a.year.includes(2025) && !a.year.includes(2026)
+);
 
 export const venues = [
   {

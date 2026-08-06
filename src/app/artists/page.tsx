@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { artists2025, artists2024Only, headliners } from "@/data/artists";
+import {
+  artists2026,
+  artists2025,
+  artists2024Unreturned,
+  headliners,
+} from "@/data/artists";
 import { ArtistRow, HeadlinerCard } from "@/components/ArtistCard";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
 
@@ -73,29 +78,43 @@ export default function ArtistsPage() {
         </div>
       </section>
 
-      {/* --------------------------------------------------------- 2025 roster */}
+      {/* --------------------------------------------------------- 2026 roster */}
       <section className="bg-paper">
         <div className="shell py-20 md:py-[var(--spacing-act)]">
-          <Slug cue="2025 Invitational" title="The call sheet" paper>
-            The songwriters who performed at the second annual Invitational.
-            Open a name for the bio, the influences, and a favorite line.
+          <Slug cue="2026 Invitational" title="The call sheet" paper>
+            The {artists2026.length} songwriters playing the third annual
+            Invitational, September 25&ndash;26. Open a name for the bio, the
+            influences, and a favorite line.
           </Slug>
           <div className="border-t border-paper-edge">
-            {artists2025.map((artist, i) => (
+            {artists2026.map((artist, i) => (
               <ArtistRow key={artist.slug} artist={artist} index={i} paper />
             ))}
           </div>
         </div>
       </section>
 
-      {/* --------------------------------------------------------- 2024 alumni */}
+      {/* --------------------------------------------------------- 2025 roster */}
       <section className="shell py-20 md:py-[var(--spacing-act)]">
-        <Slug cue="2024 Inaugural" title="The original lineup">
-          The artists who launched the Invitational. Those who also performed in
-          2025 are listed above.
+        <Slug cue="2025 Invitational" title="Second annual">
+          The songwriters who performed in 2025. Many of them are back this
+          year.
         </Slug>
         <div className="border-t border-floor-line">
-          {artists2024Only.map((artist, i) => (
+          {artists2025.map((artist, i) => (
+            <ArtistRow key={artist.slug} artist={artist} index={i} />
+          ))}
+        </div>
+      </section>
+
+      {/* --------------------------------------------------------- 2024 alumni */}
+      <section className="shell pb-20 md:pb-[var(--spacing-act)]">
+        <Slug cue="2024 Inaugural" title="The original lineup">
+          The artists who launched the Invitational. Those who have played a
+          later edition are listed above.
+        </Slug>
+        <div className="border-t border-floor-line">
+          {artists2024Unreturned.map((artist, i) => (
             <RunRow key={artist.slug} cue={String(i + 1).padStart(2, "0")}>
               <span className="t-title text-chalk">{artist.name}</span>
             </RunRow>

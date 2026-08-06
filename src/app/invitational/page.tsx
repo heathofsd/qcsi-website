@@ -148,11 +148,11 @@ export default function InvitationalPage() {
 
         <div className="mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
           <p className="t-run text-chalk-dim max-w-[52ch]">
-            <span className="text-chalk">Confirmed:</span> dates, venues, and
-            the Saturday headliner. <span className="text-chalk">Still to come:</span>{" "}
-            the full lineup and tickets.
+            <span className="text-chalk">Confirmed:</span> dates, venues, the
+            Saturday headliner, and the full songwriter lineup.{" "}
+            <span className="text-chalk">Still to come:</span> tickets.
           </p>
-          <Action href="/contact">Get notified</Action>
+          <Action href="/artists">See the lineup</Action>
         </div>
       </section>
 
@@ -350,8 +350,8 @@ export default function InvitationalPage() {
             Don&apos;t miss the 2026 Invitational
           </h2>
           <p className="t-body text-chalk-dim mt-6">
-            Sign up for updates and be the first to know when tickets and the
-            lineup are announced.
+            The lineup is set. Sign up for updates and be the first to know when
+            tickets go on sale.
           </p>
           <div className="flex flex-wrap gap-4 mt-10">
             <Action href="/contact">Stay connected</Action>

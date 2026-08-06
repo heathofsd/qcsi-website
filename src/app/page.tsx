@@ -131,11 +131,11 @@ export default function Home() {
               rather than one dim line saying "soon". */}
           <div className="mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
             <p className="t-run text-chalk-dim max-w-[52ch]">
-              <span className="text-chalk">Confirmed:</span> dates, venues, and
-              the Saturday headliner. <span className="text-chalk">Still to come:</span>{" "}
-              the full lineup and tickets.
+              <span className="text-chalk">Confirmed:</span> dates, venues, the
+              Saturday headliner, and the full songwriter lineup.{" "}
+              <span className="text-chalk">Still to come:</span> tickets.
             </p>
-            <Action href="/contact">Get notified</Action>
+            <Action href="/artists">See the lineup</Action>
           </div>
         </div>
       </section>
