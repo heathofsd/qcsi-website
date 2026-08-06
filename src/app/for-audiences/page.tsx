@@ -3,10 +3,10 @@ import Image from "next/image";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
-  title: "For Audiences",
+  title: "Attending the Invitational — What to Expect",
   alternates: { canonical: "/for-audiences" },
   description:
-    "What to expect at the Queen City Songwriters Invitational — a guide for music lovers attending songwriter rounds and headliner showcases in Spearfish, SD.",
+    "A guide to the Queen City Songwriters Invitational in downtown Spearfish, SD: six one-hour songwriter rounds a day, evening showcases at The Matthews Opera House, and how to plan the weekend.",
 };
 
 const day = [

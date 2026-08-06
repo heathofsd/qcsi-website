@@ -3,10 +3,10 @@ import Image from "next/image";
 import { Tape, RunRow, MarginNote, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
-  title: "501(c)(3) · EIN 99-3218012",
+  title: "Support QCSI",
   alternates: { canonical: "/support" },
   description:
-    "Support Queen City Songwriters Inc. — a 501(c)(3) nonprofit fostering the art of songwriting in Spearfish, South Dakota. Your donation funds artists, venues, and community programming.",
+    "Give to Queen City Songwriters Inc., a 501(c)(3) nonprofit in Spearfish, SD. 67% of every dollar goes directly to artist fees and support. $100 funds a full songwriter round.",
 };
 
 const split = [

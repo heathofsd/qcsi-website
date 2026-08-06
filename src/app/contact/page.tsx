@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Tape, RunRow, Action } from "@/components/run";
 
 export const metadata: Metadata = {
-  title: "810 State St, Spearfish SD",
+  title: "Contact",
   alternates: { canonical: "/contact" },
   description:
-    "Get in touch with Queen City Songwriters — whether you're a songwriter, sponsor, or music lover.",
+    "Get in touch with Queen City Songwriters in Spearfish, SD — songwriters looking to play, businesses interested in sponsoring, or anyone with a question.",
 };
 
 export default function ContactPage() {

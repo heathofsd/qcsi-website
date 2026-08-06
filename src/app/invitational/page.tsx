@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "The Invitational — September 25–26, 2026",
   alternates: { canonical: "/invitational" },
   description:
-    "The Queen City Songwriters Invitational is a two-day celebration of original music across downtown Spearfish, SD. September 25-26, 2026.",
+    "The third annual Queen City Songwriters Invitational, September 25–26, 2026 in downtown Spearfish, SD. Six one-hour songwriter rounds a day across three venues, evening showcases at The Matthews Opera House, and headliner Jeffrey Foucault.",
 };
 
 /* Six rounds a day from 11, done by 5. Evening curtain is 7:30 — the

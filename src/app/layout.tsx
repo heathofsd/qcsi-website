@@ -3,6 +3,7 @@ import { Archivo, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { artists2026, headliners } from "@/data/artists";
 
 // Archivo carries display and body from one family via its width axis.
 const archivo = Archivo({
@@ -31,11 +32,12 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "Queen City Songwriters | Original Voices. Authentic Stories.",
+    default:
+      "Queen City Songwriters — Original Music in Spearfish, South Dakota",
     template: "%s | Queen City Songwriters",
   },
   description:
-    "Queen City Songwriters Inc. is a nonprofit dedicated to fostering the art of songwriting in Spearfish, South Dakota. Home of the annual Queen City Songwriters Invitational.",
+    "A 501(c)(3) nonprofit building a year-round home for original music in the Black Hills. The Queen City Songwriters Invitational each September in downtown Spearfish, SD, songwriter rounds all year, and a network of 100+ writers.",
   keywords: [
     "songwriters",
     "original music",
@@ -115,19 +117,72 @@ export default function RootLayout({
                   "@type": "MusicEvent",
                   "@id": "https://qcsongwriters.com/invitational#event",
                   name: "Queen City Songwriters Invitational 2026",
+                  alternateName: "The Third Annual Queen City Songwriters Invitational",
                   url: "https://qcsongwriters.com/invitational",
                   image: "https://qcsongwriters.com/opengraph-image.jpg",
-                  startDate: "2026-09-25",
-                  endDate: "2026-09-26",
+                  startDate: "2026-09-25T11:00:00-06:00",
+                  endDate: "2026-09-26T22:00:00-06:00",
                   eventStatus: "https://schema.org/EventScheduled",
                   eventAttendanceMode:
                     "https://schema.org/OfflineEventAttendanceMode",
                   description:
-                    "A two-day celebration of original music featuring intimate daytime songwriter rounds across downtown Spearfish, a Friday night Songwriters Showcase, and a Saturday headliner performance at The Matthews Opera House.",
-                  performer: {
-                    "@type": "Person",
-                    name: "Jeffrey Foucault",
-                  },
+                    "A two-day celebration of original music featuring six one-hour songwriter rounds a day across downtown Spearfish, a Friday night Songwriters Showcase, and a Saturday headliner performance at The Matthews Opera House.",
+                  // every invited writer, not just the headliner — these are the
+                  // names people actually search for
+                  performer: [
+                    ...headliners
+                      .filter((a) => a.year.includes(2026))
+                      .map((a) => ({ "@type": "Person" as const, name: a.name })),
+                    ...artists2026.map((a) => ({
+                      "@type": "Person" as const,
+                      name: a.name,
+                    })),
+                  ],
+                  subEvent: [
+                    {
+                      "@type": "MusicEvent",
+                      name: "The Songwriters Showcase",
+                      startDate: "2026-09-25T19:30:00-06:00",
+                      eventStatus: "https://schema.org/EventScheduled",
+                      eventAttendanceMode:
+                        "https://schema.org/OfflineEventAttendanceMode",
+                      description:
+                        "Every invited songwriter takes the stage at The Matthews Opera House.",
+                      location: {
+                        "@type": "MusicVenue",
+                        name: "The Matthews Opera House & Arts Center",
+                        address: {
+                          "@type": "PostalAddress",
+                          streetAddress: "612 N Main St.",
+                          addressLocality: "Spearfish",
+                          addressRegion: "SD",
+                          postalCode: "57783",
+                          addressCountry: "US",
+                        },
+                      },
+                    },
+                    {
+                      "@type": "MusicEvent",
+                      name: "Jeffrey Foucault at The Matthews Opera House",
+                      startDate: "2026-09-26T19:30:00-06:00",
+                      eventStatus: "https://schema.org/EventScheduled",
+                      eventAttendanceMode:
+                        "https://schema.org/OfflineEventAttendanceMode",
+                      performer: { "@type": "Person", name: "Jeffrey Foucault" },
+                      location: {
+                        "@type": "MusicVenue",
+                        name: "The Matthews Opera House & Arts Center",
+                        address: {
+                          "@type": "PostalAddress",
+                          streetAddress: "612 N Main St.",
+                          addressLocality: "Spearfish",
+                          addressRegion: "SD",
+                          postalCode: "57783",
+                          addressCountry: "US",
+                        },
+                      },
+                    },
+                  ],
                   location: {
                     "@type": "Place",
                     name: "Downtown Spearfish",
@@ -143,6 +198,36 @@ export default function RootLayout({
                     "@id": "https://qcsongwriters.com/#organization",
                   },
                 },
+                // Past editions. These will not win event rich results, but they
+                // are how "John Fullbright Spearfish" or "Jonathan Byrd Black
+                // Hills" come to associate with QCSI.
+                ...[2025, 2024].map((yr) => ({
+                  "@type": "MusicEvent" as const,
+                  "@id": `https://qcsongwriters.com/artists#invitational-${yr}`,
+                  name: `Queen City Songwriters Invitational ${yr}`,
+                  url: "https://qcsongwriters.com/artists",
+                  startDate: yr === 2025 ? "2025-09-26" : "2024-09-27",
+                  endDate: yr === 2025 ? "2025-09-27" : "2024-09-28",
+                  eventStatus: "https://schema.org/EventScheduled",
+                  eventAttendanceMode:
+                    "https://schema.org/OfflineEventAttendanceMode",
+                  performer: headliners
+                    .filter((a) => a.year.includes(yr))
+                    .map((a) => ({ "@type": "Person" as const, name: a.name })),
+                  location: {
+                    "@type": "Place" as const,
+                    name: "Downtown Spearfish",
+                    address: {
+                      "@type": "PostalAddress" as const,
+                      addressLocality: "Spearfish",
+                      addressRegion: "SD",
+                      addressCountry: "US",
+                    },
+                  },
+                  organizer: {
+                    "@id": "https://qcsongwriters.com/#organization",
+                  },
+                })),
               ],
             }),
           }}

@@ -3,10 +3,10 @@ import Image from "next/image";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About QCSI — A Nonprofit for Original Music in the Black Hills",
   alternates: { canonical: "/about" },
   description:
-    "Queen City Songwriters Inc. was founded in 2024 to foster the art of songwriting and establish Spearfish, South Dakota as a beacon for original music in the Black Hills.",
+    "Queen City Songwriters is a 501(c)(3) founded in Spearfish, SD in 2024 to build a year-round home for original music — the Invitational each September, songwriter rounds all year, and a network of 100+ writers.",
 };
 
 /* The cue is the date, because the sequence is chronological and the date is

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Partners & Sponsors",
   alternates: { canonical: "/partners" },
   description:
-    "Support original music in Spearfish, SD. Become a sponsor of the Queen City Songwriters Invitational and invest in your community's creative culture.",
+    "Sponsor the Queen City Songwriters Invitational in Spearfish, SD. Packages from $50 to $5,000 put your business behind original music, 300+ attendees over two days, and a network of 100+ songwriters.",
 };
 
 const investment = [

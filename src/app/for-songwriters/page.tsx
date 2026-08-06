@@ -3,10 +3,10 @@ import Image from "next/image";
 import { Tape, RunRow, MarginNote, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
-  title: "For Songwriters",
+  title: "For Songwriters — Play a Round, Join the Network",
   alternates: { canonical: "/for-songwriters" },
   description:
-    "Learn how to get involved with Queen City Songwriters — from the annual Invitational to year-round rounds and community events.",
+    "How songwriters get involved with Queen City Songwriters in the Black Hills: the September Invitational, year-round rounds at Lucky's and Summer Rounds, and a network of 100+ writers. Every background, genre and experience level welcome.",
 };
 
 const offers = [
@@ -58,6 +58,20 @@ const faq = [
 export default function ForSongwritersPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faq.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: { "@type": "Answer", text: item.a },
+            })),
+          }),
+        }}
+      />
       <section className="shell pt-14 pb-16 md:pt-20 md:pb-20">
         <Tape land tilt="a" className="mb-10">
           By invitation · rounds open to all

@@ -10,10 +10,10 @@ import { ArtistRow, HeadlinerCard } from "@/components/ArtistCard";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
-  title: "Artists & Headliners",
+  title: "Artists & Headliners — Jeffrey Foucault, John Fullbright, Andrea von Kampen",
   alternates: { canonical: "/artists" },
   description:
-    "Meet the songwriters who have been part of the Queen City Songwriters Invitational — original voices from across the region.",
+    "The songwriters of the Queen City Songwriters Invitational in Spearfish, SD. 2026 headliner Jeffrey Foucault, past headliners John Fullbright, Andrea von Kampen, Jonathan Byrd and Jami Lynn, plus the full invited roster.",
 };
 
 export default function ArtistsPage() {

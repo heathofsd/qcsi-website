@@ -3,10 +3,10 @@ import Image from "next/image";
 import { Tape, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
-  title: "Photo & Video 2024 &amp; 2025",
+  title: "Photo & Video Gallery",
   alternates: { canonical: "/gallery" },
   description:
-    "Photos and videos from the Queen City Songwriters Invitational — original music in downtown Spearfish, South Dakota.",
+    "Photos and video from the Queen City Songwriters Invitational — songwriter rounds in downtown Spearfish and headliner nights at The Matthews Opera House, 2024 and 2025.",
 };
 
 const editions = [
