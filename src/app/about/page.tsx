@@ -25,7 +25,7 @@ const chapters = [
   {
     cue: "Now",
     title: "More than an event",
-    body: "What started as an ambitious idea has grown into something with real momentum. With 96+ songwriters in our network, partnerships with venues and businesses across Spearfish, and year-round programming including Lucky's Rounds and Summer Rounds, QCSI is building a creative ecosystem — not just an event.",
+    body: "What started as an ambitious idea has grown into something with real momentum. With 100+ songwriters in our network, partnerships with venues and businesses across Spearfish, and year-round programming including Lucky's Rounds and Summer Rounds, QCSI is building a creative ecosystem — not just an event.",
   },
 ];
 

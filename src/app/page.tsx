@@ -54,7 +54,7 @@ const weekend = [
 ];
 
 const record = [
-  { cue: "96+", subject: "Songwriters in our network" },
+  { cue: "100+", subject: "Songwriters in our network" },
   { cue: "6", subject: "Songwriter rounds a day, scattered around downtown" },
   { cue: "300+", subject: "Attendees annually" },
   { cue: "3", subject: "Years running" },

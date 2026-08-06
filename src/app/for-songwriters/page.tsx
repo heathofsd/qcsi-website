@@ -21,9 +21,9 @@ const offers = [
     desc: "Lucky's Rounds, Summer Rounds, and other recurring songwriter showcases throughout the year. Low-pressure, welcoming environments to share your music and connect with other writers.",
   },
   {
-    cue: "96+ writers",
+    cue: "100+ writers",
     title: "Community & network",
-    desc: "Join a network of 96+ songwriters across the region. Share the stage with artists you admire, build relationships with venue owners, and become part of a creative community that has your back.",
+    desc: "Join a network of 100+ songwriters across the region. Share the stage with artists you admire, build relationships with venue owners, and become part of a creative community that has your back.",
   },
 ];
 
