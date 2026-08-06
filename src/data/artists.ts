@@ -15,6 +15,9 @@ export interface Artist {
   funFact?: string;
   instagram?: string;
   facebook?: string;
+  /** Full URL. The intake form has always asked for this; there was nowhere to
+   *  put it until 2026-08-06, so earlier artists' sites were silently dropped. */
+  website?: string;
   photo?: string;
   photoPosition?: string;
   photoCredit?: string;
@@ -367,6 +370,54 @@ export const profiledArtists: Artist[] = [
     dreamCollaboration: "Fiona Apple",
     favoriteLyric: "Bottle will break, but bush will bend.",
     funFact: "He likes Brussels sprouts.",
+  },
+  // Returned their intake forms 2026-08-06, the first responses since the form
+  // was made reusable year to year. Both moved up from name-only rows.
+  {
+    name: "Brad McKim",
+    slug: "brad-mckim",
+    year: [2026],
+    website: "https://bradmckim.com",
+    photo: "/photos/artists/brad-mckim.jpg",
+    // The only landscape portrait in the set. Every frame on the site is taller
+    // than it is wide, so cover trims width and keeps full height — and Brad
+    // sits about 30% across, sharing the porch with a Monarch range that would
+    // otherwise take the middle of the crop. Pull the window left onto him.
+    photoPosition: "30% 50%",
+    hometown: "Beulah, WY",
+    fullBio:
+      "Brad McKim was raised in California and was possibly the only Willie Nelson and Jerry Jeff Walker fan in his very large high school. He started playing guitar when he was 14 and was writing songs by 15. He has lived in Colorado, Texas, Alaska, England and now Beulah, playing gigs and open mics wherever he has landed, and recorded an album of original songs called The Road that is still available online. His greatest joy musically is playing with his sons J.C. and Cal, who both surpassed him as guitarists and songwriters long ago.",
+    instrument: "Taylor 914-CE plugged in, Martin HD28-VR if not",
+    influences: "Bruce Cockburn, Joe South, Dan Fogelberg",
+    signatureSong: "The Road",
+    firstPerformance: "The annual art fair at his high school in Torrance, CA",
+    biggestAchievement:
+      "Recording an album of ten original songs nearly 30 years ago that is still available online",
+    dreamCollaboration: "Glen Hansard",
+    favoriteLyric:
+      "You're a mystery to me and what you may do, but it's bound to be love that sees you through, because your Mama loves me and loves you too, while waiting for you to come true.",
+    funFact:
+      "He worked his way through law school partly by playing almost every bar in Laramie, Wyoming in a duo called Hearsay.",
+  },
+  {
+    name: "Jackson Holte",
+    slug: "jackson-holte",
+    year: [2024, 2026],
+    instagram: "jackson_holte_",
+    website: "https://www.jacksonholte.com",
+    photo: "/photos/artists/jackson-holte.jpg",
+    hometown: "Livingston, MT",
+    fullBio:
+      "Jackson Holte is a musician, writer, and mule packer. In 2025 he won the Wyoming Singer-Songwriter Competition and the Montana Quarterly's Big Snowy Prize for creative non-fiction. His first solo record, Sky Blues, is cinematic folk music — a loosely autobiographical concept album about what Marilynne Robinson called \"the attentive quiet at the center of Western life\" and Tom Edwards called \"the hush of the land.\"",
+    instrument: "1971 Martin D-18",
+    influences: "Townes Van Zandt, James McMurtry, Leonard Cohen",
+    signatureSong: "East Hills",
+    firstPerformance: "A high school talent show",
+    biggestAchievement: "His 2025 record, Sky Blues",
+    dreamCollaboration: "Heath Johnson",
+    favoriteLyric:
+      "Is there still our sign in the North Fork? Some record of our little lives? Are the East hills still blackened at daybreak, but brimming with light?",
+    funFact: "He can make Minute Rice in 58 seconds.",
   },
 ];
 

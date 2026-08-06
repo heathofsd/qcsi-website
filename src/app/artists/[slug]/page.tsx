@@ -115,9 +115,10 @@ export default async function ArtistPage({
       ? { image: `https://qcsongwriters.com${artist.photo}` }
       : {}),
     ...(artist.hometown ? { homeLocation: artist.hometown } : {}),
-    ...(artist.instagram || artist.facebook
+    ...(artist.instagram || artist.facebook || artist.website
       ? {
           sameAs: [
+            artist.website ?? null,
             artist.instagram
               ? `https://instagram.com/${artist.instagram}`
               : null,
@@ -213,8 +214,18 @@ export default async function ArtistPage({
                         <p key={i}>{para}</p>
                       ))}
                   </div>
-                  {(artist.instagram || artist.facebook) && (
-                    <div className="flex gap-3 mt-8">
+                  {(artist.instagram || artist.facebook || artist.website) && (
+                    <div className="flex flex-wrap gap-3 mt-8">
+                      {artist.website && (
+                        <a
+                          href={artist.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="t-run border border-floor-line px-4 py-2.5 text-chalk-dim hover:text-tape hover:border-tape transition-colors"
+                        >
+                          Website
+                        </a>
+                      )}
                       {artist.instagram && (
                         <a
                           href={`https://instagram.com/${artist.instagram}`}
