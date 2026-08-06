@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
-import { ticketUrl } from "@/data/tickets";
 import { TicketCheckout } from "@/components/TicketCheckout";
 
 export const metadata: Metadata = {
