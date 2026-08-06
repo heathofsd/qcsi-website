@@ -14,7 +14,7 @@ const investment = [
   { cue: "300+", subject: "Attendees over two days" },
   { cue: "$20K", subject: "Annual event budget" },
   { cue: "4", subject: "Downtown venues activated" },
-  { cue: "30+", subject: "Artists supported" },
+  { cue: "100+", subject: "Artists in our network" },
 ];
 
 const venuePartners = [
