@@ -3,6 +3,7 @@ import { Archivo, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { artists2026, headliners } from "@/data/artists";
 
 // Archivo carries display and body from one family via its width axis.
@@ -127,6 +128,12 @@ export default function RootLayout({
                     "https://schema.org/OfflineEventAttendanceMode",
                   description:
                     "A two-day celebration of original music featuring six one-hour songwriter rounds a day across downtown Spearfish, a Friday night Songwriters Showcase, and a Saturday headliner performance at The Matthews Opera House.",
+                  offers: {
+                    "@type": "Offer",
+                    url: "https://www.eventbrite.com/e/queen-city-songwriters-invitational-jeffrey-foucault-tickets-1996628646028?aff=site-schema",
+                    availability: "https://schema.org/InStock",
+                    validFrom: "2026-08-06",
+                  },
                   // every invited writer, not just the headliner — these are the
                   // names people actually search for
                   performer: [
@@ -169,6 +176,12 @@ export default function RootLayout({
                       eventAttendanceMode:
                         "https://schema.org/OfflineEventAttendanceMode",
                       performer: { "@type": "Person", name: "Jeffrey Foucault" },
+                      offers: {
+                        "@type": "Offer",
+                        url: "https://www.eventbrite.com/e/queen-city-songwriters-invitational-jeffrey-foucault-tickets-1996628646028?aff=site-schema",
+                        availability: "https://schema.org/InStock",
+                        validFrom: "2026-08-06",
+                      },
                       location: {
                         "@type": "MusicVenue",
                         name: "The Matthews Opera House & Arts Center",
@@ -235,6 +248,7 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           Skip to content
         </a>
+        <AnnouncementBar />
         <Header />
         <main id="main">{children}</main>
         <Footer />

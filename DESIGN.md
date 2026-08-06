@@ -251,6 +251,9 @@ Courier Prime uppercase, `0.06em` tracking, chalk-dim on the floor, tape orange 
 
 Below `xl` it collapses to a full-height floor panel (`min-height: calc(100vh - 74px)`) of the same run rows, with the tape Give strip pushed to the bottom by `mt-auto` so it closes the list rather than floating mid-panel. The panel marks its active route in tape orange with a mono "Here" in the meta column. It closes on Escape and locks body scroll while open — it is a real panel, not a dropdown. The toggle is a square button that morphs to an X, never a rounded pill.
 
+### Announcement Bar
+A full-width strip of tape across the very top of every page — the system's answer to an arrival popup, which this site never uses (it blocks the document, and Google demotes mobile rankings for intrusive interstitials). Tape orange, ink text per the Black-On-Tape rule, one line, whole bar is the link. Static, not sticky: it says its piece and scrolls away.
+
 ### Skip Link
 A tape strip fixed at the top left, translated off-screen until `:focus`. Required: the sticky header carries eight nav items on every route, so keyboard users would otherwise tab through all of them on every page.
 

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Tape, RunRow, MarginNote, Slug, Action } from "@/components/run";
+import { ticketUrl } from "@/data/tickets";
 
 const testimonials = [
   {
@@ -48,8 +49,9 @@ const weekend = [
     cue: "Sat 7:30 PM",
     subject: "Jeffrey Foucault",
     where: "The Matthews Opera House",
-    meta: "Main stage",
+    meta: "Ticketed",
     flag: true,
+    tickets: true,
   },
 ];
 
@@ -98,9 +100,11 @@ export default function Home() {
 
         {/* the actions sit with the offer, not below the proof */}
         <div className="flex flex-wrap gap-4 mt-10">
-          <Action href="/invitational">The 2026 Invitational</Action>
-          <Action href="/about" variant="ghost">
-            Our story
+          <Action href={ticketUrl("site-home")} external>
+            Get tickets
+          </Action>
+          <Action href="/invitational" variant="ghost">
+            The 2026 Invitational
           </Action>
         </div>
 
@@ -112,6 +116,8 @@ export default function Home() {
                 key={row.cue}
                 cue={row.cue}
                 meta={row.meta}
+                href={"tickets" in row ? ticketUrl("site-home") : undefined}
+                external={"tickets" in row}
                 enter="load"
                 index={i}
               >
@@ -131,11 +137,13 @@ export default function Home() {
               rather than one dim line saying "soon". */}
           <div className="mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
             <p className="t-run text-chalk-dim max-w-[52ch]">
-              <span className="text-chalk">Confirmed:</span> dates, venues, the
-              Saturday headliner, and the full songwriter lineup.{" "}
-              <span className="text-chalk">Still to come:</span> tickets.
+              <span className="text-chalk">Tickets are live</span> for Saturday
+              night &mdash; Jeffrey Foucault at The Matthews, September 26.
+              Daytime rounds are free to walk into.
             </p>
-            <Action href="/artists">See the lineup</Action>
+            <Action href={ticketUrl("site-home")} external>
+              Get tickets
+            </Action>
           </div>
         </div>
       </section>

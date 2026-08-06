@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { venues } from "@/data/artists";
 import { Tape, RunRow, MarginNote, Slug, Action } from "@/components/run";
+import { TicketCheckout } from "@/components/TicketCheckout";
+import { ticketUrl } from "@/data/tickets";
 
 export const metadata: Metadata = {
   title: "The Invitational — September 25–26, 2026",
@@ -44,8 +46,9 @@ const runSheet = [
         cue: "7:30 PM",
         subject: "Jeffrey Foucault",
         where: "The Matthews Opera House",
-        meta: "Main stage",
+        meta: "Ticketed",
         flag: true,
+        tickets: true,
       },
     ],
   },
@@ -106,7 +109,9 @@ export default function InvitationalPage() {
 
         {/* the actions sit with the offer, not below the run sheet */}
         <div className="flex flex-wrap gap-4 mt-10">
-          <Action href="/contact">Get notified</Action>
+          <TicketCheckout aff="site-invitational">
+            Get tickets &mdash; Jeffrey Foucault
+          </TicketCheckout>
           <Action
             href="https://app.getpulley.app/donate/qcsi/c/qcsi2026"
             variant="ghost"
@@ -127,6 +132,8 @@ export default function InvitationalPage() {
                     key={row.cue + row.subject}
                     cue={row.cue}
                     meta={row.meta}
+                    href={"tickets" in row ? ticketUrl("site-invitational") : undefined}
+                    external={"tickets" in row}
                     enter="load"
                     index={di * 2 + ri}
                   >
@@ -148,11 +155,13 @@ export default function InvitationalPage() {
 
         <div className="mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
           <p className="t-run text-chalk-dim max-w-[52ch]">
-            <span className="text-chalk">Confirmed:</span> dates, venues, the
-            Saturday headliner, and the full songwriter lineup.{" "}
-            <span className="text-chalk">Still to come:</span> tickets.
+            <span className="text-chalk">Tickets are live</span> for Saturday
+            night at The Matthews. Friday&apos;s Songwriters Showcase and the
+            daytime rounds are free to walk into.
           </p>
-          <Action href="/artists">See the lineup</Action>
+          <Action href={ticketUrl("site-invitational")} external>
+            Get tickets
+          </Action>
         </div>
       </section>
 
@@ -350,11 +359,13 @@ export default function InvitationalPage() {
             Don&apos;t miss the 2026 Invitational
           </h2>
           <p className="t-body text-chalk-dim mt-6">
-            The lineup is set. Sign up for updates and be the first to know when
-            tickets go on sale.
+            The lineup is set and tickets are live &mdash; Jeffrey Foucault on
+            The Matthews stage, Saturday, September 26 at 7:30.
           </p>
           <div className="flex flex-wrap gap-4 mt-10">
-            <Action href="/contact">Stay connected</Action>
+            <Action href={ticketUrl("site-invitational")} external>
+              Get tickets
+            </Action>
             <Action href="/for-audiences" variant="ghost">
               Plan your weekend
             </Action>

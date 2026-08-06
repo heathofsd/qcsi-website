@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
+import { ticketUrl } from "@/data/tickets";
 
 export const metadata: Metadata = {
   title: "Attending the Invitational — What to Expect",
@@ -44,7 +45,7 @@ const goodToKnow = [
   {
     cue: "Tickets",
     title: "Tickets",
-    desc: "Daytime rounds are typically free or low-cost. Evening headliner shows at The Matthews require tickets, available through Eventbrite when announced.",
+    desc: "Daytime rounds are free to walk into. Saturday night\u2019s headliner show \u2014 Jeffrey Foucault at The Matthews \u2014 is ticketed on Eventbrite now.",
   },
   {
     cue: "On foot",
@@ -89,7 +90,9 @@ export default function ForAudiencesPage() {
           bars, and a 110-year-old opera house.
         </p>
         <div className="flex flex-wrap gap-4 mt-10">
-          <Action href="/contact">Get notified</Action>
+          <Action href={ticketUrl("site-audiences")} external>
+            Get tickets
+          </Action>
           <Action href="/invitational" variant="ghost">
             September 25&ndash;26, 2026
           </Action>
@@ -211,10 +214,13 @@ export default function ForAudiencesPage() {
       <section className="shell pb-20 md:pb-[var(--spacing-act)]">
         <h2 className="t-display text-chalk">September 25&ndash;26, 2026</h2>
         <p className="t-body text-chalk-dim mt-6">
-          Be the first to know when tickets go on sale and the lineup drops.
+          The lineup is out and Saturday night is on sale &mdash; Jeffrey
+          Foucault at The Matthews.
         </p>
         <div className="flex flex-wrap gap-4 mt-10">
-          <Action href="/contact">Stay connected</Action>
+          <Action href={ticketUrl("site-audiences")} external>
+            Get tickets
+          </Action>
           <Action href="/invitational" variant="ghost">
             The Invitational
           </Action>

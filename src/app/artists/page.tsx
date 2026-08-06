@@ -8,6 +8,7 @@ import {
 } from "@/data/artists";
 import { ArtistRow, HeadlinerCard } from "@/components/ArtistCard";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
+import { ticketUrl } from "@/data/tickets";
 
 export const metadata: Metadata = {
   title: "Artists & Headliners — Jeffrey Foucault, John Fullbright, Andrea von Kampen",
@@ -41,7 +42,9 @@ export default function ArtistsPage() {
             September 26.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Action href="/contact">Get notified</Action>
+            <Action href={ticketUrl("site-artist")} external>
+              Get tickets
+            </Action>
             <Action href="/invitational" variant="ghost">
               The Invitational
             </Action>

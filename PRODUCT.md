@@ -49,7 +49,7 @@ This is the claim a neighboring arts nonprofit cannot truthfully copy: not "we p
 - Artist and venue records live in `src/data/artists.ts` (44 records; headliners plus roster, with `fullBio`, hometown, instrument, influences, signature song, favorite lyric, socials, photo, photo position). Sponsor tiers live in `src/data/sponsors.ts`.
 - **Donations** run through Pulley: `app.getpulley.app/donate/qcsi`, campaign `qcsi2026`, plus a by-check path. Sponsorship packages are canonical **in Pulley**, not in this repo — Legend/Presenting $5,000 · Troubadour $1,000 · Songsmith $500 · Busker $300 · Fan $50.
 - **Contact** is a Notion form embed (`heathjohnson.notion.site/ebd//320f6ac441bb80709bfdce9af7094e60`). There is no server-side mail route and no newsletter system.
-- **No ticketing exists yet** for the 2026 Invitational (confirmed 2026-08-03). Lineup is unannounced. The real primary actions on event surfaces are *get notified* and *donate*; a ticket path must be able to drop in cleanly once it exists.
+- **Ticketing is live** (2026-08-06): Eventbrite event `1996628646028` — Saturday night only, Jeffrey Foucault at The Matthews, Sept 26 7:30–9:30 PM. Friday's showcase and daytime rounds are not on this ticket. Links carry per-placement `?aff=` codes (`site-bar`, `site-home`, `site-invitational`, `site-audiences`, `site-artist`, `site-schema`) so Eventbrite's dashboard attributes sales by placement; helpers in `src/data/tickets.ts`. `/invitational` uses Eventbrite's embedded checkout as progressive enhancement (`TicketCheckout`).
 - 48 photographs in `public/photos/` — documentary images of real rounds, venues, performers, and audiences. This is the strongest asset the site owns.
 - Three YouTube embeds are already in use on the site.
 

@@ -419,6 +419,33 @@ export const profiledArtists: Artist[] = [
       "Is there still our sign in the North Fork? Some record of our little lives? Are the East hills still blackened at daybreak, but brimming with light?",
     funFact: "He can make Minute Rice in 58 seconds.",
   },
+  {
+    name: "Clint Hahn",
+    slug: "clint-hahn",
+    year: [2026],
+    instagram: "officialclinthahn",
+    // He submitted a facebook.com/share/… link. Those are opaque redirects, not
+    // usernames — this is the account it resolves to.
+    facebook: "officialclinthahn",
+    website: "https://linktr.ee/Clint.Hahn",
+    photo: "/photos/artists/clint-hahn.jpg",
+    hometown: "Hammond, MT",
+    // His own bio, shifted from first person to third to match the rest of the
+    // roster. Nothing else changed.
+    fullBio:
+      "Clint Hahn is a rancher and firefighter from Hammond, Montana. He started playing music in 2019 and writing his own in 2024. Music got him through hard times, and he hopes to make music that does the same for someone else.",
+    instrument: "Epiphone EJ-200 (Annabel)",
+    influences: "Wade Forster, Kellen Smith, Red Shahan, Brandon Jenkins",
+    signatureSong: "The Rancher",
+    firstPerformance: "Crow Peak Brewery, Spearfish, SD",
+    biggestAchievement:
+      "The friends made along the way — so many talented people he's honored to call friends",
+    dreamCollaboration:
+      "Kellen Smith — a similar background in ranching, writing songs he can relate to",
+    favoriteLyric:
+      "They say the devil wears a suit and tie, but this one wore a silk gown.",
+    funFact: "He doesn't mind pineapple on pizza.",
+  },
 ];
 
 export const artists2024Only: Artist[] = [
@@ -445,7 +472,6 @@ export const artists2024Only: Artist[] = [
  * point they graduate into `artists` above with a full profile.
  */
 export const rosterNoProfile: Artist[] = [
-  { name: "Clint Hahn", slug: "clint-hahn", year: [2026] },
   { name: "Daron Lacina", slug: "daron-lacina", year: [2026] },
   { name: "Ian Gall", slug: "ian-gall", year: [2026] },
   { name: "Quinlan Valdez", slug: "quinlan-valdez", year: [2026] },
