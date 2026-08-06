@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const investment = [
   { cue: "300+", subject: "Attendees over two days" },
   { cue: "$20K", subject: "Annual event budget" },
-  { cue: "6+", subject: "Downtown venues activated" },
+  { cue: "4", subject: "Downtown venues activated" },
   { cue: "30+", subject: "Artists supported" },
 ];
 
