@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Tape, RunRow, MarginNote, Slug, Action } from "@/components/run";
 import { ticketUrl } from "@/data/tickets";
+import { TicketCheckout } from "@/components/TicketCheckout";
 
 const testimonials = [
   {
@@ -100,9 +101,7 @@ export default function Home() {
 
         {/* the actions sit with the offer, not below the proof */}
         <div className="flex flex-wrap gap-4 mt-10">
-          <Action href={ticketUrl("site-home")} external>
-            Get tickets
-          </Action>
+          <TicketCheckout aff="site-home">Get tickets</TicketCheckout>
           <Action href="/invitational" variant="ghost">
             The 2026 Invitational
           </Action>
@@ -141,9 +140,7 @@ export default function Home() {
               night &mdash; Jeffrey Foucault at The Matthews, September 26.
               Daytime rounds are free to walk into.
             </p>
-            <Action href={ticketUrl("site-home")} external>
-              Get tickets
-            </Action>
+            <TicketCheckout aff="site-home">Get tickets</TicketCheckout>
           </div>
         </div>
       </section>

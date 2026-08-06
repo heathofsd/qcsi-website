@@ -16,24 +16,47 @@ declare global {
   }
 }
 
-/* Eventbrite's embedded checkout as progressive enhancement: this renders a
-   plain tape-button link that always works, and if EB's widget script loads,
-   clicking it opens checkout in-page instead of leaving the site. The script
-   is loaded here — only pages that render this component pay for it. */
+/* One shared loader — several triggers mount per page (the announcement bar
+   plus in-page buttons), and each appending its own copy of EB's script was
+   a race the first version would have lost. */
+let loader: Promise<void> | null = null;
+function loadEbWidgets(): Promise<void> {
+  if (window.EBWidgets) return Promise.resolve();
+  if (!loader) {
+    loader = new Promise((resolve) => {
+      const s = document.createElement("script");
+      s.src = "https://www.eventbrite.com/static/widgets/eb_widgets.js";
+      s.async = true;
+      s.onload = () => resolve();
+      s.onerror = () => resolve(); // resolve either way — the href fallback stands
+      document.body.appendChild(s);
+    });
+  }
+  return loader;
+}
+
+/* Eventbrite's embedded checkout as progressive enhancement: renders a plain
+   link that always works; when the widget script arrives, the same element
+   opens checkout in-page instead of leaving the site. Every "Get tickets"
+   on the site goes through this — leaving the site is the fallback, not
+   the design. */
 export function TicketCheckout({
   aff,
   children,
+  className = "btn btn-tape font-bold",
 }: {
   aff: TicketPlacement;
   children: React.ReactNode;
+  className?: string;
 }) {
   const id = useId().replace(/[^a-zA-Z0-9-]/g, "");
   const triggerId = `eb-checkout-${id}`;
   const [enhanced, setEnhanced] = useState(false);
 
   useEffect(() => {
-    const attach = () => {
-      if (!window.EBWidgets) return false;
+    let alive = true;
+    loadEbWidgets().then(() => {
+      if (!alive || !window.EBWidgets) return;
       window.EBWidgets.createWidget({
         widgetType: "checkout",
         eventId: TICKETS_EVENT_ID,
@@ -41,16 +64,9 @@ export function TicketCheckout({
         modalTriggerElementId: triggerId,
       });
       setEnhanced(true);
-      return true;
-    };
-    if (attach()) return;
-    const s = document.createElement("script");
-    s.src = "https://www.eventbrite.com/static/widgets/eb_widgets.js";
-    s.async = true;
-    s.onload = () => attach();
-    document.body.appendChild(s);
+    });
     return () => {
-      s.remove();
+      alive = false;
     };
   }, [triggerId]);
 
@@ -60,7 +76,7 @@ export function TicketCheckout({
       href={ticketUrl(aff)}
       // once the widget owns the click, the href is only the no-js fallback
       onClick={enhanced ? (e) => e.preventDefault() : undefined}
-      className="btn btn-tape font-bold"
+      className={className}
     >
       {children}
     </a>

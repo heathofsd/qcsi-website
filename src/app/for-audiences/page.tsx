@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
 import { ticketUrl } from "@/data/tickets";
+import { TicketCheckout } from "@/components/TicketCheckout";
 
 export const metadata: Metadata = {
   title: "Attending the Invitational — What to Expect",
@@ -90,9 +91,7 @@ export default function ForAudiencesPage() {
           bars, and a 110-year-old opera house.
         </p>
         <div className="flex flex-wrap gap-4 mt-10">
-          <Action href={ticketUrl("site-audiences")} external>
-            Get tickets
-          </Action>
+          <TicketCheckout aff="site-audiences">Get tickets</TicketCheckout>
           <Action href="/invitational" variant="ghost">
             September 25&ndash;26, 2026
           </Action>
@@ -218,9 +217,7 @@ export default function ForAudiencesPage() {
           Foucault at The Matthews.
         </p>
         <div className="flex flex-wrap gap-4 mt-10">
-          <Action href={ticketUrl("site-audiences")} external>
-            Get tickets
-          </Action>
+          <TicketCheckout aff="site-audiences">Get tickets</TicketCheckout>
           <Action href="/invitational" variant="ghost">
             The Invitational
           </Action>

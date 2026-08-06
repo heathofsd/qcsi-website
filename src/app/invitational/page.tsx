@@ -159,9 +159,7 @@ export default function InvitationalPage() {
             night at The Matthews. Friday&apos;s Songwriters Showcase and the
             daytime rounds are free to walk into.
           </p>
-          <Action href={ticketUrl("site-invitational")} external>
-            Get tickets
-          </Action>
+          <TicketCheckout aff="site-invitational">Get tickets</TicketCheckout>
         </div>
       </section>
 
@@ -363,9 +361,9 @@ export default function InvitationalPage() {
             The Matthews stage, Saturday, September 26 at 7:30.
           </p>
           <div className="flex flex-wrap gap-4 mt-10">
-            <Action href={ticketUrl("site-invitational")} external>
+            <TicketCheckout aff="site-invitational">
               Get tickets
-            </Action>
+            </TicketCheckout>
             <Action href="/for-audiences" variant="ghost">
               Plan your weekend
             </Action>

@@ -9,7 +9,7 @@ import {
   type Artist,
 } from "@/data/artists";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
-import { ticketUrl } from "@/data/tickets";
+import { TicketCheckout } from "@/components/TicketCheckout";
 import { CopyButton } from "@/components/CopyButton";
 
 /* Every artist with a written record gets a page, plus the whole 2026 bill.
@@ -152,9 +152,7 @@ export default async function ArtistPage({
         )}
         <div className="flex flex-wrap gap-4 mt-10">
           {on2026 ? (
-            <Action href={ticketUrl("site-artist")} external>
-              Get tickets
-            </Action>
+            <TicketCheckout aff="site-artist">Get tickets</TicketCheckout>
           ) : (
             <Action href="/artists">The artists</Action>
           )}
