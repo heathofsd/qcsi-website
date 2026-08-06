@@ -205,7 +205,7 @@ export function ArtistRow({
         {cue}
       </span>
       <span className="min-w-0">
-        <span className={`t-title ${paper ? "text-ink" : "text-chalk"}`}>
+        <span className="t-title run-subject">
           {artist.name}
         </span>
         {artist.hometown && (

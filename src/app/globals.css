@@ -39,6 +39,8 @@
   /* --- the paper --- */
   --color-paper: #f4f5f2;
   --color-paper-edge: #d8d9d3;
+  /* hover bed for paper rows — light enough that tape ink still clears AA on it */
+  --color-paper-tint: #f1f2ec;
   --color-ink: #17171a;
   --color-pencil: #6c6c66;
   --color-ballpoint: #2b3a8f;
@@ -292,6 +294,33 @@
   }
   .run-row--paper .run-cue {
     color: var(--color-pencil);
+  }
+
+  /* A paper row hovers inside the paper field. Without this it inherited the
+     floor's near-black bed, which put ink on ink at 1.03:1 and made the name
+     vanish under the cursor. The bed lifts to a paper tint and the subject
+     turns tape ink, so the feedback is the name changing colour, not the row
+     going dark. */
+  .run-row--paper.run-row--link:hover,
+  .run-row--paper.run-row--link:focus-visible {
+    background-color: var(--color-paper-tint);
+  }
+  .run-row--paper.run-row--link:hover .run-cue,
+  .run-row--paper.run-row--link:focus-visible .run-cue,
+  .run-row--paper.run-row--link:hover .run-subject,
+  .run-row--paper.run-row--link:focus-visible .run-subject {
+    color: var(--color-tape-ink);
+  }
+
+  /* The subject's colour belongs to the row, not to a utility class on the
+     span — Tailwind utilities sit in a later cascade layer and would win over
+     any hover rule here no matter how specific it is. */
+  .run-subject {
+    color: var(--color-chalk);
+    transition: color 160ms var(--ease-pull);
+  }
+  .run-row--paper .run-subject {
+    color: var(--color-ink);
   }
 
   /* -------------------------------------------------------- margin note --- */
