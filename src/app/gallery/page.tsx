@@ -115,7 +115,7 @@ const videos = [
   },
   {
     id: "HfreoKuUsa0",
-    title: "Lacy Nelson at the 2024 Invitational",
+    title: "Lacy Hotchkiss at the 2024 Invitational",
     cue: "2024",
   },
   { id: "gugGfwwZe0k", title: "Heath Johnson live performance", cue: "Live" },

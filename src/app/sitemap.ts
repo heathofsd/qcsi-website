@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { pageArtists } from "@/data/artists";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://qcsongwriters.com";
@@ -14,5 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/partners`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/support`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.5 },
+    // one URL per artist — each indexable for that writer's own name
+    ...pageArtists.map((a) => ({
+      url: `${baseUrl}/artists/${a.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: a.fullBio || a.bio ? 0.6 : 0.4,
+    })),
   ];
 }

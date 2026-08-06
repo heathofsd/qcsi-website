@@ -17,6 +17,7 @@ export interface Artist {
   facebook?: string;
   photo?: string;
   photoPosition?: string;
+  photoCredit?: string;
   headliner?: boolean;
 }
 
@@ -32,6 +33,7 @@ export const headliners: Artist[] = [
     signatureSong: "The Universal Fire",
     photo: "/photos/jeffrey-foucault.jpg",
     photoPosition: "center 20%",
+    photoCredit: "Joe Navas",
     headliner: true,
   },
   {
@@ -446,3 +448,26 @@ export const venues = [
     type: "round" as const,
   },
 ];
+
+/* ------------------------------------------------------------ artist pages --- */
+
+/**
+ * Everyone who gets a page at /artists/<slug>: anyone with a written record,
+ * plus the entire 2026 bill — a name on this year's call sheet gets a URL from
+ * announcement day and the page fills in as intake lands. Headliners and the
+ * rostered lists never share a slug, so a plain concat is safe.
+ */
+export const pageArtists: Artist[] = [...headliners, ...allRostered].filter(
+  (a) => !!(a.fullBio || a.bio) || a.year.includes(2026)
+);
+
+export function getArtistBySlug(slug: string): Artist | undefined {
+  return pageArtists.find((a) => a.slug === slug);
+}
+
+/** Edition facts the pages cite. Derived nowhere — this is the record. */
+export const editionsByYear: Record<number, { ordinal: string; note: string }> = {
+  2024: { ordinal: "Inaugural", note: "Jonathan Byrd & Jami Lynn headlined" },
+  2025: { ordinal: "Second annual", note: "Andrea von Kampen & John Fullbright headlined" },
+  2026: { ordinal: "Third annual", note: "Jeffrey Foucault headlines · Sept 25–26" },
+};

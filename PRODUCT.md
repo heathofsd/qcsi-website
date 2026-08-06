@@ -45,7 +45,7 @@ This is the claim a neighboring arts nonprofit cannot truthfully copy: not "we p
 ## Capabilities and Constraints
 
 - Next.js 16 App Router, React 19, Tailwind CSS v4, TypeScript. Deployed on Vercel; push to `main` deploys.
-- Ten routes: `/`, `/about`, `/invitational`, `/artists`, `/for-songwriters`, `/for-audiences`, `/partners`, `/support`, `/contact`, `/gallery`.
+- Ten static routes (`/`, `/about`, `/invitational`, `/artists`, `/for-songwriters`, `/for-audiences`, `/partners`, `/support`, `/contact`, `/gallery`) plus per-artist pages at `/artists/[slug]` — one for every artist with a written record and for the whole 2026 bill, statically generated from `src/data/artists.ts`, each with its own auto-generated Open Graph image and Person schema. Added 2026-08-06; the pages double as artist press kits (copy-ready bios, photo download).
 - Artist and venue records live in `src/data/artists.ts` (44 records; headliners plus roster, with `fullBio`, hometown, instrument, influences, signature song, favorite lyric, socials, photo, photo position). Sponsor tiers live in `src/data/sponsors.ts`.
 - **Donations** run through Pulley: `app.getpulley.app/donate/qcsi`, campaign `qcsi2026`, plus a by-check path. Sponsorship packages are canonical **in Pulley**, not in this repo — Legend/Presenting $5,000 · Troubadour $1,000 · Songsmith $500 · Busker $300 · Fan $50.
 - **Contact** is a Notion form embed (`heathjohnson.notion.site/ebd//320f6ac441bb80709bfdce9af7094e60`). There is no server-side mail route and no newsletter system.
