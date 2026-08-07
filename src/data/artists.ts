@@ -446,6 +446,27 @@ export const profiledArtists: Artist[] = [
       "They say the devil wears a suit and tie, but this one wore a silk gown.",
     funFact: "He doesn't mind pineapple on pizza.",
   },
+  {
+    name: "Quinlan Valdez",
+    slug: "quinlan-valdez",
+    year: [2026],
+    instagram: "quinlan_valdez",
+    facebook: "QuinlanValdezMusic",
+    website: "https://quinlanvaldezmusic.com",
+    photo: "/photos/artists/quinlan-valdez.jpg",
+    hometown: "Casper, WY",
+    fullBio:
+      "Quinlan Valdez's music reflects his deep Wyoming roots and has resonated across the region. Commonly described as a peaceful joy, his sound is sure to capture the ears of audiences from all experiences. He has been featured on the Wyoming Road Trip Playlist and has shared the stage with regional legends, bringing a raw voice to the local scene. What makes him unforgettable is the calm, soulful presence — the kind that makes a room lean in and listen.",
+    instrument: "Larrivee L-03 and a Ute resonator banjo",
+    influences: "Jalan Crossland, Amelia Curran, Gillian Welch",
+    signatureSong: "Blue Sunlight, or Ten Sleep Creek",
+    firstPerformance: "Metro Coffee, Casper, WY",
+    biggestAchievement: "Playing music as a full-time job",
+    dreamCollaboration: "Sharing a stage with Possessed by Paul James",
+    favoriteLyric:
+      "Love is a scene we know so well when we're dreaming wide awake",
+    funFact: "He's a van dweller — travelling is most possible in van life.",
+  },
 ];
 
 export const artists2024Only: Artist[] = [
@@ -474,7 +495,6 @@ export const artists2024Only: Artist[] = [
 export const rosterNoProfile: Artist[] = [
   { name: "Daron Lacina", slug: "daron-lacina", year: [2026] },
   { name: "Ian Gall", slug: "ian-gall", year: [2026] },
-  { name: "Quinlan Valdez", slug: "quinlan-valdez", year: [2026] },
 ];
 
 /**
