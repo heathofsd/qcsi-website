@@ -156,6 +156,14 @@ export default function RootLayout({
                       description:
                         "Every invited songwriter takes the stage at The Matthews Opera House. Free to attend.",
                       isAccessibleForFree: true,
+                      offers: {
+                        "@type": "Offer",
+                        url: "https://www.eventbrite.com/e/queen-city-songwriters-invitational-the-songwriters-showcase-tickets-1997092516477?aff=site-schema",
+                        price: "0",
+                        priceCurrency: "USD",
+                        availability: "https://schema.org/InStock",
+                        validFrom: "2026-08-06",
+                      },
                       location: {
                         "@type": "MusicVenue",
                         name: "The Matthews Opera House & Arts Center",

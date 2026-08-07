@@ -27,6 +27,8 @@ export function ticketUrl(aff: TicketPlacement): string {
 
 /* Friday's Songwriters Showcase is free. The RSVP listing exists so Eventbrite
  * sends day-before reminders and QCSI finally captures emails — walk-ins stay
- * welcome either way. Null until the draft listing is published; the site
- * renders RSVP buttons only when this is set. */
-export const FRIDAY_RSVP_URL: string | null = null;
+ * welcome either way. Published 2026-08-06; set back to null to pull the RSVP
+ * buttons if the listing ever comes down. */
+export const FRIDAY_EVENT_ID = "1997092516477";
+
+export const FRIDAY_RSVP_URL: string | null = `https://www.eventbrite.com/e/queen-city-songwriters-invitational-the-songwriters-showcase-tickets-${FRIDAY_EVENT_ID}?aff=site-friday`;
