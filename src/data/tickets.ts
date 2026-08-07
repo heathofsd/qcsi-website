@@ -24,3 +24,9 @@ export type TicketPlacement =
 export function ticketUrl(aff: TicketPlacement): string {
   return `${BASE}?aff=${aff}`;
 }
+
+/* Friday's Songwriters Showcase is free. The RSVP listing exists so Eventbrite
+ * sends day-before reminders and QCSI finally captures emails — walk-ins stay
+ * welcome either way. Null until the draft listing is published; the site
+ * renders RSVP buttons only when this is set. */
+export const FRIDAY_RSVP_URL: string | null = null;

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { venues } from "@/data/artists";
 import { Tape, RunRow, MarginNote, Slug, Action } from "@/components/run";
 import { TicketCheckout } from "@/components/TicketCheckout";
-import { ticketUrl } from "@/data/tickets";
+import { ticketUrl, FRIDAY_RSVP_URL } from "@/data/tickets";
 
 export const metadata: Metadata = {
   title: "The Invitational — September 25–26, 2026",
@@ -29,7 +29,7 @@ const runSheet = [
         cue: "7:30 PM",
         subject: "Songwriters Showcase",
         where: "The Matthews Opera House",
-        meta: "Every invited writer",
+        meta: "Free",
       },
     ],
   },
@@ -160,6 +160,55 @@ export default function InvitationalPage() {
             daytime rounds are free to walk into.
           </p>
           <TicketCheckout aff="site-invitational">Get tickets</TicketCheckout>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------- friday, for free */}
+      <section id="friday" className="border-t border-floor-line">
+        <div className="shell py-16 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+            <div className="lg:col-span-7">
+              <Slug cue="Friday night · Sept 25 · free" title="Eighteen writers, one stage">
+                The Songwriters Showcase puts every invited writer on The
+                Matthews stage in a single night &mdash; 7:30, no ticket
+                needed, just walk in. It&apos;s the whole third annual bill in
+                one room, and the best possible preview of Saturday.
+              </Slug>
+              <div className="flex flex-wrap gap-4">
+                {FRIDAY_RSVP_URL ? (
+                  <Action href={FRIDAY_RSVP_URL} external>
+                    RSVP free &mdash; get a reminder
+                  </Action>
+                ) : (
+                  <Action href="/artists">Meet all eighteen</Action>
+                )}
+                <TicketCheckout aff="site-invitational">
+                  Saturday tickets
+                </TicketCheckout>
+              </div>
+            </div>
+            <div className="lg:col-span-5">
+              <p className="t-run text-tape mb-1">The night</p>
+              <div className="border-t border-floor-line">
+                <RunRow cue="7:30 PM" meta="Free">
+                  <span className="t-title text-chalk">
+                    Songwriters Showcase
+                  </span>
+                  <span className="t-run text-chalk-dim block mt-1.5">
+                    The Matthews Opera House
+                  </span>
+                </RunRow>
+                <RunRow cue="18" meta="One song at a time">
+                  <span className="t-title text-chalk">
+                    Every invited writer
+                  </span>
+                  <span className="t-run text-chalk-dim block mt-1.5">
+                    The full 2026 bill, one stage
+                  </span>
+                </RunRow>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

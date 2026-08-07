@@ -45,7 +45,7 @@ const goodToKnow = [
   {
     cue: "Tickets",
     title: "Tickets",
-    desc: "Daytime rounds are free to walk into. Saturday night\u2019s headliner show \u2014 Jeffrey Foucault at The Matthews \u2014 is ticketed on Eventbrite now.",
+    desc: "Friday night\u2019s Songwriters Showcase and all the daytime rounds are free \u2014 just walk in. Saturday night\u2019s headliner show \u2014 Jeffrey Foucault at The Matthews \u2014 is ticketed on Eventbrite now.",
   },
   {
     cue: "On foot",

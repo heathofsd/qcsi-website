@@ -38,7 +38,7 @@ const weekend = [
     cue: "Fri 7:30 PM",
     subject: "Songwriters Showcase",
     where: "The Matthews Opera House",
-    meta: "Every invited writer",
+    meta: "Free",
   },
   {
     cue: "Sat 11:00 AM",

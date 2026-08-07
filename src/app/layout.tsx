@@ -154,7 +154,8 @@ export default function RootLayout({
                       eventAttendanceMode:
                         "https://schema.org/OfflineEventAttendanceMode",
                       description:
-                        "Every invited songwriter takes the stage at The Matthews Opera House.",
+                        "Every invited songwriter takes the stage at The Matthews Opera House. Free to attend.",
+                      isAccessibleForFree: true,
                       location: {
                         "@type": "MusicVenue",
                         name: "The Matthews Opera House & Arts Center",
