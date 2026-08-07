@@ -121,7 +121,9 @@ export const profiledArtists: Artist[] = [
   {
     name: "Chris Graves",
     slug: "chris-graves",
-    year: [2025, 2026],
+    // 2024 added on Heath's correction 2026-08-07 — he played the inaugural and
+    // the record had him starting in 2025.
+    year: [2024, 2025, 2026],
     instagram: "iamchrisgraves",
     photo: "/photos/artists/chris-graves.png",
     hometown: "Sturgis, SD (now based in Rapid City)",
