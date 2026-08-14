@@ -494,6 +494,26 @@ export const profiledArtists: Artist[] = [
       "Love is a scene we know so well when we're dreaming wide awake",
     funFact: "He's a van dweller — travelling is most possible in van life.",
   },
+  {
+    // Billed Wayne P. Baye; the intake form has him as "Wayne Baye", which is
+    // also his brain entity's slug. The middle initial is the public name.
+    name: "Wayne P. Baye",
+    slug: "wayne-p-baye",
+    year: [2024, 2026],
+    photo: "/photos/artists/wayne-p-baye.jpg",
+    hometown: "Whitewood, SD",
+    // His own bio, shifted from first person to third. The closing line he
+    // submitted — that playing The Matthews was huge for him and the sound was
+    // incredible — is left out on purpose: it is praise for us, and this page is
+    // about him. It belongs in the testimonials block if anywhere.
+    fullBio:
+      "Wayne P. Baye grew up in western North Dakota and went into the oilfield after high school, chasing drilling rigs through North Dakota, Montana, Wyoming, Utah, New Mexico, Oklahoma and Texas.\nHe moved from Wyoming to the Black Hills fifteen years ago and has spent them riding motorcycles, playing guitar and harmonica, and cooking for events.",
+    instrument: "Gibson J-45 (2010)",
+    influences: "Mary Gauthier, Bob Dylan, John Prine, Fred Eaglesmith",
+    signatureSong: "Pluggin Along",
+    firstPerformance: "A wedding in Halliday, ND",
+    biggestAchievement: "Playing a set on 6th Street in Austin, Texas",
+  },
 ];
 
 export const artists2024Only: Artist[] = [
@@ -511,7 +531,6 @@ export const artists2024Only: Artist[] = [
   { name: "Ryan Little Eagle", slug: "ryan-little-eagle", year: [2024] },
   { name: "Scott Simpson", slug: "scott-simpson", year: [2024] },
   { name: "Tanner Johns", slug: "tanner-johns", year: [2024] },
-  { name: "Wayne P. Baye", slug: "wayne-p-baye", year: [2024, 2026] },
 ];
 
 /**
