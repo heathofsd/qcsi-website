@@ -514,6 +514,28 @@ export const profiledArtists: Artist[] = [
     firstPerformance: "A wedding in Halliday, ND",
     biggestAchievement: "Playing a set on 6th Street in Austin, Texas",
   },
+  {
+    name: "Daron Lacina",
+    slug: "daron-lacina",
+    year: [2026],
+    website: "https://stickponies.com",
+    photo: "/photos/artists/daron-lacina.jpg",
+    hometown: "LaMoure, ND (now Spearfish)",
+    // His own bio, shifted from first person to third and trimmed of its
+    // sign-off. Nothing about the story changed.
+    fullBio:
+      "Daron Lacina grew up in LaMoure, North Dakota, took a business administration degree with an agri-business minor at Dickinson State, and rode bareback broncs professionally in the PRCA for ten years before retiring into agronomy.\nHe came to the guitar late and sideways: in his early thirties he loaned his brother money and took the man's guitar as collateral. He learned his chords at open mics and song circles, playing for tips, joined the band Exit 262, and wrote his first song shortly after turning forty. Songwriting turned out to be the direction he wanted, so he left Exit 262 for the Stick Ponies, where he still plays.\nFour years ago he moved to Spearfish for the musical vibe of the Black Hills. He works as an agronomist at CBH Coop in Belle Fourche, hosts the Sunday afternoon open mic at Crow Peak Brewery, and hopes to get some recordings done this winter.",
+    instrument: "Martin DRS2 acoustic-electric (2014)",
+    // He wrote "Jimmy Buffet" and "Steve Earl"; spellings corrected.
+    influences: "John Prine, Jimmy Buffett, Chris LeDoux, Steve Earle",
+    signatureSong: "Catchin a Buzz",
+    firstPerformance: "An 80th birthday party at the KC Club, Jamestown, ND",
+    biggestAchievement: "Getting played on the radio",
+    dreamCollaboration: "Picking guitar with John Prine",
+    favoriteLyric:
+      "Coconuts are out of season, I'm drunk and don't have a reason",
+    funFact: "He makes a great omelette.",
+  },
 ];
 
 export const artists2024Only: Artist[] = [
@@ -539,7 +561,6 @@ export const artists2024Only: Artist[] = [
  * point they graduate into `artists` above with a full profile.
  */
 export const rosterNoProfile: Artist[] = [
-  { name: "Daron Lacina", slug: "daron-lacina", year: [2026] },
   { name: "Ian Gall", slug: "ian-gall", year: [2026] },
 ];
 
