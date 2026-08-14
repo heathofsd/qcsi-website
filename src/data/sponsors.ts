@@ -78,18 +78,41 @@ export interface Sponsor {
   tier?: string;
 }
 
+// PULLEY IS THE SOURCE OF TRUTH for who is a sponsor and at what level — the QCSI org's
+// 2026 Invitational campaign tiers. This list is a mirror of it, so refresh it from there
+// rather than editing from memory: a name here is a promised benefit, and the recognition
+// doc's rule is that nobody on the website gets dropped from the program.
+//
+// Alphabetical, per ventures/qcsi/fundraising/donor-recognition-by-tier.md — then the
+// durable descriptors (grant funders, in-kind) as their own trailing group.
+//
+// 2026-08-14, refreshed to 2026 against Pulley, with Heath's calls on the ambiguous ones:
+//   · ADDED the six on Pulley's 2026 tiers that were missing here — being absent is an
+//     undelivered benefit, since the ladder promises website recognition at every tier.
+//   · Coeur Wharf is the name to print. Pulley carries the person (srose@coeur.com);
+//     this is the same sponsorship, so it appears once, as the company.
+//   · Grant St. Liquor and Spearfish Creek Wine Bar are ONE sponsor, and Grant St. is the
+//     name they want recognised. The Wine Bar keeps its billing in `venuePartners` on the
+//     partners page — that list is separate, so it is a venue here, not a sponsor.
+//   · REMOVED as not-yet-renewed for 2026: Munro Earthmoving (expected, will return),
+//     Edward Jones — Chris Mitchell, Riverfront Broadcasting.
+// STILL OPEN: Local Black Hills and White's Queen City Motors both gave in 2025 and have
+// no 2026 tier in Pulley — same pattern as the removals, but not yet confirmed, and the
+// recognition doc's rule is that nobody gets dropped without cause. Left in deliberately.
 export const currentSponsors: Sponsor[] = [
-  { name: "Munro Earthmoving" },
-  { name: "Edward Jones — Chris Mitchell" },
+  { name: "Century 21" },
+  { name: "Coeur Wharf" },
+  { name: "Devon Sants" },
+  { name: "Gary Lattin" },
+  { name: "Grant St. Liquor" },
   { name: "Legacy Financial" },
-  { name: "Sundance State Bank" },
   { name: "Local Black Hills" },
   { name: "Lori DeVries — Real Estate Center" },
-  { name: "Century 21" },
+  { name: "Lucius May" },
+  { name: "Russ & Diana Gillette" },
+  { name: "Sara May" },
+  { name: "Sundance State Bank" },
   { name: "White's Queen City Motors" },
-  { name: "Coeur Wharf" },
-  { name: "Spearfish Creek Wine Bar" },
   { name: "South Dakota Arts Council", tier: "Grant" },
   { name: "Visit Spearfish", tier: "Grant" },
-  { name: "Riverfront Broadcasting", tier: "In-Kind" },
 ];

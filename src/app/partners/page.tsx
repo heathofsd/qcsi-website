@@ -147,11 +147,15 @@ export default function PartnersPage() {
           These businesses and organizations make the Invitational possible.
         </Slug>
         <div className="border-t border-floor-line">
+          {/* No location line. This used to stamp "Spearfish, SD" under every sponsor
+              without a descriptor, which asserted something nobody had verified — and
+              stopped being true outright once individual Fan-tier sponsors joined the
+              list (Devon Sants is Pueblo, Colorado). If locations are wanted back, they
+              belong as an optional per-sponsor field with real values, not a default. */}
           {currentSponsors.map((sponsor) => (
             <RunRow
               key={sponsor.name}
               cue={sponsor.tier ?? "Sponsor"}
-              meta={sponsor.tier ? undefined : "Spearfish, SD"}
             >
               <span className="t-title text-chalk">{sponsor.name}</span>
             </RunRow>
