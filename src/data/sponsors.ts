@@ -73,8 +73,19 @@ export const sponsorTiers: SponsorTier[] = [
 
 export interface Sponsor {
   name: string;
-  // Optional descriptor. Sponsorship-package levels are intentionally omitted here
-  // (they change year to year); only durable descriptors like grant/in-kind remain.
+  /**
+   * What prints in the row's cue column: the sponsor's package level — Legend,
+   * Troubadour, Songsmith, Busker, Fan — or a durable descriptor (Grant, In-Kind).
+   * Omitted means "recognised, no 2026 package level assigned", which renders as the
+   * generic "Sponsor" and is a flag that Pulley needs a tier for them.
+   *
+   * Package levels used to be deliberately left off here on the grounds that they
+   * change year to year. Showing them is the better call: the recognition ladder sells
+   * *differentiated prominence* — Legend gets "prime placement", Troubadour "premium" —
+   * and a flat alphabetical list quietly under-delivers that, seating a $2,000
+   * Troubadour between two $50 Fan sponsors. The year-to-year churn is handled by
+   * treating this file as a mirror of Pulley rather than by hiding the levels.
+   */
   tier?: string;
 }
 
@@ -99,20 +110,42 @@ export interface Sponsor {
 // STILL OPEN: Local Black Hills and White's Queen City Motors both gave in 2025 and have
 // no 2026 tier in Pulley — same pattern as the removals, but not yet confirmed, and the
 // recognition doc's rule is that nobody gets dropped without cause. Left in deliberately.
+// Package levels mirror Pulley's 2026 campaign tier assignments. Kept alphabetical here
+// for scanning; the page renders `sponsorsByLevel` below, which does the ordering.
 export const currentSponsors: Sponsor[] = [
-  { name: "Century 21" },
-  { name: "Coeur Wharf" },
-  { name: "Devon Sants" },
-  { name: "Gary Lattin" },
-  { name: "Grant St. Liquor" },
-  { name: "Legacy Financial" },
+  { name: "Century 21", tier: "Songsmith" },
+  { name: "Coeur Wharf", tier: "Songsmith" },
+  { name: "Devon Sants", tier: "Fan" },
+  { name: "Gary Lattin", tier: "Fan" },
+  { name: "Grant St. Liquor", tier: "Songsmith" },
+  { name: "Legacy Financial", tier: "Troubadour" },
   { name: "Local Black Hills" },
-  { name: "Lori DeVries — Real Estate Center" },
-  { name: "Lucius May" },
-  { name: "Russ & Diana Gillette" },
-  { name: "Sara May" },
-  { name: "Sundance State Bank" },
+  { name: "Lori DeVries — Real Estate Center", tier: "Songsmith" },
+  { name: "Lucius May", tier: "Fan" },
+  { name: "Russ & Diana Gillette", tier: "Busker" },
+  { name: "Sara May", tier: "Fan" },
+  { name: "Sundance State Bank", tier: "Troubadour" },
   { name: "White's Queen City Motors" },
   { name: "South Dakota Arts Council", tier: "Grant" },
   { name: "Visit Spearfish", tier: "Grant" },
 ];
+
+// Down the ladder, then alphabetical inside each level. Derived rather than hand-ordered
+// so a name appended to the list above still lands in the right place — the same reason
+// artists.ts derives its per-year rosters instead of keeping parallel arrays.
+const LEVEL_RANK: Record<string, number> = {
+  Legend: 0,
+  Troubadour: 1,
+  Songsmith: 2,
+  Busker: 3,
+  Fan: 4,
+  Sponsor: 5, // recognised, no 2026 level assigned — sorts below the ladder
+  Grant: 6,
+  "In-Kind": 7,
+};
+
+export const sponsorsByLevel: Sponsor[] = [...currentSponsors].sort((a, b) => {
+  const ra = LEVEL_RANK[a.tier ?? "Sponsor"] ?? LEVEL_RANK.Sponsor;
+  const rb = LEVEL_RANK[b.tier ?? "Sponsor"] ?? LEVEL_RANK.Sponsor;
+  return ra - rb || a.name.localeCompare(b.name);
+});

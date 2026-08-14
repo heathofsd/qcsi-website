@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { sponsorTiers, currentSponsors } from "@/data/sponsors";
+import { sponsorTiers, sponsorsByLevel } from "@/data/sponsors";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
@@ -152,7 +152,7 @@ export default function PartnersPage() {
               stopped being true outright once individual Fan-tier sponsors joined the
               list (Devon Sants is Pueblo, Colorado). If locations are wanted back, they
               belong as an optional per-sponsor field with real values, not a default. */}
-          {currentSponsors.map((sponsor) => (
+          {sponsorsByLevel.map((sponsor) => (
             <RunRow
               key={sponsor.name}
               cue={sponsor.tier ?? "Sponsor"}
