@@ -18,21 +18,6 @@ export const metadata: Metadata = {
   },
 };
 
-const records = [
-  {
-    cue: "2010",
-    title: "Seth Bullock: The Spirit of the West",
-  },
-  {
-    cue: "2012",
-    title: "Rusty Old American Dream",
-  },
-  {
-    cue: "2014",
-    title: "Son of a Gun",
-  },
-];
-
 export default function GordyPrattPage() {
   const personLd = {
     "@context": "https://schema.org",
@@ -105,21 +90,19 @@ export default function GordyPrattPage() {
             </p>
             <p>
               In Deadwood he built Deadwood Production Company and put up more
-              than a dozen musical comedies.{" "}
-              <em>The Desperate Damsels of Deadwood.</em>{" "}
-              <em>Virtue, Villains and Vixens.</em> <em>Wild Bill Hiccup.</em>{" "}
-              He wrote them, produced them, and played them, often more than one
-              a day, in a town that had just opened the tables. Winters, he took
-              a one-man show on the road.
+              than a dozen musical comedies. The Desperate Damsels of Deadwood.
+              Virtue, Villains and Vixens. Wild Bill Hiccup. He wrote them,
+              produced them, and played them, often more than one a day, in a
+              town that had just opened the tables. Winters, he took a one-man
+              show on the road.
             </p>
             <p>
-              His other one-man show was{" "}
-              <em>Seth Bullock: The Spirit of the West</em>. He performed it
-              more than a thousand times. ABC&apos;s{" "}
-              <em>Good Morning America</em> had him on to sing &ldquo;The Days
-              of &apos;76,&rdquo; a song from that show. As The Original
-              Fabulous One Guy he carried a stand-up musical comedy of parodies
-              and originals into rooms across the region. He opened for Kenny
+              His other one-man show was Seth Bullock: The Spirit of the West.
+              He performed it more than a thousand times. ABC&apos;s Good
+              Morning America had him on to sing &ldquo;The Days of
+              &apos;76,&rdquo; a song from that show. As The Original Fabulous
+              One Guy he carried a stand-up musical comedy of parodies and
+              originals into rooms across the region. He opened for Kenny
               Chesney, the Nitty Gritty Dirt Band, and the Beach Boys.
             </p>
             <p>
@@ -130,33 +113,24 @@ export default function GordyPrattPage() {
               in Spearfish he kept a song circle and house concerts going. No
               microphones. Songs and the people who write them.
             </p>
+            <p>South Dakota Country Music Hall of Fame, 2017.</p>
+            <p>
+              The records are still here. Seth Bullock: The Spirit of the West
+              (2010). Rusty Old American Dream (2012). Son of a Gun (2014). Hear
+              them on Spotify:{" "}
+              <a
+                href={SPOTIFY}
+                className="text-ballpoint underline underline-offset-4 hover:text-tape-ink"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {SPOTIFY}
+              </a>
+            </p>
+            <p>
+              We remember him. If you have a song, you have a seat at the table.
+            </p>
           </div>
-
-          <div className="border-t border-paper-edge mt-14 max-w-3xl">
-            <RunRow paper cue="2017">
-              <span className="t-title text-ink">
-                South Dakota Country Music Hall of Fame
-              </span>
-            </RunRow>
-          </div>
-
-          <p className="t-body text-ink mt-14 max-w-[68ch]">
-            The records are still here.
-          </p>
-          <div className="border-t border-paper-edge mt-6 max-w-3xl">
-            {records.map((row) => (
-              <RunRow key={row.cue} paper cue={row.cue}>
-                <span className="t-title text-ink">{row.title}</span>
-              </RunRow>
-            ))}
-            <RunRow paper cue="Listen" href={SPOTIFY} external>
-              <span className="t-title text-ink">Hear them on Spotify</span>
-            </RunRow>
-          </div>
-
-          <p className="t-body text-ink mt-14 max-w-[60ch]">
-            We remember him. If you have a song, you have a seat at the table.
-          </p>
         </div>
       </section>
 
