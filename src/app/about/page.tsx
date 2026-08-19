@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
@@ -103,6 +104,12 @@ export default function AboutPage() {
               kitchen-table conversations between songwriters who believed
               Spearfish, South Dakota could be more than a dot on the map
               &mdash; it could be a destination for original music.
+            </p>
+            <p className="t-run-sm text-chalk-dim mt-6">
+              <Link href="/gordy-pratt" className="hover:text-tape transition-colors">
+                Gordy Pratt
+              </Link>{" "}
+              was a founding director.
             </p>
 
             <div className="mt-14 border-t border-floor-line">
