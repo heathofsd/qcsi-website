@@ -87,6 +87,14 @@ export interface Sponsor {
    * treating this file as a mirror of Pulley rather than by hiding the levels.
    */
   tier?: string;
+  /**
+   * Path under `public/`, e.g. `/sponsors/coeur-wharf.svg`. Optional: a missing
+   * file falls back to the name alone so we can ship partial and drop files later.
+   * People (`person: true`) never get a logo treatment even if a path is set.
+   */
+  logo?: string;
+  /** Individuals — Fan-tier people, named couples. Never a logo. */
+  person?: boolean;
 }
 
 // PULLEY IS THE SOURCE OF TRUTH for who is a sponsor and at what level — the QCSI org's
@@ -112,28 +120,52 @@ export interface Sponsor {
 // recognition doc's rule is that nobody gets dropped without cause. Left in deliberately.
 // Package levels mirror Pulley's 2026 campaign tier assignments. Kept alphabetical here
 // for scanning; the page renders `sponsorsByLevel` below, which does the ordering.
+//
+// Logo slots use the suggested public/sponsors/ filenames. The page only renders a
+// mark when the file is on disk — drop a clean official SVG/PNG later and it appears.
+// 2026-08-20 files on hand: Coeur Mining IR mark (Wharf is a Coeur operation),
+// Quik Signs site SVG, Visit Spearfish site header mark. Others stay name-only
+// until a clean official file lands (C21 brand kit 400'd; Sundance / SDAC sites
+// challenged or portal-only; White's / Local BH / Legacy / Grant St. / Lori
+// had no clean high-res official mark from their own sites).
 export const currentSponsors: Sponsor[] = [
-  { name: "Century 21", tier: "Songsmith" },
-  { name: "Coeur Wharf", tier: "Songsmith" },
-  { name: "Devon Sants", tier: "Fan" },
-  { name: "Gary Lattin", tier: "Fan" },
-  { name: "Grant St. Liquor", tier: "Songsmith" },
-  { name: "Legacy Financial", tier: "Troubadour" },
-  { name: "Local Black Hills" },
-  { name: "Lori DeVries — Real Estate Center", tier: "Songsmith" },
-  { name: "Lucius May", tier: "Fan" },
-  { name: "Russ & Diana Gillette", tier: "Busker" },
-  { name: "Sara May", tier: "Fan" },
-  { name: "Sundance State Bank", tier: "Troubadour" },
-  { name: "White's Queen City Motors" },
-  { name: "South Dakota Arts Council", tier: "Grant" },
-  { name: "Visit Spearfish", tier: "Grant" },
+  { name: "Century 21", tier: "Songsmith", logo: "/sponsors/century-21.svg" },
+  { name: "Coeur Wharf", tier: "Songsmith", logo: "/sponsors/coeur-wharf.svg" },
+  { name: "Devon Sants", tier: "Fan", person: true },
+  { name: "Gary Lattin", tier: "Fan", person: true },
+  { name: "Grant St. Liquor", tier: "Songsmith", logo: "/sponsors/grant-st-liquor.svg" },
+  { name: "Legacy Financial", tier: "Troubadour", logo: "/sponsors/legacy-financial.svg" },
+  { name: "Local Black Hills", logo: "/sponsors/local-black-hills.svg" },
+  {
+    name: "Lori DeVries — Real Estate Center",
+    tier: "Songsmith",
+    logo: "/sponsors/lori-devries.svg",
+  },
+  { name: "Lucius May", tier: "Fan", person: true },
+  { name: "Russ & Diana Gillette", tier: "Busker", person: true },
+  { name: "Sara May", tier: "Fan", person: true },
+  {
+    name: "Sundance State Bank",
+    tier: "Troubadour",
+    logo: "/sponsors/sundance-state-bank.svg",
+  },
+  {
+    name: "White's Queen City Motors",
+    logo: "/sponsors/whites-queen-city-motors.svg",
+  },
+  {
+    name: "South Dakota Arts Council",
+    tier: "Grant",
+    logo: "/sponsors/south-dakota-arts-council.svg",
+  },
+  { name: "Visit Spearfish", tier: "Grant", logo: "/sponsors/visit-spearfish.jpg" },
+  { name: "Quik Signs", tier: "In-Kind", logo: "/sponsors/quik-signs.svg" },
 ];
 
 // Down the ladder, then alphabetical inside each level. Derived rather than hand-ordered
 // so a name appended to the list above still lands in the right place — the same reason
 // artists.ts derives its per-year rosters instead of keeping parallel arrays.
-const LEVEL_RANK: Record<string, number> = {
+export const LEVEL_RANK: Record<string, number> = {
   Legend: 0,
   Troubadour: 1,
   Songsmith: 2,
