@@ -121,42 +121,44 @@ export interface Sponsor {
 // Package levels mirror Pulley's 2026 campaign tier assignments. Kept alphabetical here
 // for scanning; the page renders `sponsorsByLevel` below, which does the ordering.
 //
-// Logo slots use the suggested public/sponsors/ filenames. The page only renders a
-// mark when the file is on disk — drop a clean official SVG/PNG later and it appears.
-// 2026-08-20 files on hand: Coeur Mining IR mark (Wharf is a Coeur operation),
-// Quik Signs site SVG, Visit Spearfish site header mark. Others stay name-only
-// until a clean official file lands (C21 brand kit 400'd; Sundance / SDAC sites
-// challenged or portal-only; White's / Local BH / Legacy / Grant St. / Lori
-// had no clean high-res official mark from their own sites).
+// Logo slots are optional. The page only renders a mark when the file is on disk.
+// 2026-08-20 files on hand (official public URLs):
+//   · Century 21 corporate 2018 wordmark (Wikimedia). No Spearfish Realty DBA lockup.
+//   · Coeur Mining IR lite SVG on paper (`coeur-wharf.svg`). Dark variant is in the
+//     folder for later use; the page must keep the lite file.
+//   · Local Black Hills official horizontal PNG (black-backed).
+//   · Visit Spearfish official social image (photo + white wordmark, not a cutout).
+//   · Sundance State Bank footer PNG and White's Queen City Motors dealer PNG —
+//     official but small; fine as paper-block web marks, name on print if needed.
+//   · South Dakota Arts Council historic official GIF (Wayback). Current grant pack
+//     is a JS-only sd.gov portal; no better file, no invented NEA mark.
+// Name only (no public Legacy mark — Ameriprise only, do not use a Florida LFP logo;
+// Grant St. Liquor and Lori DeVries are Facebook-only / site 403).
 export const currentSponsors: Sponsor[] = [
   { name: "Century 21", tier: "Songsmith", logo: "/sponsors/century-21.svg" },
   { name: "Coeur Wharf", tier: "Songsmith", logo: "/sponsors/coeur-wharf.svg" },
   { name: "Devon Sants", tier: "Fan", person: true },
   { name: "Gary Lattin", tier: "Fan", person: true },
-  { name: "Grant St. Liquor", tier: "Songsmith", logo: "/sponsors/grant-st-liquor.svg" },
-  { name: "Legacy Financial", tier: "Troubadour", logo: "/sponsors/legacy-financial.svg" },
-  { name: "Local Black Hills", logo: "/sponsors/local-black-hills.svg" },
-  {
-    name: "Lori DeVries — Real Estate Center",
-    tier: "Songsmith",
-    logo: "/sponsors/lori-devries.svg",
-  },
+  { name: "Grant St. Liquor", tier: "Songsmith" },
+  { name: "Legacy Financial", tier: "Troubadour" },
+  { name: "Local Black Hills", logo: "/sponsors/local-black-hills.png" },
+  { name: "Lori DeVries — Real Estate Center", tier: "Songsmith" },
   { name: "Lucius May", tier: "Fan", person: true },
   { name: "Russ & Diana Gillette", tier: "Busker", person: true },
   { name: "Sara May", tier: "Fan", person: true },
   {
     name: "Sundance State Bank",
     tier: "Troubadour",
-    logo: "/sponsors/sundance-state-bank.svg",
+    logo: "/sponsors/sundance-state-bank.png",
   },
   {
     name: "White's Queen City Motors",
-    logo: "/sponsors/whites-queen-city-motors.svg",
+    logo: "/sponsors/whites-queen-city-motors.png",
   },
   {
     name: "South Dakota Arts Council",
     tier: "Grant",
-    logo: "/sponsors/south-dakota-arts-council.svg",
+    logo: "/sponsors/south-dakota-arts-council.gif",
   },
   { name: "Visit Spearfish", tier: "Grant", logo: "/sponsors/visit-spearfish.jpg" },
   { name: "Quik Signs", tier: "In-Kind", logo: "/sponsors/quik-signs.svg" },
