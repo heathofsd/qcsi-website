@@ -105,11 +105,13 @@ export default function AboutPage() {
               Spearfish, South Dakota could be more than a dot on the map
               &mdash; it could be a destination for original music.
             </p>
-            <p className="t-run-sm text-chalk-dim mt-6">
+            <p className="t-body text-chalk-dim mt-6 max-w-[46ch]">
               <Link href="/gordy-pratt" className="hover:text-tape transition-colors">
                 Gordy Pratt
               </Link>{" "}
-              was a founding director.
+              was in those kitchen-table conversations. He was a founding
+              director. He helped with the ideas and the connections when we
+              were getting started.
             </p>
 
             <div className="mt-14 border-t border-floor-line">
