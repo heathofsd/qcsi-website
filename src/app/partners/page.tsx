@@ -30,13 +30,22 @@ const venuePartners = [
   "Spearfish Public House",
 ];
 
+// Frames take the section rhythm, not leftover stamp sizes. Band (72) and
+// act (120) are the system's large steps — the same ones that pad paper
+// blocks and separate acts. Premium is two acts on desktop so a Troubadour
+// outreads the footer mark (`h-24`) the way display type outreads a title.
+// Width is the column (Full Measure Rule), not a rem cap that shrinks a
+// wide lockup back into a stamp beside its caption.
 const LOGO_FRAME: Record<
   "premium" | "prominent" | "standard",
   string
 > = {
-  premium: "h-16 md:h-24 max-w-[14rem] md:max-w-[18rem]",
-  prominent: "h-14 md:h-20 max-w-[12rem] md:max-w-[15rem]",
-  standard: "h-12 md:h-16 max-w-[10rem] md:max-w-[13rem]",
+  premium:
+    "h-[var(--spacing-act)] md:h-[calc(var(--spacing-act)*2)] w-full",
+  prominent:
+    "h-[var(--spacing-band)] md:h-[calc(var(--spacing-act)+var(--spacing-band))] w-full",
+  standard:
+    "h-[var(--spacing-band)] md:h-[var(--spacing-act)] w-full",
 };
 
 function nameRowsWithGroupedFans(
@@ -97,7 +106,7 @@ function SponsorMarkFigure({
   prominence: "premium" | "prominent" | "standard";
 }) {
   return (
-    <figure className="min-w-0">
+    <figure className="min-w-0 w-full">
       <div
         className={`flex items-center justify-start ${LOGO_FRAME[prominence]}`}
       >
@@ -110,7 +119,7 @@ function SponsorMarkFigure({
           className="max-h-full max-w-full object-contain object-left"
         />
       </div>
-      <figcaption className="t-run-sm text-pencil mt-3">
+      <figcaption className="t-run-sm text-pencil mt-4">
         {sponsor.name}
       </figcaption>
     </figure>
@@ -259,14 +268,14 @@ export default function PartnersPage() {
 
       {logoGroups.length > 0 ? (
         <section className="bg-paper">
-          <div className="shell py-16 md:py-20">
+          <div className="shell py-20 md:py-[var(--spacing-act)]">
             {logoGroups.map((group) => (
               <div
                 key={group.cue}
-                className="border-t border-paper-edge py-10 first:pt-0 first:border-t-0"
+                className="border-t border-paper-edge py-[var(--spacing-band)] first:pt-0 first:border-t-0"
               >
                 <p className="t-run text-tape-ink mb-8">{group.cue}</p>
-                <div className="flex flex-wrap gap-x-10 gap-y-10 md:gap-x-14 items-end">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10 md:gap-y-[var(--spacing-band)] items-end">
                   {group.marks.map((sponsor) => (
                     <SponsorMarkFigure
                       key={sponsor.name}

@@ -131,7 +131,10 @@ export interface Sponsor {
 //     (star + practice name). Not the full “Welcome…” banner.
 //   · Lori DeVries — Real Estate Center official 2900×1500 business mark.
 //   · Local Black Hills official horizontal PNG (black-backed).
-//   · Visit Spearfish official social image (photo + white wordmark, not a cutout).
+//   · Visit Spearfish file stays at public/sponsors/visit-spearfish.jpg but is
+//     NOT listed: Heath confirmed 2026-08-20 they have not awarded the 2026
+//     grant (vault 2026-08-14: application complete, board deadline Aug 25).
+//     Restore the row when they actually give.
 //   · Sundance State Bank footer PNG and White's Queen City Motors dealer PNG —
 //     official but small; fine as paper-block web marks, name on print if needed.
 //     Did not swap White's for the 750px black-square favicon.
@@ -173,7 +176,6 @@ export const currentSponsors: Sponsor[] = [
     tier: "Grant",
     logo: "/sponsors/south-dakota-arts-council.jpg",
   },
-  { name: "Visit Spearfish", tier: "Grant", logo: "/sponsors/visit-spearfish.jpg" },
   { name: "Quik Signs", tier: "In-Kind", logo: "/sponsors/quik-signs.svg" },
 ];
 

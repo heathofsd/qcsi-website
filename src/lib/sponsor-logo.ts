@@ -35,7 +35,9 @@ export function logoProminence(
   tier?: string,
 ): "premium" | "prominent" | "standard" {
   if (tier === "Legend" || tier === "Troubadour") return "premium";
-  if (tier === "Songsmith") return "prominent";
+  if (tier === "Songsmith" || tier === "Grant" || tier === "In-Kind") {
+    return "prominent";
+  }
   return "standard";
 }
 
