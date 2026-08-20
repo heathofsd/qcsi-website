@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Tape, RunRow } from "@/components/run";
 
 const SPOTIFY = "https://open.spotify.com/artist/4aEoUklXzkBYXewDv0vNMZ";
-const PHOTO = "/photos/people/gordy-pratt.jpg";
+const PHOTO = "/photos/people/gordy-pratt.png";
 
 export const metadata: Metadata = {
   title: "Gordy Pratt",
