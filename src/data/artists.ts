@@ -546,7 +546,7 @@ export const profiledArtists: Artist[] = [
     // He submitted facebook.com/profile.php?id=61593637316388. The page
     // concatenates facebook.com/${handle}, so a profile-id URL cannot be
     // stored without inventing a username.
-    photo: "/photos/artists/ian-gall.jpg",
+    photo: "/photos/artists/ian-gall.JPG",
     // Portrait 2:3, full-body on a stump, face in the upper third. Artist
     // frames are aspect-[4/5] (record page) and aspect-[3/4] (headliner
     // cards), both object-fit: cover. The source is taller than either
