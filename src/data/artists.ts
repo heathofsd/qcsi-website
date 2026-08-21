@@ -211,7 +211,7 @@ export const profiledArtists: Artist[] = [
     instagram: "janicegilbertmusic",
     facebook: "janicegilbertmusic",
     photo: "/photos/artists/janice-gilbert.jpg",
-    hometown: "Miller, SD",
+    hometown: "Tea, SD",
     fullBio: "Janice Gilbert is an award-winning songwriter, performer, and music educator from rural South Dakota. She began singing in church and community settings, winning the 2004 Dakota Star Talent Search at the South Dakota State Fair. In 2006, she relocated to Nashville, teaching music and collaborating with songwriters while performing at venues like the Bluebird Cafe. In 2012, she won the Bluebird Cafe's 30th Anniversary Songwriting Contest. After releasing three Nashville albums, she returned to South Dakota in 2013 and continues performing regionally with original music blending Midwest storytelling with contemporary country influences.",
     instrument: "Piano / Guitar",
     influences: "Barry Dean, Diane Warren, Don Henry, Chris Wallen",
