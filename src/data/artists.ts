@@ -547,12 +547,11 @@ export const profiledArtists: Artist[] = [
     // concatenates facebook.com/${handle}, so a profile-id URL cannot be
     // stored without inventing a username.
     photo: "/photos/artists/ian-gall.JPG",
-    // Portrait 2:3, full-body on a stump, face in the upper third. Artist
-    // frames are aspect-[4/5] (record page) and aspect-[3/4] (headliner
-    // cards), both object-fit: cover. The source is taller than either
-    // frame, so cover crops top and bottom — default center eats the head.
-    // Same high pin as Foucault / Fullbright.
-    photoPosition: "center 20%",
+    // Heath locked a tighter 4:5 crop 2026-08-20 — face, chest, guitar,
+    // same ratio as the artist page frame. The old center 20% pin was
+    // for the full-body 2:3 on a stump. Leaving it would recrop this
+    // crop and cut the guitar at the bottom of the frame.
+    photoPosition: "center 50%",
     hometown: "Divide, CO",
     // His own short bio, already third person. Curly quotes normalized;
     // hometown comma kept. No career facts added.
