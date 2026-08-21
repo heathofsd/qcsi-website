@@ -536,6 +536,38 @@ export const profiledArtists: Artist[] = [
       "Coconuts are out of season, I'm drunk and don't have a reason",
     funFact: "He makes a great omelette.",
   },
+  {
+    // Public billing locked 2026-08-20: legal name first, project in
+    // parentheses. Slug stays ian-gall — do not add a secondhand-son row.
+    name: "Ian Gall (Secondhand Son)",
+    slug: "ian-gall",
+    year: [2026],
+    instagram: "secondhand_son_music",
+    // He submitted facebook.com/profile.php?id=61593637316388. The page
+    // concatenates facebook.com/${handle}, so a profile-id URL cannot be
+    // stored without inventing a username.
+    photo: "/photos/artists/ian-gall.jpg",
+    // Portrait 2:3, full-body on a stump, face in the upper third. Artist
+    // frames are aspect-[4/5] (record page) and aspect-[3/4] (headliner
+    // cards), both object-fit: cover. The source is taller than either
+    // frame, so cover crops top and bottom — default center eats the head.
+    // Same high pin as Foucault / Fullbright.
+    photoPosition: "center 20%",
+    hometown: "Divide, CO",
+    // His own short bio, already third person. Curly quotes normalized;
+    // hometown comma kept. No career facts added.
+    fullBio:
+      "Ian Gall (Secondhand Son) is originally from Rochester, NY, and now calls a small mountain town in Colorado home. His musical journey began with piano, followed by years of singing in choirs and performing in musicals. Eventually he picked up the guitar and began writing songs of his own.\nInfluenced by artists including The Doors, James Taylor, Fleetwood Mac, and countless others, Secondhand Son blends layered, emotional lyrics with a deep, soulful sound.\nToward the end of 2026, Secondhand Son will release its debut album.",
+    instrument: "Taylor Koa GS Mini",
+    influences: "The Doors, James Taylor, Fleetwood Mac",
+    signatureSong: "No Saint",
+    firstPerformance: "Westerville, OH",
+    biggestAchievement: "Writing for his first album",
+    dreamCollaboration: "Gregory Alan Isakov",
+    // Submitted under the song title Resign. Lines unchanged.
+    favoriteLyric:
+      "Let me be the villain / And I will go my way / I'm tired and I'm turning / away from yesterday",
+  },
 ];
 
 export const artists2024Only: Artist[] = [
@@ -558,11 +590,10 @@ export const artists2024Only: Artist[] = [
 /**
  * Confirmed for a given year but no intake on file yet — name only, no bio or
  * photo. They render as plain rows until their intake form comes back, at which
- * point they graduate into `artists` above with a full profile.
+ * point they graduate into `profiledArtists` above with a full profile.
+ * Empty as of Ian Gall's 2026-08-20 intake: every 2026 writer now has a record.
  */
-export const rosterNoProfile: Artist[] = [
-  { name: "Ian Gall", slug: "ian-gall", year: [2026] },
-];
+export const rosterNoProfile: Artist[] = [];
 
 /**
  * Everyone who has ever been on a roster, headliners excluded. The `year` field
