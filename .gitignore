@@ -46,5 +46,12 @@ next-env.d.ts
 # claude code — personal, machine-specific
 .claude/settings.local.json
 
-# impeccable — transient decision-page daemon state (pid/port/heartbeat)
+# impeccable — machine-local / transient state
 .impeccable/questions/
+.impeccable/config.local.json
+.impeccable/hook.cache.json
+.impeccable/hook.pending.json
+.impeccable/live/
+.impeccable/review/
+.impeccable-live.json
+.impeccable-live/
