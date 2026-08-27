@@ -87,6 +87,14 @@ export interface Sponsor {
    * treating this file as a mirror of Pulley rather than by hiding the levels.
    */
   tier?: string;
+  /**
+   * Path under `public/`, e.g. `/sponsors/coeur-wharf.svg`. Optional: a missing
+   * file falls back to the name alone so we can ship partial and drop files later.
+   * People (`person: true`) never get a logo treatment even if a path is set.
+   */
+  logo?: string;
+  /** Individuals — Fan-tier people, named couples. Never a logo. */
+  person?: boolean;
 }
 
 // PULLEY IS THE SOURCE OF TRUTH for who is a sponsor and at what level — the QCSI org's
@@ -112,28 +120,69 @@ export interface Sponsor {
 // recognition doc's rule is that nobody gets dropped without cause. Left in deliberately.
 // Package levels mirror Pulley's 2026 campaign tier assignments. Kept alphabetical here
 // for scanning; the page renders `sponsorsByLevel` below, which does the ordering.
+//
+// Logo slots are optional. The page only renders a mark when the file is on disk.
+// 2026-08-20 files on hand (official public URLs):
+//   · Century 21 Spearfish Realty local lockup (gold on black). Prefer this over
+//     the corporate-only wordmark so the page reads Spearfish Realty.
+//   · Coeur Mining IR lite SVG on paper (`coeur-wharf.svg`). Dark variant is in the
+//     folder for later use; the page must keep the lite file.
+//   · Legacy Financial: left lockup crop of the official Ameriprise team banner
+//     (star + practice name). Not the full “Welcome…” banner.
+//   · Lori DeVries — Real Estate Center official 2900×1500 business mark.
+//   · Local Black Hills official horizontal PNG (black-backed).
+//   · Visit Spearfish file stays at public/sponsors/visit-spearfish.jpg but is
+//     NOT listed: Heath confirmed 2026-08-20 they have not awarded the 2026
+//     grant (vault 2026-08-14: application complete, board deadline Aug 25).
+//     Restore the row when they actually give.
+//   · Sundance State Bank footer PNG and White's Queen City Motors dealer PNG —
+//     official but small; fine as paper-block web marks, name on print if needed.
+//     Did not swap White's for the 750px black-square favicon.
+//   · South Dakota Arts Council official grant-recognition TEAL mark (Wayback of
+//     artscouncil.sd.gov/grants/logo/TEAL_SDAC_Logo.jpg — live path is ServiceNow).
+//   · Quik Signs company SVG.
+// Name only: Grant St. Liquor (sign photo only).
 export const currentSponsors: Sponsor[] = [
-  { name: "Century 21", tier: "Songsmith" },
-  { name: "Coeur Wharf", tier: "Songsmith" },
-  { name: "Devon Sants", tier: "Fan" },
-  { name: "Gary Lattin", tier: "Fan" },
+  { name: "Century 21", tier: "Songsmith", logo: "/sponsors/century-21.png" },
+  { name: "Coeur Wharf", tier: "Songsmith", logo: "/sponsors/coeur-wharf.svg" },
+  { name: "Devon Sants", tier: "Fan", person: true },
+  { name: "Gary Lattin", tier: "Fan", person: true },
   { name: "Grant St. Liquor", tier: "Songsmith" },
-  { name: "Legacy Financial", tier: "Troubadour" },
-  { name: "Local Black Hills" },
-  { name: "Lori DeVries — Real Estate Center", tier: "Songsmith" },
-  { name: "Lucius May", tier: "Fan" },
-  { name: "Russ & Diana Gillette", tier: "Busker" },
-  { name: "Sara May", tier: "Fan" },
-  { name: "Sundance State Bank", tier: "Troubadour" },
-  { name: "White's Queen City Motors" },
-  { name: "South Dakota Arts Council", tier: "Grant" },
-  { name: "Visit Spearfish", tier: "Grant" },
+  {
+    name: "Legacy Financial",
+    tier: "Troubadour",
+    logo: "/sponsors/legacy-financial.jpg",
+  },
+  { name: "Local Black Hills", logo: "/sponsors/local-black-hills.png" },
+  {
+    name: "Lori DeVries — Real Estate Center",
+    tier: "Songsmith",
+    logo: "/sponsors/lori-devries.png",
+  },
+  { name: "Lucius May", tier: "Fan", person: true },
+  { name: "Russ & Diana Gillette", tier: "Busker", person: true },
+  { name: "Sara May", tier: "Fan", person: true },
+  {
+    name: "Sundance State Bank",
+    tier: "Troubadour",
+    logo: "/sponsors/sundance-state-bank.png",
+  },
+  {
+    name: "White's Queen City Motors",
+    logo: "/sponsors/whites-queen-city-motors.png",
+  },
+  {
+    name: "South Dakota Arts Council",
+    tier: "Grant",
+    logo: "/sponsors/south-dakota-arts-council.jpg",
+  },
+  { name: "Quik Signs", tier: "In-Kind", logo: "/sponsors/quik-signs.svg" },
 ];
 
 // Down the ladder, then alphabetical inside each level. Derived rather than hand-ordered
 // so a name appended to the list above still lands in the right place — the same reason
 // artists.ts derives its per-year rosters instead of keeping parallel arrays.
-const LEVEL_RANK: Record<string, number> = {
+export const LEVEL_RANK: Record<string, number> = {
   Legend: 0,
   Troubadour: 1,
   Songsmith: 2,

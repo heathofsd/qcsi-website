@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Image from "next/image";
-import { sponsorTiers, sponsorsByLevel } from "@/data/sponsors";
+import { LEVEL_RANK, sponsorTiers, sponsorsByLevel } from "@/data/sponsors";
+import {
+  groupMarksByLevel,
+  partitionSponsors,
+  type SponsorMark,
+} from "@/lib/sponsor-logo";
 import { Tape, RunRow, Slug, Action } from "@/components/run";
 
 export const metadata: Metadata = {
@@ -24,7 +30,112 @@ const venuePartners = [
   "Spearfish Public House",
 ];
 
+// Frames take the section rhythm, not leftover stamp sizes. Band (72) and
+// act (120) are the system's large steps — the same ones that pad paper
+// blocks and separate acts. Premium is two acts on desktop so a Troubadour
+// outreads the footer mark (`h-24`) the way display type outreads a title.
+// Width is the column (Full Measure Rule), not a rem cap that shrinks a
+// wide lockup back into a stamp beside its caption.
+const LOGO_FRAME: Record<
+  "premium" | "prominent" | "standard",
+  string
+> = {
+  premium:
+    "h-[var(--spacing-act)] md:h-[calc(var(--spacing-act)*2)] w-full",
+  prominent:
+    "h-[var(--spacing-band)] md:h-[calc(var(--spacing-act)+var(--spacing-band))] w-full",
+  standard:
+    "h-[var(--spacing-band)] md:h-[var(--spacing-act)] w-full",
+};
+
+function nameRowsWithGroupedFans(
+  rows: { name: string; tier?: string }[],
+  fanNames: string[],
+): ReactNode[] {
+  const items: ReactNode[] = [];
+  let insertedFan = false;
+  const fanRow =
+    fanNames.length > 0 ? (
+      <RunRow key="fan-group" cue="Fan">
+        <span className="t-title text-chalk">{fanNames.join(" · ")}</span>
+      </RunRow>
+    ) : null;
+
+  for (const sponsor of rows) {
+    const rank = LEVEL_RANK[sponsor.tier ?? "Sponsor"] ?? LEVEL_RANK.Sponsor;
+    if (fanRow && !insertedFan && rank > LEVEL_RANK.Fan) {
+      items.push(fanRow);
+      insertedFan = true;
+    }
+    items.push(
+      <RunRow key={sponsor.name} cue={sponsor.tier ?? "Sponsor"}>
+        <span className="t-title text-chalk">{sponsor.name}</span>
+      </RunRow>,
+    );
+  }
+  if (fanRow && !insertedFan) items.push(fanRow);
+  return items;
+}
+
+function SponsorNameList({
+  rows,
+  fanNames,
+}: {
+  rows: { name: string; tier?: string }[];
+  fanNames: string[];
+}) {
+  if (rows.length === 0 && fanNames.length === 0) return null;
+
+  return (
+    <div className="border-t border-floor-line">
+      {/* No location line. This used to stamp "Spearfish, SD" under every sponsor
+          without a descriptor, which asserted something nobody had verified — and
+          stopped being true outright once individual Fan-tier sponsors joined the
+          list (Devon Sants is Pueblo, Colorado). If locations are wanted back, they
+          belong as an optional per-sponsor field with real values, not a default. */}
+      {nameRowsWithGroupedFans(rows, fanNames)}
+    </div>
+  );
+}
+
+function SponsorMarkFigure({
+  sponsor,
+  prominence,
+}: {
+  sponsor: SponsorMark;
+  prominence: "premium" | "prominent" | "standard";
+}) {
+  return (
+    <figure className="min-w-0 w-full">
+      <div
+        className={`flex items-center justify-start ${LOGO_FRAME[prominence]}`}
+      >
+        {/* Mixed SVG / raster marks — img keeps SVG unprocessed and
+            object-contain holds the paper field without a card chrome. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={sponsor.logoSrc}
+          alt=""
+          className="max-h-full max-w-full object-contain object-left"
+        />
+      </div>
+      <figcaption className="t-run-sm text-pencil mt-4">
+        {sponsor.name}
+      </figcaption>
+    </figure>
+  );
+}
+
 export default function PartnersPage() {
+  const { withLogo, nameOnly } = partitionSponsors(sponsorsByLevel);
+  const logoGroups = groupMarksByLevel(withLogo);
+  const fanNames = nameOnly
+    .filter((sponsor) => sponsor.tier === "Fan" && sponsor.person)
+    .map((sponsor) => sponsor.name);
+  const namedRows = nameOnly.filter(
+    (sponsor) => !(sponsor.tier === "Fan" && sponsor.person),
+  );
+
   return (
     <>
       <section className="shell pt-14 pb-16 md:pt-20 md:pb-20">
@@ -142,26 +253,48 @@ export default function PartnersPage() {
       </section>
 
       {/* -------------------------------------------------------- the credits */}
-      <section className="shell py-20 md:py-[var(--spacing-act)]">
+      <section
+        className={`shell pt-20 md:pt-[var(--spacing-act)] ${
+          logoGroups.length > 0 ? "pb-10 md:pb-14" : "pb-20 md:pb-[var(--spacing-act)]"
+        }`}
+      >
         <Slug cue="With thanks" title="Our sponsors & partners">
           These businesses and organizations make the Invitational possible.
         </Slug>
-        <div className="border-t border-floor-line">
-          {/* No location line. This used to stamp "Spearfish, SD" under every sponsor
-              without a descriptor, which asserted something nobody had verified — and
-              stopped being true outright once individual Fan-tier sponsors joined the
-              list (Devon Sants is Pueblo, Colorado). If locations are wanted back, they
-              belong as an optional per-sponsor field with real values, not a default. */}
-          {sponsorsByLevel.map((sponsor) => (
-            <RunRow
-              key={sponsor.name}
-              cue={sponsor.tier ?? "Sponsor"}
-            >
-              <span className="t-title text-chalk">{sponsor.name}</span>
-            </RunRow>
-          ))}
-        </div>
+        {logoGroups.length === 0 ? (
+          <SponsorNameList rows={namedRows} fanNames={fanNames} />
+        ) : null}
       </section>
+
+      {logoGroups.length > 0 ? (
+        <section className="bg-paper">
+          <div className="shell py-20 md:py-[var(--spacing-act)]">
+            {logoGroups.map((group) => (
+              <div
+                key={group.cue}
+                className="border-t border-paper-edge py-[var(--spacing-band)] first:pt-0 first:border-t-0"
+              >
+                <p className="t-run text-tape-ink mb-8">{group.cue}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10 md:gap-y-[var(--spacing-band)] items-end">
+                  {group.marks.map((sponsor) => (
+                    <SponsorMarkFigure
+                      key={sponsor.name}
+                      sponsor={sponsor}
+                      prominence={group.prominence}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {logoGroups.length > 0 ? (
+        <section className="shell py-20 md:py-[var(--spacing-act)]">
+          <SponsorNameList rows={namedRows} fanNames={fanNames} />
+        </section>
+      ) : null}
 
       <section className="shell pb-20 md:pb-[var(--spacing-act)]">
         <Slug cue="The rooms" title="Venue partners">
