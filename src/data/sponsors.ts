@@ -107,9 +107,17 @@ export interface Sponsor {
 //     partners page — that list is separate, so it is a venue here, not a sponsor.
 //   · REMOVED as not-yet-renewed for 2026: Munro Earthmoving (expected, will return),
 //     Edward Jones — Chris Mitchell, Riverfront Broadcasting.
-// STILL OPEN: Local Black Hills and White's Queen City Motors both gave in 2025 and have
-// no 2026 tier in Pulley — same pattern as the removals, but not yet confirmed, and the
-// recognition doc's rule is that nobody gets dropped without cause. Left in deliberately.
+// STILL OPEN: Local Black Hills gave in 2025 and has no 2026 tier in Pulley — same pattern
+// as the removals, but not yet confirmed, and the recognition doc's rule is that nobody gets
+// dropped without cause. Left in deliberately.
+// RESOLVED 2026-09-01: White's Queen City Motors renewed at $500 Songsmith (Pulley, under
+// Cody Brown), so it now carries a tier and sorts up out of the untiered group.
+// PRINT NAMES RULED 2026-09-01 (Heath), and corrected in Pulley the same day so the source of
+// truth and this list agree: "Luke May" (was "Lucius May"), "Russ & Diana Gillett" (was
+// "Gillette" — his own email spells it Gillett), and "Sundance State Bank" with no branch
+// suffix, which overrides Melissa's 2026-08-15 "Sundance State Bank Spearfish Branch" note.
+// Sundance was already right here. Alphabetical order is unchanged: Lucius and Luke both sort
+// between "Lori" and "Russ".
 // Package levels mirror Pulley's 2026 campaign tier assignments. Kept alphabetical here
 // for scanning; the page renders `sponsorsByLevel` below, which does the ordering.
 export const currentSponsors: Sponsor[] = [
@@ -121,11 +129,11 @@ export const currentSponsors: Sponsor[] = [
   { name: "Legacy Financial", tier: "Troubadour" },
   { name: "Local Black Hills" },
   { name: "Lori DeVries — Real Estate Center", tier: "Songsmith" },
-  { name: "Lucius May", tier: "Fan" },
-  { name: "Russ & Diana Gillette", tier: "Busker" },
+  { name: "Luke May", tier: "Fan" },
+  { name: "Russ & Diana Gillett", tier: "Busker" },
   { name: "Sara May", tier: "Fan" },
   { name: "Sundance State Bank", tier: "Troubadour" },
-  { name: "White's Queen City Motors" },
+  { name: "White's Queen City Motors", tier: "Songsmith" },
   { name: "South Dakota Arts Council", tier: "Grant" },
   { name: "Visit Spearfish", tier: "Grant" },
 ];
