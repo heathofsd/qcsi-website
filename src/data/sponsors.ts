@@ -118,13 +118,18 @@ export interface Sponsor {
 // suffix, which overrides Melissa's 2026-08-15 "Sundance State Bank Spearfish Branch" note.
 // Sundance was already right here. Alphabetical order is unchanged: Lucius and Luke both sort
 // between "Lori" and "Russ".
+// EXCEPTION 2026-09-01 (Heath): Gary Lattin is listed at **Busker**, one level above what
+// his gift alone buys. Pulley has him at $250 against a $300 Busker floor and Pulley is
+// right — this is not drift to reconcile away. He turns up at every gig and tips the players
+// constantly, and the bump is how we say thank you for that. Deliberate. Leave it: this is
+// the one row in the list that does not derive from the Pulley amount.
 // Package levels mirror Pulley's 2026 campaign tier assignments. Kept alphabetical here
 // for scanning; the page renders `sponsorsByLevel` below, which does the ordering.
 export const currentSponsors: Sponsor[] = [
   { name: "Century 21", tier: "Songsmith" },
   { name: "Coeur Wharf", tier: "Songsmith" },
   { name: "Devon Sants", tier: "Fan" },
-  { name: "Gary Lattin", tier: "Fan" },
+  { name: "Gary Lattin", tier: "Busker" },
   { name: "Grant St. Liquor", tier: "Songsmith" },
   { name: "Legacy Financial", tier: "Troubadour" },
   { name: "Local Black Hills" },
