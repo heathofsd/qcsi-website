@@ -256,7 +256,10 @@ export const profiledArtists: Artist[] = [
   {
     name: "Heath Johnson",
     slug: "heath-johnson",
-    year: [2024, 2025, 2026],
+    // 2026 removed 2026-09-04 — he bowed out of playing and Johnny Hastings took
+    // his two rounds. The entry stays: he genuinely played 2024 and 2025, and the
+    // site filters by year, so deleting him would erase that history.
+    year: [2024, 2025],
     instagram: "throughtheheath",
     facebook: "heathjohnsonmusic",
     photo: "/photos/artists/heath-johnson.png",
