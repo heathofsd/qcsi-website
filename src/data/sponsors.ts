@@ -157,10 +157,13 @@ export const currentSponsors: Sponsor[] = [
   { name: "Crow Peak Brewery", tier: "Busker", logo: "crow_peak_brewery.png" },
   { name: "Devon Sants", tier: "Fan" },
   { name: "Gary Lattin", tier: "Busker" },
-  // Deliberately no logo: the only mark that exists is one WE drew from a photo of
-  // their sign, and they have not seen it. Publishing an invented mark as a
-  // business's own is not ours to do. They render as type until they approve it.
-  { name: "Grant Street Liquor", tier: "Songsmith" },
+  // The only mark that exists for them is one WE drew from a photograph of their
+  // sign — Great Vibes over Playfair Display, following the sign's own structure.
+  // It is a typographic treatment, not their trademark, and it is used here on
+  // Heath's explicit call (2026-09-07) so the website and the sponsor sign show
+  // the same thing. Still worth their sign-off; if they supply a real file or
+  // object, replace this and `sponsor-sign/logos/grant-street-liquor.png` together.
+  { name: "Grant Street Liquor", tier: "Songsmith", logo: "grant-street-liquor.png" },
   { name: "Holiday Inn / Lucky's 13 Pub", tier: "Songsmith", logo: "holiday_inn_luckys_13.png" },
   { name: "Legacy Financial — Jon Pochop", tier: "Troubadour", logo: "legacy_financial.png" },
   { name: "Local Black Hills" },
