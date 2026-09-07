@@ -74,6 +74,12 @@ export const sponsorTiers: SponsorTier[] = [
 export interface Sponsor {
   name: string;
   /**
+   * Filename in `public/sponsors/`. Absent means the sponsor renders as type,
+   * which is the correct rendering for individuals — they have no mark and never
+   * will — and the honest one for a business whose logo we do not have.
+   */
+  logo?: string;
+  /**
    * What prints in the row's cue column: the sponsor's package level — Legend,
    * Troubadour, Songsmith, Busker, Fan — or a durable descriptor (Grant, In-Kind).
    * Omitted means "recognised, no 2026 package level assigned", which renders as the
@@ -125,22 +131,50 @@ export interface Sponsor {
 // the one row in the list that does not derive from the Pulley amount.
 // Package levels mirror Pulley's 2026 campaign tier assignments. Kept alphabetical here
 // for scanning; the page renders `sponsorsByLevel` below, which does the ordering.
+// 2026-09-07 — RECONCILED AGAINST THE PRINT COLLATERAL, which had moved ahead of
+// this file. Five sponsors were on the poster and the sponsor sign and missing
+// here entirely: Crow Peak Brewery, Holiday Inn / Lucky's 13 Pub, Pit 14 Barbecue,
+// Quik Signs, Schlimgen Law Firm. Four of the five are in-kind, and the money.md
+// precedent (Quik Signs: recognised at tier, not counted in the campaign total) is
+// that in-kind is recognised like any other gift. This file's own rule is that a
+// name here is a promised benefit and the ladder promises website recognition at
+// every tier — so being absent was five undelivered benefits, not a formatting gap.
+//
+// THREE PRINT NAMES were also out of step and are now aligned to what the poster
+// and sign actually print:
+//   · "Grant St. Liquor"  -> "Grant Street Liquor"          (spelled out)
+//   · "Legacy Financial"  -> "Legacy Financial — Jon Pochop"
+//   · "Century 21"        -> "Century 21 Spearfish Realty"
+// ⚠️ The Century 21 line had an UNCOMMITTED local edit to "Jason Tysdal — Century
+// 21", saved 2026-09-03, the same day Heath ruled the print name. It is overridden
+// here rather than silently kept, because the poster, the sign and the logo file
+// itself all read "Century 21 Spearfish Realty" — a caption reading one thing
+// beside a logo reading another is worse than either. If the person's name is
+// wanted, change all four surfaces together.
 export const currentSponsors: Sponsor[] = [
-  { name: "Century 21", tier: "Songsmith" },
-  { name: "Coeur Wharf", tier: "Songsmith" },
+  { name: "Century 21 Spearfish Realty", tier: "Songsmith", logo: "century_21.png" },
+  { name: "Coeur Wharf", tier: "Songsmith", logo: "coeur_wharf.png" },
+  { name: "Crow Peak Brewery", tier: "Busker", logo: "crow_peak_brewery.png" },
   { name: "Devon Sants", tier: "Fan" },
   { name: "Gary Lattin", tier: "Busker" },
-  { name: "Grant St. Liquor", tier: "Songsmith" },
-  { name: "Legacy Financial", tier: "Troubadour" },
+  // Deliberately no logo: the only mark that exists is one WE drew from a photo of
+  // their sign, and they have not seen it. Publishing an invented mark as a
+  // business's own is not ours to do. They render as type until they approve it.
+  { name: "Grant Street Liquor", tier: "Songsmith" },
+  { name: "Holiday Inn / Lucky's 13 Pub", tier: "Songsmith", logo: "holiday_inn_luckys_13.png" },
+  { name: "Legacy Financial — Jon Pochop", tier: "Troubadour", logo: "legacy_financial.png" },
   { name: "Local Black Hills" },
-  { name: "Lori DeVries — Real Estate Center", tier: "Songsmith" },
+  { name: "Lori DeVries — Real Estate Center", tier: "Songsmith", logo: "real-estate-center-lori-devries.png" },
   { name: "Luke May", tier: "Fan" },
+  { name: "Pit 14 Barbecue", tier: "Busker", logo: "pit_14_bbq.png" },
+  { name: "Quik Signs", tier: "Busker", logo: "quik_signs.png" },
   { name: "Russ & Diana Gillett", tier: "Busker" },
   { name: "Sara May", tier: "Fan" },
-  { name: "Sundance State Bank", tier: "Troubadour" },
-  { name: "White's Queen City Motors", tier: "Songsmith" },
-  { name: "South Dakota Arts Council", tier: "Grant" },
-  { name: "Visit Spearfish", tier: "Grant" },
+  { name: "Schlimgen Law Firm", tier: "Songsmith", logo: "schlimgen_law_firm.png" },
+  { name: "Sundance State Bank", tier: "Troubadour", logo: "sundance_state_bank.png" },
+  { name: "White's Queen City Motors", tier: "Songsmith", logo: "whites_queen_city_motors.png" },
+  { name: "South Dakota Arts Council", tier: "Grant", logo: "sd_arts_council.png" },
+  { name: "Visit Spearfish", tier: "Grant", logo: "visit_spearfish.png" },
 ];
 
 // Down the ladder, then alphabetical inside each level. Derived rather than hand-ordered
