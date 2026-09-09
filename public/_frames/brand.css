@@ -1,0 +1,233 @@
+/* QCSI promo art — shared poster layer.
+
+   THE KIT IS A PAPER BLOCK CUT OUT OF THE SITE.
+
+   apps/qcsi-website ships "The Running Order" (see its DESIGN.md): a matte stage-floor
+   black ground with bright copier paper cut into it and one fluorescent tape orange.
+   Every region on that site belongs to either the floor or the paper, and never mixes
+   the two fields' text colors. This kit is entirely the PAPER field — same tokens, same
+   Field Rule, no new hue. That is what makes a poster and the site look related without
+   being identical: same inks, different stock.
+
+   Why paper and not floor: a poster is printed, and every device that makes ink read as
+   printed rather than rendered — multiply blending, paper tooth, an off-register second
+   run — needs a light stock to act on. Over black they are all no-ops.
+
+   Identity lives here (stock, inks, type roles, press mechanics); each format file owns
+   its own canvas size, layout, and type scale. */
+
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo:wdth,wght@62..125,100..900&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root{
+  /* --- the stock --- */
+  --stock:#F4F5F2;        /* copier paper. Explicitly not cream. */
+  --edge:#D8D9D3;         /* paper-edge — cut edges and light rules */
+
+  /* --- the black run --- */
+  --ink:#17171A;          /* sharpie ink — the paper field's text token */
+  --pencil:#6C6C66;       /* secondary on paper, 4.7:1 */
+
+  /* --- the second run --- */
+  --tape:#FF5A26;         /* spike tape. Carries #17171A text, never white. */
+  --tape-ink:#C63C0C;     /* same roll, darkened only to carry small text on paper (4.73:1) */
+
+  /* --- the floor: the site's OTHER field, used by exactly one format ---
+     Sponsor thank-yous run on the floor rather than the paper, because they have to
+     separate from the artist posts in a feed and DESIGN.md names field change as the
+     system's strongest separation ("floor to paper is the strongest separation
+     available"). That buys the separation with ZERO new hues — these are the same
+     site tokens, just the other half of the Field Rule. On the floor, tape orange
+     itself carries small text (6.0:1); --tape-ink is a paper-only token. */
+  --floor:#0F0F11;
+  --floor-line:#2E2E34;
+  --chalk:#E9E9E5;
+  --chalk-dim:#9C9C98;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{background:var(--stock);}
+
+body{
+  background:var(--stock);
+  color:var(--ink);
+  font-family:"Archivo","Arial Narrow",Arial,sans-serif;
+  position:relative;
+  overflow:hidden;
+}
+
+/* ============================== PRESS MECHANICS ==============================
+   Four devices, lifted from reference/hatch-comparison.html. Together they are
+   the whole difference between a printed sheet and a rendered one. */
+
+/* 1. The tooth. Uncoated stock has a surface; ink sits IN it, not on it.
+      Multiplied over the sheet so it darkens the ink and the stock together. */
+.tooth{
+  position:absolute;inset:0;z-index:9;pointer-events:none;
+  opacity:.34;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='220' height='220' filter='url(%23n)' opacity='0.5'/></svg>");
+}
+
+/* 2. Every ink layer multiplies into the stock. Keep this list to leaf elements —
+      mix-blend-mode opens a stacking context, so putting it on a container would trap
+      its children's blending inside the container instead of letting it reach the sheet. */
+.slug,.cut,.rule-fat,.rule-thin,.logo{mix-blend-mode:multiply;}
+
+/* 3. The off-register second run. A two-colour job is two passes through the press,
+      and they never land perfectly on each other. The orange run sits a hair off
+      under the black one, so a fringe shows on two edges. This is the single most
+      load-bearing detail in the whole world — without it the type looks set, not
+      printed. */
+.offreg{position:relative;}
+/* left/top + auto height rather than inset:0, and margin:0 to shrug off any format-level
+   sibling rule: both are here so the second pass keeps EXACTLY the first pass's geometry
+   and the only difference between them stays the 2.5px offset. Stretch it or nudge it and
+   preserveAspectRatio rescales the glyphs, which stops reading as misregistration and
+   starts reading as a mistake. */
+.offreg .pass2{position:absolute;left:0;top:0;margin:0;transform:translate(2.5px,2.5px);}
+.offreg .pass2 text{fill:var(--tape);}
+
+/* 4. Photographs print as one-colour blocks, not as full-colour images. A halftone
+      cut is one ink: the photo's light values drop out to bare stock and its dark
+      values become solid. Multiply is what performs that drop-out. */
+.cut{
+  background-size:cover;background-repeat:no-repeat;
+  filter:grayscale(1) contrast(1.42) brightness(1.08);
+}
+/* the headline act's cut runs in the orange, the way a bill gives the top of the
+   bill the second colour. Ranking by ink is legitimate on a poster; see README. */
+.cut-tape{
+  filter:grayscale(1) contrast(1.28) brightness(1.34)
+         sepia(1) hue-rotate(-16deg) saturate(3.6);
+}
+
+/* ================================ STRUCTURE =================================
+   A broadside is a stack of full-measure bands separated by rules and nothing
+   else. No cards, no radius, no blur — the sheet is flat and the ink is on it.
+   The bands themselves are laid out per format (each canvas has its own rhythm);
+   what is shared is the rules that separate them.
+
+   flex:none for the same reason .slug carries it — a rule is a fixed-height flex item,
+   and an overflowing column shrinks it to nothing without reporting anything. A rule
+   that silently vanishes is worse than a layout that visibly overflows. */
+.rule-fat{height:11px;background:var(--ink);flex:none;}
+.rule-thin{height:3px;background:var(--ink);flex:none;}
+
+/* The slug: SVG text forced to fill its measure exactly, the way a line of wood
+   type fills its slug. This is DESIGN.md's Full Measure Rule made literal —
+   textLength + lengthAdjust means the line genuinely fills, never approximately. */
+/* flex:none is load-bearing, not tidiness. A slug is usually a direct child of a
+   flex column; if the stack overflows, flex shrinks the svg's auto height, and
+   preserveAspectRatio then scales the whole viewBox down and centres it — so the
+   line quietly stops filling its measure and sits indented. Never let it shrink;
+   fix an overflow by cutting content instead. */
+/* overflow:visible is a SAFETY NET, not a licence to guess. An <svg> clips to its
+   viewBox by default, so a viewBox even a pixel short of the glyphs shears the tops
+   off the letterforms — and it does it silently, looking like a deliberate crop
+   rather than a bug. With this, a viewBox that is slightly wrong costs a slightly
+   loose or tight gap instead of destroying the type. The numbers below are still
+   computed properly; this just means being wrong is survivable.
+   See the README for the ratios (Alfa Slab One ink ascent = 0.792 x font-size). */
+.slug{display:block;width:100%;height:auto;flex:none;overflow:visible;}
+.slug text{fill:var(--ink);}
+.slug .tape{fill:var(--tape);}
+/* the two cuts a slug can be set in. Starting condensed means lengthAdjust has less
+   distorting to do when it stretches the line out to the measure. */
+.slug text.s{font-family:"Alfa Slab One",Georgia,serif;}
+.slug text.g{font-family:"Archivo","Arial Narrow",sans-serif;font-weight:800;
+             font-variation-settings:"wdth" 62;}
+
+/* ================================== TYPE ====================================
+   Three families. Two are the site's own and carry the same jobs they carry
+   there; the third is the one thing a poster needs that the site does not own.
+
+     Archivo        subjects — condensed caps for bands (site's display font)
+     Courier Prime  every run-sheet datum (site's Run Sheet Rule, unchanged)
+     Alfa Slab One  the poster slab — the claim and the name
+
+   Why a third family at all: a broadside's signature is the CONTRAST between a
+   squat fat slab band and a tall condensed band. With Archivo alone, textLength
+   fills every band to the same measure with the same texture and the sheet turns
+   into monotonous stripes. The slab is what breaks that. It is display-only,
+   uppercase-only, one weight — added for one job, not for variety. */
+
+/* The slab as running text (the headline act's name). Set as a slug instead
+   wherever the line should fill its measure — see .slug text.s above. */
+.slab{font-family:"Alfa Slab One",Georgia,serif;text-transform:uppercase;line-height:.98;}
+
+/* THE RUN SHEET RULE, carried over intact: anything that would be typed into a run
+   sheet — a time, a date, a room, a number, a credit, a handle — is Courier Prime.
+   Anything that is a subject is Archivo or the slab. */
+.run{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  text-transform:uppercase;letter-spacing:.09em;
+  color:var(--ink);
+}
+.run--dim{color:var(--pencil);}
+.run--tape{color:var(--tape-ink);}   /* tape orange darkened so small text passes on paper */
+
+/* The lyric is Courier Prime italic — not a decorative serif. DESIGN.md assigns the
+   lyric to the margin note, which is mono in pencil: a line typed on a lyric sheet.
+   The retired kit set it in italic Playfair; that face is gone from the system. */
+.lyric{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-style:italic;font-weight:400;
+  color:var(--ink);line-height:1.46;
+}
+
+/* ================================ COMPONENTS ================================ */
+
+/* The torn tape strip. Straight top and bottom (cut by the roll width), ragged
+   left and right (torn by hand), sitting at a slight rotation. Deterministic
+   clip-path, never a decorative image. Black text on tape, never white. */
+.tape-strip{
+  position:relative;display:inline-block;
+  background:var(--tape);color:var(--ink);
+  clip-path:polygon(
+    0% 6%, 1.2% 0%, 2.4% 5%, 98% 2%, 99% 8%, 100% 3%,
+    100% 95%, 98.6% 100%, 97.4% 94%, 2% 98%, 1% 92%, 0% 97%);
+  transform:rotate(-.5deg);
+}
+
+/* THE POSTER'S ANSWER TO AN ELEVATED CARD.
+   The retired kit floated the headliner on border-radius 22px and a 70px blurred
+   shadow. A press cannot blur and it cannot round — but it can lay down a second
+   solid impression a few points off, which is exactly what a shadow is for: it
+   tells you the block sits on the sheet. So the card becomes a BLOCK: zero radius,
+   a heavy ink keyline, and a solid offset in ink behind it. Same job, printed. */
+.block{
+  position:relative;overflow:hidden;
+  border:4px solid var(--ink);
+  box-shadow:12px 12px 0 0 var(--ink);
+}
+.block .photo{position:absolute;inset:0;background-repeat:no-repeat;}
+.block .meta{position:absolute;}
+
+/* The mark prints as solid ink on the stock, with NO filter. The vector marks in
+   apps/qcsi-website/public/brand/ are drawn at fill="#17171A", which is this kit's
+   --ink token exactly, so they arrive already the right colour. The retired kit's
+   `filter: brightness(0)` was purely a raster hack to crush an arbitrary PNG to
+   black; it is not needed and it is not a house style. Nothing here inverts —
+   inverting is for a dark ground, and this kit prints on paper.
+
+   Two lockups, chosen by whether the sheet already says the org's name:
+     qcsi-mark.svg           crown only  → EVENT ART, where the headline is already
+                                           "QUEEN CITY SONGWRITERS" at full measure
+                                           and a corner wordmark just repeats it
+     qcsi-logo-stacked.svg   crown + wordmark → ARTIST SPOTLIGHTS, where the artist's
+                                           name is the headline and the mark plus the
+                                           URL are the only things naming the org
+
+   Set HEIGHT only; the viewBox carries the aspect (mark 130x116 = 1.12:1,
+   stacked 440x293 = 1.50:1). The retired PNG was 3000x3000 with heavy transparent
+   padding baked in, so identical `height` numbers do NOT transfer — the stacked
+   lockup is half again as wide as that padded box and its artwork fills the frame.
+   Every height here was re-tuned after the swap; so were the width gutters that
+   .v-frame, .v-bleed and the artist story reserve for it. */
+.logo{object-fit:contain;width:auto;}
+
+.credit{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  text-transform:uppercase;letter-spacing:.12em;color:var(--pencil);
+}

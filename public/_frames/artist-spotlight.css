@@ -1,0 +1,140 @@
+/* QCSI artist spotlight — components for the artist-forward format.
+   Layers on top of brand.css.
+
+   Deliberately inverted from the event art: there, the org and the date lead and
+   the headline act is ranked. Here the artist's NAME is the slug that fills the
+   measure, the cut runs at full size, and a lyric of theirs carries the message.
+   The org shows up only as a small mark and the URL in the footer.
+
+   ONE RULE HOLDS ACROSS THE WHOLE FAMILY: the mark never sits on the artist.
+   It lives on bare stock, locked up opposite the name. */
+
+/* the cut — the photograph as a block of one ink. .cut in brand.css does the
+   drop-out; this positions it. */
+.shot{position:absolute;}
+
+/* ============ EDGE TREATMENT: STILL THE PHOTO'S CALL, BUT IT INVERTED ============
+
+   The retired kit ran on charcoal, where the rule was: dark photo dissolves,
+   bright photo gets cut hard. On paper that rule flips, because a one-ink cut
+   drops its LIGHT values out to bare stock and turns its DARK values solid:
+
+     HIGH-KEY photo  → the edges dissolve into the stock on their own. Leave it
+                       open. A keyline around it fights the drop-out and puts a
+                       box around nothing. (Janice — white sky, pale stone.)
+     DARK photo      → prints as a heavy solid block with a hard edge whether you
+                       want one or not. Cut it hard and keyline it. Fading it into
+                       white stock makes grey mud — the exact inverse of the grey
+                       haze that fading a bright photo into charcoal used to make.
+                       (Devon — near-black. Chris — dark warm stage shot.)
+
+   Same principle as before, opposite prescription. Follow the photograph, never
+   a house style.
+
+   Note what is NOT here any more: the gradient fade layers the charcoal kit needed
+   on every cut. On paper a cut either drops out on its own or wants a hard edge, so
+   there is nothing left for a fade to do. */
+
+/* the print keyline — a cut locked in a chase has an edge. Only for dark cuts;
+   a high-key cut is left open. */
+.keyline{border:4px solid var(--ink);}
+
+/* The badge is the sheet's one tape strip. The retired kit used a 999px amber
+   pill; nothing in this system is round, and tape is what carries a fact. */
+.badge{
+  display:inline-block;align-self:flex-start;
+  background:var(--tape);color:var(--ink);
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-weight:700;text-transform:uppercase;
+  clip-path:polygon(
+    0% 6%, 1.6% 0%, 3.2% 5%, 97% 2%, 98.4% 8%, 100% 3%,
+    100% 95%, 98.2% 100%, 96.6% 94%, 3% 98%, 1.4% 92%, 0% 97%);
+  transform:rotate(-.5deg);
+}
+
+/* their own words. Courier Prime italic, not a display serif: DESIGN.md puts the
+   lyric in the margin note, and the margin note is mono. A line typed on a lyric
+   sheet, which is what it is. */
+.lyric{margin-left:-.5ch;}   /* hangs the opening quote into the margin */
+
+.home{font-family:"Archivo",Arial,sans-serif;font-weight:400;color:var(--pencil);}
+
+.foot{display:flex;align-items:baseline;gap:14px;}
+.foot .dot{color:var(--edge);}
+
+
+/* ================= SQUARE LAYOUT VARIANTS (1080 x 1080) =================
+
+   Four silhouettes so a feed grid of artists doesn't read as a mail merge.
+   They are not interchangeable decoration — each one has a job, because the
+   roster's photos are uneven, and the two constraints that pick the variant
+   (resolution and shape) are properties of the file, so they did not change
+   when the kit changed worlds:
+
+     .v-split   cut held small in a left panel   → LOW-RES photos (stays crisp)
+     .v-angle   cut shaped on a diagonal         → HIGH-KEY photos, high-res
+     .v-frame   cut inset as a print, captioned  → LANDSCAPE photos
+     .v-bleed   cut bleeds three edges           → DARK high-res portrait with a
+                                                   strong face and thin data
+
+   Only 8 of ~18 local artists have a usable favouriteLyric, so .v-frame and
+   .v-bleed are built to carry a post with no quote at all.
+   Pick the variant that fits the photo, then vary across posts.
+   ======================================================================== */
+
+.sq .copy{position:absolute;display:flex;flex-direction:column;}
+/* nothing in a copy column may be squeezed by its neighbours. If the column
+   overflows, that must show up as an overflow to fix, not as a rule quietly
+   collapsing to zero height or a name slug rescaling itself. */
+.copy > *{flex:none;}
+/* SIZED FOR A PHONE FEED, NOT FOR THIS FILE OPEN ON A DESKTOP. A 1080 square is
+   read at roughly 400px wide in-feed and 160px in the grid, so anything under about
+   17px here is unreadable where it actually gets seen. When in doubt, bigger. */
+.sq .badge{font-size:17px;letter-spacing:.15em;padding:10px 20px 11px;margin-bottom:24px;}
+.sq .aname{margin-bottom:14px;}
+.sq .home{font-size:26px;margin-bottom:22px;}
+.sq .rule-thin{margin-bottom:22px;}
+.sq .lyric{font-size:25px;margin-bottom:20px;}
+/* the signature song is the primary datum and sets in full ink; influences are a
+   secondary note in pencil and set tighter, so the two never read as one grey block */
+/* both data lines run tighter than the .run default (.09em) — at these sizes the
+   longest of them (signature song + instrument) needs the tracking back to clear a
+   one-line set in the narrowest column, and a data line reads better tight anyway */
+.sq .qmeta{font-size:19px;letter-spacing:.05em;margin-bottom:10px;}
+.sq .infl{font-size:17px;letter-spacing:.04em;margin-bottom:26px;}
+.sq .url,.sq .handle{font-size:19px;}
+
+/* --- V1 split: the cut held small in a column, so a low-res file prints near
+       native instead of being blown up soft --- */
+/* panel held to 360 so the type column gets a 544 measure — enough to set the two
+   longest data lines in the kit (signature song + instrument, three influences) on
+   one line each at feed-legible sizes. A narrower panel also serves this variant's
+   whole reason for existing: Lacy's 642px source now downsamples 1.8x. */
+.v-split .shot{left:64px;top:64px;width:360px;height:952px;}
+.v-split .logo{position:absolute;right:64px;top:64px;height:114px;}
+.v-split .copy{left:472px;right:64px;top:230px;bottom:64px;justify-content:center;}
+
+/* --- V2 angle: the cut is SHAPED, not veiled. The retired version laid a charcoal
+       wedge over the photo; a scrim is exactly what DESIGN.md forbids and a press
+       cannot do it anyway. Here the cut itself is clipped on the diagonal and bare
+       stock carries the type — a shaped block locked in the chase. --- */
+/* the diagonal's WIDEST point is 50% (at the top), so the copy column starts clear
+   of it at 580 — a type column that begins inside the cut's reach is the one way
+   this variant fails, and it fails on every line at once */
+.v-angle .shot{inset:0;clip-path:polygon(0 0, 46% 0, 34% 100%, 0 100%);}
+.v-angle .logo{position:absolute;right:64px;top:64px;height:112px;}
+.v-angle .copy{left:540px;right:64px;top:220px;bottom:64px;justify-content:center;}
+
+/* --- V3 frame: the cut inset as a print with a caption rule under it. The one
+       shape that suits a landscape file. --- */
+.v-frame .shot{left:64px;top:64px;width:952px;height:520px;}
+.v-frame .capline{position:absolute;left:64px;right:64px;top:598px;}
+.v-frame .logo{position:absolute;right:64px;bottom:64px;height:112px;}
+.v-frame .copy{left:64px;right:250px;top:646px;bottom:64px;justify-content:flex-start;}
+
+/* --- V4 bleed: the cut runs off three edges and the type band is cut into the
+       stock beneath it. Not a full-bleed photo — a poster always shows its sheet,
+       and a dark cut needs clean stock under it or the type has nothing to sit on. --- */
+.v-bleed .shot{left:0;right:0;top:0;height:576px;}
+.v-bleed .logo{position:absolute;right:64px;bottom:64px;height:112px;}
+.v-bleed .copy{left:64px;right:250px;top:624px;bottom:64px;justify-content:flex-start;}

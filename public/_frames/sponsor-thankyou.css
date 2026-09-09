@@ -1,0 +1,189 @@
+/* QCSI sponsor thank-you — components for the sponsor-forward format.
+   Layers on top of brand.css.
+
+   SAME SYSTEM, THE OTHER FIELD. Same three type families, same tape, same zero
+   radius, same recognition ladder. What changes is the ground, the photo law and
+   the hierarchy — and all three changes come from what a sponsor post actually is,
+   not from wanting variety.
+
+
+   DEPARTURE 1 — IT RUNS ON THE FLOOR, NOT THE PAPER.
+
+   A sponsor post has to be findable among the artist posts in a feed, and it has to
+   feel like recognition rather than another spotlight. The temptation is a new
+   colour; that would break the One Roll Rule and fragment a system whose whole point
+   is that the site and the kit are one thing.
+
+   There is a better answer already in the system. DESIGN.md names field change as
+   its strongest separation device — "floor to paper is the strongest separation
+   available" — and the site owns exactly two fields. The rest of this kit is the
+   paper field, so sponsors get the floor: #0F0F11 ground, chalk type, tape orange
+   direct (6.0:1 on the floor, so --tape-ink is not needed here). Maximum separation
+   from the artist sheets, zero new hues.
+
+   What the floor costs: multiply, the paper tooth and the off-register second run
+   are all no-ops on a dark ground. That is fine here and only here, because this is
+   the one format whose photograph is not a one-ink cut anyway (see below). The floor
+   is matte masonite, not uncoated stock — it should not have tooth.
+
+
+   DEPARTURE 2 — THE PHOTO RUNS IN FULL COLOUR, IN A PAPER BLOCK.
+
+   Everywhere else in the kit a photograph is a .cut: one ink, lights dropped out to
+   bare stock. That is right for an art-directed portrait and actively wrong here. A
+   sponsor photo is a presentation shot — a novelty cheque, a logo, a group in a
+   lobby — and the one-ink treatment turns the cheque's colour to mid-grey, the
+   sponsor's mark into an unreadable smudge, and thin pen handwriting into either
+   blown-out white or a clogged blob. A sponsor's brand is part of what they were
+   promised; rendering it illegible is a relationship problem, not a style choice.
+
+   So the photograph sits in a PAPER BLOCK cut into the floor — the site's own
+   signature component, carrying the one thing that has to stay in full colour. On a
+   dark ground a bright block separates completely on its own, which is why there is
+   no keyline and no solid offset here: those devices exist to lift ink off a light
+   stock, and they have nothing to do on the floor.
+
+
+   DEPARTURE 3 — NOTHING IS RANKED BY SIZE.
+
+   The artist frames rank: the name is a slug, and a short name sets huge while a
+   long one sets small. That is correct for a bill and a liability for sponsors,
+   who sit on a five-step ladder (Legend $5,000 / Troubadour $1,000 / Songsmith
+   $500 / Busker $300 / Fan $50 — see ventures/qcsi/fundraising/donor-recognition-
+   by-tier.md). So every type size on this sheet is FIXED, never a slug: two
+   sponsors' names are the same size whatever their tier and whatever their length.
+
+   The tier is stated once, as a Courier datum, in the ladder's own package name —
+   never as a dollar figure. The amount is on the cheque if anyone wants it. */
+
+
+/* ============================ THE FLOOR FIELD ============================
+   This is the one format in the kit that runs on the floor rather than the paper.
+   Everything below assumes that ground. */
+
+.sq-sponsor{background:var(--floor);color:var(--chalk);}
+
+/* The photograph sits in a PAPER BLOCK cut into the floor — the site's own signature
+   component, and on a dark ground it does the job the white print margin was doing
+   before, only harder. No keyline and no solid offset: those exist to separate ink
+   from stock on a light sheet, and against the floor a paper block needs no help.
+   No tooth either — the floor is matte masonite, not uncoated stock. */
+.paper-block{
+  position:absolute;
+  background:var(--stock);
+  padding:20px;
+}
+.paper-block .shot{
+  position:absolute;inset:20px;
+  background-size:cover;background-repeat:no-repeat;
+  /* full colour, only steadied — no grayscale, no multiply. See DEPARTURE 1. */
+  filter:saturate(.96) contrast(1.04);
+}
+
+/* the caption the block carries, on a ruled line beneath it */
+.capline{
+  position:absolute;display:flex;justify-content:space-between;align-items:baseline;
+  border-top:2px solid var(--floor-line);padding-top:12px;
+}
+
+/* "THANK YOU" is an eyebrow, not a slug.
+
+   It started as a full-measure slab slug, which cost 141px of a 1080 sheet and forced
+   the photograph into a 2.11:1 letterbox. A presentation shot's content — heads down
+   to the bottom of whatever is being held — is about 1.56:1, so a 2.11:1 frame HAS to
+   crop top or bottom, and a better crop only changes which one you lose. Height had to
+   come from somewhere and this was the cheapest 100px on the sheet.
+
+   The equal-treatment guarantee is unaffected: what makes tiers un-rankable is that
+   these are the same words at the same FIXED size on every sponsor post, not that they
+   fill the measure. Demoting it also gives the sponsor top billing, which is the right
+   hierarchy for a thank-you anyway.
+
+   Tape orange direct, not tape-ink: on the floor the orange itself reads at 6.0:1. */
+.thanks{
+  font-family:"Archivo","Arial Narrow",sans-serif;
+  font-variation-settings:"wdth" 68;
+  font-weight:800;text-transform:uppercase;
+  letter-spacing:.02em;line-height:1;
+  color:var(--tape);
+}
+
+/* the largest type on the sheet — and fixed size, every sponsor, every tier.
+   See DEPARTURE 2. */
+.sponsor{
+  font-family:"Alfa Slab One",Georgia,serif;
+  text-transform:uppercase;
+  line-height:.98;letter-spacing:-.008em;
+  color:var(--chalk);
+}
+
+.tier{color:var(--chalk-dim);}
+
+/* one line of QCSI voice — the gap this money closes is the listening room */
+.because{
+  font-family:"Archivo",Arial,sans-serif;
+  font-weight:400;line-height:1.5;color:var(--chalk);
+}
+
+.sq-sponsor .url{color:var(--chalk-dim);}
+
+/* --tape-ink is a PAPER-only token: it is the roll darkened so small text clears
+   white stock (4.73:1 there), and on the floor it drops to about 3:1 and fails.
+   DESIGN.md is explicit — "on the floor, tape orange itself is used (6.0:1) and this
+   token is not needed" — so .run--tape has to be re-pointed for this one field. */
+.sq-sponsor .capline .run.run--tape,
+.sq-sponsor .copy .run.run--tape{color:var(--tape);}
+
+/* THE MARK: TURN OFF MULTIPLY BEFORE ANYTHING ELSE.
+
+   brand.css puts .logo in the multiply list, which is right on paper — the mark
+   should sit IN the stock like every other ink layer. On the floor it is fatal:
+   multiply against #0F0F11 crushes anything to near-black, so the mark vanishes.
+   It fails silently and it looks like a broken asset path, which is what cost the
+   time here. The arithmetic is the giveaway if it happens again: chalk 232 x floor
+   15 / 255 = 14, and the mark's rect measured exactly 14 against a floor of 15.
+
+   With multiply off, the canonical ink lockup just inverts: #17171A inverted is
+   #E8E8E5, which is chalk to within a point. No reversed copy of the asset is kept
+   — a second file would be one more thing to regenerate whenever the mark changes,
+   and this derives the reverse from the source every render.
+
+   The site almost certainly wants a reversed mark of its own — its ground is the
+   floor, and Header/Footer are still on the retired raster logo.png. */
+.sq-sponsor .logo{mix-blend-mode:normal;filter:invert(1);opacity:.94;}
+
+.sq-sponsor .url{color:var(--chalk-dim);}
+
+
+
+/* ===================== SQUARE THANK-YOU (1080 x 1080) =====================
+   One silhouette, not four. The artist squares need variants because a feed grid
+   of nine artists reads as a mail merge; sponsor posts are occasional and spread
+   across a season, and a sponsor ladder wants every post to look identical anyway.
+   Sameness is the feature here, not the bug.
+
+   The paper block runs full-bleed horizontally — "paper blocks are cut into the floor
+   at full-bleed or at container width" — which buys the photograph the width it needs
+   to hold a row of people and whatever they are holding without cropping either.
+   ========================================================================= */
+
+.sq-sponsor .tape-strip{
+  position:absolute;left:64px;top:64px;
+  padding:11px 22px 12px;font-family:"Courier Prime",monospace;
+  text-transform:uppercase;letter-spacing:.15em;font-size:17px;font-weight:700;
+}
+
+.sq-sponsor .paper-block{left:0;right:0;top:150px;height:610px;}
+.sq-sponsor .capline{left:64px;right:64px;top:784px;font-size:16px;}
+.sq-sponsor .capline .run{color:var(--chalk-dim);}
+
+.sq-sponsor .copy{position:absolute;left:64px;right:250px;top:820px;bottom:64px;
+                  display:flex;flex-direction:column;}
+.sq-sponsor .copy > *{flex:none;}
+
+.sq-sponsor .thanks{font-size:30px;margin-bottom:8px;}
+.sq-sponsor .sponsor{font-size:52px;margin-bottom:10px;}
+.sq-sponsor .tier{font-size:18px;margin-bottom:10px;}
+.sq-sponsor .because{font-size:20px;margin-bottom:auto;}
+.sq-sponsor .url{font-size:19px;}
+.sq-sponsor .logo{position:absolute;right:64px;bottom:64px;height:112px;}
