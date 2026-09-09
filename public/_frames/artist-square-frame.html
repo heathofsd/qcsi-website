@@ -11,6 +11,15 @@
      file carries no artist or sponsor likeness and can sit on a public URL. Drop a
      photo into the frame in Canva. */
   .shot{background:#9A9A96;filter:none;}
+  /* Exact-size PDF for Canva import. The @page is 6px under the 1080px body ON
+     PURPOSE, so the art bleeds off the trim rather than leaving a pale hairline. Canva's HTML importer reflows the document and
+     throws the CSS layout away; a PDF keeps the geometry and the text stays editable.
+     html gets the field colour too, or a fractional page/body mismatch leaves a pale
+     strip down the trim edge. */
+  @page{size:1074px 1074px;margin:0;}
+  @media print{html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+               html{background:#F4F5F2;}
+}
 </style>
 </head>
 <body class="sq v-frame" data-document-role="page" data-label="Artist frame">
