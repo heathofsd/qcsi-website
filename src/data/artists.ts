@@ -570,6 +570,39 @@ export const profiledArtists: Artist[] = [
     favoriteLyric:
       "Let me be the villain / And I will go my way / I'm tired and I'm turning / away from yesterday",
   },
+  {
+    name: "Johnny Hastings",
+    slug: "johnny-hastings",
+    // Added to the bill 2026-09-04: Heath bowed out of performing and Johnny
+    // took his two rounds unchanged. Roster still 18.
+    year: [2026],
+    instagram: "johnnyhastingsmusic",
+    facebook: "johnny.hastings.16",
+    website: "https://johnnyhastingsmusic.com",
+    // Two press photos submitted. This is the second — Black Hills pines at
+    // golden hour, resonator in hand, centered and facing camera. The other is
+    // a graffiti-wall shot: busy behind him and off-center once a portrait
+    // frame crops the sides.
+    photo: "/photos/artists/johnny-hastings.jpg",
+    hometown: "Rapid City, SD",
+    // His own long bio, already third person. Punctuation normalized (curly
+    // quotes, hyphens doing the work of em dashes) and the stray full stop
+    // after "teenager" rejoined to the sentence his line break had split.
+    // The Wild West Songwriters Festival win comes from his SHORT bio, which
+    // the long one omits — his words, and his most relevant credential here.
+    // He says he picked up the guitar at fourteen and was in bars "by the time
+    // he was a teenager"; that is his copy, but worth asking him about.
+    fullBio:
+      "Johnny Hastings is a powerhouse blues guitarist hailed as one of South Dakota's brightest rising musicians. He has recently begun his journey as a songwriter, won the Wild West Songwriters Festival in 2025, and released his debut album, Older, earlier this year.\nBorn and raised in the Black Hills, Johnny first picked up the guitar at fourteen, inspired by the sounds of Eric Clapton and B.B. King. With just $100 he had saved, he bought his first guitar — a Squier Mini Strat — and never looked back. By the time he was a teenager, Johnny was already playing in local bars, writing original music, and developing his signature, soul-drenched style.\nAfter honing his craft at the Los Angeles College of Music, Johnny returned home to Rapid City, where he continues to live and breathe music — captivating crowds at venues across the region.",
+    instrument: "1967 Gibson J-50",
+    influences: "Jackson Browne, The Beatles",
+    biggestAchievement: "Playing with Buddy Guy",
+    dreamCollaboration: "Jimi Hendrix",
+    favoriteLyric:
+      "I'm faded like a ghost, trying to make the most out of scaring people into loving me",
+    // Submitted first person: "I had my first snickers bar when I was 30 yrs old."
+    funFact: "He had his first Snickers bar at thirty.",
+  },
 ];
 
 export const artists2024Only: Artist[] = [
