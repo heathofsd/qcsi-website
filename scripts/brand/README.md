@@ -16,6 +16,7 @@ npm run build
 | `public/brand/qcsi-logo-horizontal.svg` | crown paths + outlined wordmark |
 | `public/brand/qcsi-logo-stacked.svg` | ” |
 | `public/brand/qcsi-mark.svg` | crown alone |
+| `public/brand/qcsi-logo-header-2x1.png` | horizontal lockup on white, 600×300 (2:1) — for hosts that want ≥150×75 above content |
 | `src/app/icon.svg` | crown in ink on spike-tape orange |
 | `src/app/apple-icon.png` | 180 × 180 |
 | `src/app/favicon.ico` | 16 / 32 / 48 |
