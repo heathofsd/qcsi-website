@@ -1,0 +1,306 @@
+/* QCSI weekend partner TV slide — 1920 × 1080.
+   Floor field of The Running Order (DESIGN.md), sized for a silent bar TV
+   across the room. Same tokens as brand.css; this format owns canvas, scale,
+   and layout. No radius, no shadow, no second accent. */
+
+@import url("brand.css");
+
+html, body{
+  width:1920px;
+  height:1080px;
+  background:var(--floor);
+  color:var(--chalk);
+  overflow:hidden;
+}
+
+body.weekend-tv{
+  display:grid;
+  grid-template-columns:1fr 1fr 320px;
+  grid-template-rows:auto 1fr auto;
+  grid-template-areas:
+    "mast mast mast"
+    "fri  sat  cta"
+    "foot foot foot";
+  padding:36px 48px 32px;
+  gap:0 40px;
+  box-sizing:border-box;
+}
+
+/* ---- mast ---- */
+.mast{
+  grid-area:mast;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:end;
+  gap:28px;
+  padding-bottom:22px;
+  border-bottom:3px solid var(--floor-line);
+  margin-bottom:22px;
+}
+
+.mast .logo{
+  height:96px;
+  mix-blend-mode:normal; /* chalk on floor; brand.css multiply is paper-only */
+  filter:brightness(0) invert(1);
+  opacity:.92;
+  align-self:center;
+}
+
+.mast-copy{min-width:0;}
+
+.mast .tape-strip{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-size:18px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:10px 18px 8px;
+  margin-bottom:10px;
+  transform:rotate(-0.8deg);
+}
+
+.mast h1{
+  font-family:"Archivo","Arial Narrow",Arial,sans-serif;
+  font-weight:800;
+  font-variation-settings:"wdth" 70;
+  font-size:64px;
+  line-height:.9;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  color:var(--chalk);
+  margin:0;
+}
+
+.mast .sub{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-size:20px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--chalk-dim);
+  margin-top:10px;
+}
+
+/* ---- day columns ---- */
+.day{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
+
+.day-fri{grid-area:fri;}
+.day-sat{grid-area:sat;}
+
+.day-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:16px;
+  padding-bottom:12px;
+  border-bottom:2px solid var(--floor-line);
+  margin-bottom:4px;
+}
+
+.day-head .day-name{
+  font-family:"Archivo","Arial Narrow",Arial,sans-serif;
+  font-weight:800;
+  font-variation-settings:"wdth" 72;
+  font-size:40px;
+  line-height:1;
+  letter-spacing:-.015em;
+  text-transform:uppercase;
+  color:var(--chalk);
+}
+
+.day-head .day-date{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-size:18px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--tape);
+}
+
+.day-cue{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-size:14px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--chalk-dim);
+  padding:10px 0 6px;
+}
+
+.rounds{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.round{
+  display:grid;
+  grid-template-columns:118px 1fr;
+  align-items:baseline;
+  gap:16px;
+  padding:11px 0;
+  border-bottom:1px solid var(--floor-line);
+}
+
+.round .time{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-size:22px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--chalk-dim);
+}
+
+.round .venue{
+  font-family:"Archivo",Arial,sans-serif;
+  font-weight:700;
+  font-variation-settings:"wdth" 88;
+  font-size:26px;
+  line-height:1.1;
+  letter-spacing:0;
+  color:var(--chalk);
+}
+
+.evening{
+  margin-top:auto;
+  padding-top:16px;
+}
+
+.evening .tape-strip{
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+  padding:14px 18px 12px;
+  transform:rotate(-0.4deg);
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-size:15px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink);
+  margin-bottom:12px;
+}
+
+.evening .show-title{
+  font-family:"Archivo","Arial Narrow",Arial,sans-serif;
+  font-weight:800;
+  font-variation-settings:"wdth" 72;
+  font-size:34px;
+  line-height:1;
+  letter-spacing:-.015em;
+  text-transform:uppercase;
+  color:var(--chalk);
+  margin:0 0 8px;
+}
+
+.evening .show-meta{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-size:16px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--chalk-dim);
+  line-height:1.45;
+}
+
+.evening .show-meta .hi{color:var(--tape);}
+
+/* ---- CTA / QR ----
+   Paper sheet is an explicit block (not a stretched rail). Grid stretch alone
+   left ink CTA type sitting on the floor where it disappeared — Field Rule. */
+.cta{
+  grid-area:cta;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-self:stretch;
+  min-height:0;
+}
+
+.cta-sheet{
+  background:var(--paper);
+  color:var(--ink);
+  padding:22px 20px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.cta .qr{
+  width:100%;
+  height:auto;
+  aspect-ratio:1;
+  object-fit:contain;
+  display:block;
+  background:var(--paper);
+  mix-blend-mode:normal;
+  filter:none;
+}
+
+.cta .scan{
+  font-family:"Archivo","Arial Narrow",Arial,sans-serif;
+  font-weight:800;
+  font-variation-settings:"wdth" 78;
+  font-size:28px;
+  line-height:1.05;
+  letter-spacing:-.01em;
+  text-transform:uppercase;
+  color:var(--ink);
+  margin:0;
+}
+
+.cta .url{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-size:15px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--tape-ink);
+  margin:0;
+}
+
+.cta .note{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-size:13px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--pencil);
+  line-height:1.4;
+  margin:0;
+}
+
+/* ---- foot ---- */
+.foot{
+  grid-area:foot;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  margin-top:18px;
+  padding-top:16px;
+  border-top:3px solid var(--floor-line);
+}
+
+.foot .venues{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-size:15px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--chalk-dim);
+  line-height:1.5;
+}
+
+.foot .venues strong{
+  color:var(--chalk);
+  font-weight:400;
+}
+
+.foot .tag{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-size:15px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--tape);
+  white-space:nowrap;
+}
+
+/* Floor overrides for brand.css paper defaults */
+body.weekend-tv .run{color:var(--chalk);}
+body.weekend-tv .rule-fat{background:var(--floor-line);}
+body.weekend-tv .rule-thin{background:var(--floor-line);}

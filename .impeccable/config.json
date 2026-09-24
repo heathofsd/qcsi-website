@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font-size",
+        "value": "*",
+        "files": [
+          "public/_frames/weekend-tv.css"
+        ],
+        "createdAt": "2026-09-24T21:50:02.624Z",
+        "reason": "Partner TV slide is a fixed 1920x1080 bar canvas; room-scale type sits outside the site rem ramp by design."
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "*",
+        "files": [
+          "public/_frames/weekend-tv.html"
+        ],
+        "createdAt": "2026-09-24T21:50:02.657Z",
+        "reason": "Partner TV slide is a fixed 1920x1080 bar canvas; room-scale type sits outside the site rem ramp by design."
+      }
+    ]
+  }
+}
