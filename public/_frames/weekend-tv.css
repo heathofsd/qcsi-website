@@ -215,7 +215,8 @@ body.weekend-tv{
 }
 
 .cta-sheet{
-  background:var(--paper);
+  /* brand.css names the stock --stock; --paper is a site/DESIGN token only */
+  background:var(--stock);
   color:var(--ink);
   padding:22px 20px 20px;
   display:flex;
@@ -229,7 +230,7 @@ body.weekend-tv{
   aspect-ratio:1;
   object-fit:contain;
   display:block;
-  background:var(--paper);
+  background:var(--stock);
   mix-blend-mode:normal;
   filter:none;
 }
