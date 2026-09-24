@@ -13,15 +13,56 @@ export interface Artist {
   dreamCollaboration?: string;
   favoriteLyric?: string;
   funFact?: string;
+  /** Username only: instagram.com/<this>. */
   instagram?: string;
+  /** Username only: facebook.com/<this>. A profile.php?id= address has no
+   *  username, so it goes in `links` as a full URL instead. */
   facebook?: string;
   /** Full URL. The intake form has always asked for this; there was nowhere to
-   *  put it until 2026-08-06, so earlier artists' sites were silently dropped. */
+   *  put it until 2026-08-06, so earlier artists' sites were silently dropped.
+   *  Janice Gilbert's and Devon Sants's 2025 answers were restored 2026-09-24. */
   website?: string;
+  /** Every other place to hear or follow them. See ArtistLink. */
+  links?: ArtistLink[];
   photo?: string;
   photoPosition?: string;
   photoCredit?: string;
   headliner?: boolean;
+}
+
+/**
+ * Where an artist can be heard or followed, in the order their page lists them:
+ * listening first, then following. The artist pages and the 2026 digital
+ * booklet both take their order and names from here.
+ */
+export const linkKinds = {
+  spotify: { label: "Spotify", listen: true },
+  apple: { label: "Apple Music", listen: true },
+  bandcamp: { label: "Bandcamp", listen: true },
+  youtube: { label: "YouTube", listen: true },
+  website: { label: "Website", listen: false },
+  linktree: { label: "Linktree", listen: false },
+  instagram: { label: "Instagram", listen: false },
+  facebook: { label: "Facebook", listen: false },
+} as const;
+
+export type LinkKind = keyof typeof linkKinds;
+
+/**
+ * A link the fields above can't hold: a listening profile, a second page, or a
+ * Facebook address with no username. Each names its source, because a wrong
+ * Spotify link sends a fan to a stranger. Take them from the intake form or the
+ * artist's own site or Linktree, never from a search engine.
+ */
+export interface ArtistLink {
+  kind: LinkKind;
+  /** Full https URL. */
+  url: string;
+  /** Only for a page that isn't the artist's own: their band, an album. It
+   *  replaces the platform name, and it keeps the link out of the Person's
+   *  `sameAs`, which may only name the artist. */
+  label?: string;
+  source: string;
 }
 
 export const headliners: Artist[] = [
@@ -35,6 +76,11 @@ export const headliners: Artist[] = [
     instrument: "Guitar / Vocals",
     signatureSong: "The Universal Fire",
     website: "https://jeffreyfoucault.com",
+    links: [
+      // His site links the new record on Bandcamp and no Spotify page. It's an
+      // album page, not his profile, so it carries a label.
+      { kind: "bandcamp", url: "https://jeffreyfoucault.bandcamp.com/album/the-universal-fire", label: "The Universal Fire on Bandcamp", source: "jeffreyfoucault.com" },
+    ],
     photo: "/photos/jeffrey-foucault.jpg",
     photoPosition: "center 20%",
     photoCredit: "Joe Navas",
@@ -125,6 +171,9 @@ export const profiledArtists: Artist[] = [
     // the record had him starting in 2025.
     year: [2024, 2025, 2026],
     instagram: "iamchrisgraves",
+    // His 2025 intake form gave a facebook.com/share/… redirect, which can't be
+    // stored as a handle. Resolved 2026-09-24 to the page it lands on.
+    facebook: "Music.Chrisgraves",
     photo: "/photos/artists/chris-graves.png",
     hometown: "Sturgis, SD (now based in Rapid City)",
     fullBio: "Chris Graves is a singer-songwriter born and raised in Sturgis, South Dakota, with strong ties to Spearfish and now based in Rapid City. Known for his raw honesty and driving guitar style, Chris blends influences like Dave Grohl and Medium Build into songs that are both confessional and powerful.",
@@ -159,6 +208,9 @@ export const profiledArtists: Artist[] = [
     name: "Craig Winquist",
     slug: "craig-winquist",
     year: [2025, 2026],
+    // On his 2025 intake form and his brain entity; it never reached this file
+    // until 2026-09-24.
+    facebook: "craig.winquist",
     photo: "/photos/artists/craig-winquist.jpg",
     hometown: "Canton, SD",
     fullBio: "Craig Winquist is a songwriter from Canton, South Dakota whose career reflects a deep love for melody and story. He spent eight years in Nashville writing songs and has had more than thirty songs recorded by artists worldwide, with some featured on television. A career highlight was performing at the legendary Bluebird Cafe. He continues to write and perform while raising his family in South Dakota as a cattle and sheep rancher.",
@@ -177,6 +229,13 @@ export const profiledArtists: Artist[] = [
     year: [2024, 2025, 2026],
     instagram: "devonsants",
     facebook: "devonsants",
+    // The website answer on his 2025 intake form.
+    website: "https://linktr.ee/devonsants",
+    links: [
+      { kind: "spotify", url: "https://open.spotify.com/artist/1FmxHI2mjFVOCiLPhYvd2i", source: "his Linktree" },
+      { kind: "apple", url: "https://music.apple.com/us/artist/devon-sants/1426949628", source: "his Linktree" },
+      { kind: "youtube", url: "https://www.youtube.com/@devonsants", source: "his Linktree" },
+    ],
     photo: "/photos/artists/devon-sants.jpg",
     hometown: "Pueblo, CO",
     fullBio: "Devon Sants is an independent Americana storyteller from Pueblo, Colorado whose songs go back to the roots of storytelling. A proud father whose music draws from life experience, Devon contributed to the Life Is a Joke; A Tribute to Our Amigo compilation album.",
@@ -210,6 +269,8 @@ export const profiledArtists: Artist[] = [
     year: [2025, 2026],
     instagram: "janicegilbertmusic",
     facebook: "janicegilbertmusic",
+    // The website answer on her 2025 intake form.
+    website: "https://janicegilbert.com",
     photo: "/photos/artists/janice-gilbert.jpg",
     hometown: "Tea, SD",
     fullBio: "Janice Gilbert is an award-winning songwriter, performer, and music educator from rural South Dakota. She began singing in church and community settings, winning the 2004 Dakota Star Talent Search at the South Dakota State Fair. In 2006, she relocated to Nashville, teaching music and collaborating with songwriters while performing at venues like the Bluebird Cafe. In 2012, she won the Bluebird Cafe's 30th Anniversary Songwriting Contest. After releasing three Nashville albums, she returned to South Dakota in 2013 and continues performing regionally with original music blending Midwest storytelling with contemporary country influences.",
@@ -226,6 +287,11 @@ export const profiledArtists: Artist[] = [
     name: "Cody Neeb",
     slug: "cody-neeb",
     year: [2024, 2025, 2026],
+    links: [
+      // The Facebook address on his 2025 intake form is his band's page, so the
+      // label says so.
+      { kind: "facebook", url: "https://www.facebook.com/thestarfellows", label: "The Starfellows on Facebook", source: "2025 intake form" },
+    ],
     photo: "/photos/artists/cody-neeb.jpg",
     hometown: "Indianapolis, IN",
     fullBio: "Cody Neeb is a pianist and songwriter based in Indianapolis with ties to the Black Hills. With over 20 years of piano experience, he creates songs that blend wit, heart, and honesty. His work ranges from humorous parenting compositions to fan favorites. He describes his greatest achievement as \"Stickin' with it for this long.\"",
@@ -435,6 +501,13 @@ export const profiledArtists: Artist[] = [
     year: [2024, 2026],
     instagram: "jackson_holte_",
     website: "https://www.jacksonholte.com",
+    links: [
+      // The Spotify icon in his site header points at open.spotify.com/user/jacksonholte,
+      // which is a dead page. The artist profile is the one on his /streaming page.
+      { kind: "spotify", url: "https://open.spotify.com/artist/6maVXg2QVnSvjRbBNw8Cei", source: "jacksonholte.com/streaming" },
+      { kind: "apple", url: "https://music.apple.com/us/artist/jackson-holte/1745167188", source: "jacksonholte.com" },
+      { kind: "bandcamp", url: "https://jacksonholte.bandcamp.com", source: "jacksonholte.com" },
+    ],
     photo: "/photos/artists/jackson-holte.jpg",
     hometown: "Livingston, MT",
     fullBio:
@@ -458,6 +531,9 @@ export const profiledArtists: Artist[] = [
     // usernames — this is the account it resolves to.
     facebook: "officialclinthahn",
     website: "https://linktr.ee/Clint.Hahn",
+    links: [
+      { kind: "spotify", url: "https://open.spotify.com/artist/1csShXPnZMmcgOZlFh10YD", source: "his Linktree, linktr.ee/Clint.Hahn" },
+    ],
     photo: "/photos/artists/clint-hahn.jpg",
     hometown: "Hammond, MT",
     // His own bio, shifted from first person to third to match the rest of the
@@ -483,6 +559,9 @@ export const profiledArtists: Artist[] = [
     instagram: "quinlan_valdez",
     facebook: "QuinlanValdezMusic",
     website: "https://quinlanvaldezmusic.com",
+    links: [
+      { kind: "youtube", url: "https://www.youtube.com/@QuinlanValdez", source: "quinlanvaldezmusic.com" },
+    ],
     photo: "/photos/artists/quinlan-valdez.jpg",
     hometown: "Casper, WY",
     fullBio:
@@ -546,9 +625,11 @@ export const profiledArtists: Artist[] = [
     slug: "ian-gall",
     year: [2026],
     instagram: "secondhand_son_music",
-    // He submitted facebook.com/profile.php?id=61593637316388. The page
-    // concatenates facebook.com/${handle}, so a profile-id URL cannot be
-    // stored without inventing a username.
+    links: [
+      // He submitted facebook.com/profile.php?id=61593637316388. A profile-id
+      // address has no username for `facebook`, so it lives here as the full URL.
+      { kind: "facebook", url: "https://www.facebook.com/profile.php?id=61593637316388", source: "2026 intake form; brain entity" },
+    ],
     photo: "/photos/artists/ian-gall.JPG",
     // Heath locked a tighter 4:5 crop 2026-08-20 — face, chest, guitar,
     // same ratio as the artist page frame. The old center 20% pin was
@@ -579,6 +660,12 @@ export const profiledArtists: Artist[] = [
     instagram: "johnnyhastingsmusic",
     facebook: "johnny.hastings.16",
     website: "https://johnnyhastingsmusic.com",
+    links: [
+      // His site links two Spotify profiles. The LISTEN ON SPOTIFY button goes to
+      // this one, "Johnny Hastings", which carries Older. A footer icon still
+      // points at an older "Johnny Hastings Blues" profile with no listeners.
+      { kind: "spotify", url: "https://open.spotify.com/artist/7GklfF7VxmoM0n0xGhojCz", source: "johnnyhastingsmusic.com" },
+    ],
     // Two press photos submitted. This is the second — Black Hills pines at
     // golden hour, resonator in hand, centered and facing camera. The other is
     // a graffiti-wall shot: busy behind him and off-center once a portrait
@@ -701,6 +788,44 @@ export const pageArtists: Artist[] = [...headliners, ...allRostered].filter(
 
 export function getArtistBySlug(slug: string): Artist | undefined {
   return pageArtists.find((a) => a.slug === slug);
+}
+
+/** One link as an artist page shows it. */
+export interface ShownLink {
+  kind: LinkKind;
+  url: string;
+  /** The platform's name, or the link's own label. */
+  label: string;
+  /** The artist's own profile, so it belongs in their Person `sameAs`. */
+  own: boolean;
+}
+
+/**
+ * Every link an artist has, in `linkKinds` order: `website` (named Linktree
+ * when it is one), the Instagram and Facebook handles, then `links`. The artist
+ * page's buttons, its Person `sameAs` and the 2026 digital booklet all read
+ * this, so none of them can disagree about where to find an artist.
+ */
+export function artistLinks(a: Artist): ShownLink[] {
+  const found: ShownLink[] = [];
+  const add = (kind: LinkKind, url: string, label?: string) =>
+    found.push({ kind, url, label: label ?? linkKinds[kind].label, own: !label });
+  if (a.website) add(/linktr\.ee/i.test(a.website) ? "linktree" : "website", a.website);
+  if (a.instagram) add("instagram", `https://www.instagram.com/${a.instagram}/`);
+  if (a.facebook) add("facebook", `https://www.facebook.com/${a.facebook}`);
+  for (const l of a.links ?? []) add(l.kind, l.url, l.label);
+
+  // one button per page, however the address was typed
+  const seen = new Set<string>();
+  const order = Object.keys(linkKinds);
+  return found
+    .filter((l) => {
+      const key = l.url.toLowerCase().replace(/^https?:\/\/(www\.)?/, "").replace(/\/+$/, "");
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .sort((x, y) => order.indexOf(x.kind) - order.indexOf(y.kind));
 }
 
 /** Edition facts the pages cite. Derived nowhere — this is the record. */

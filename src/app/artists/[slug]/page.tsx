@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import {
   pageArtists,
   getArtistBySlug,
+  artistLinks,
   artists2026,
   editionsByYear,
   type Artist,
@@ -105,6 +106,10 @@ export default async function ArtistPage({
   ];
   const shown = details.filter(([, v]) => !!v);
 
+  const links = artistLinks(artist);
+  // a band page or an album is shown on the page, but it isn't the artist
+  const sameAs = links.filter((l) => l.own).map((l) => l.url);
+
   const personLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -116,17 +121,7 @@ export default async function ArtistPage({
       ? { image: `https://qcsongwriters.com${artist.photo}` }
       : {}),
     ...(artist.hometown ? { homeLocation: artist.hometown } : {}),
-    ...(artist.instagram || artist.facebook || artist.website
-      ? {
-          sameAs: [
-            artist.website ?? null,
-            artist.instagram
-              ? `https://instagram.com/${artist.instagram}`
-              : null,
-            artist.facebook ? `https://facebook.com/${artist.facebook}` : null,
-          ].filter(Boolean),
-        }
-      : {}),
+    ...(sameAs.length > 0 ? { sameAs } : {}),
     ...(on2026
       ? { performerIn: { "@id": "https://qcsongwriters.com/invitational#event" } }
       : {}),
@@ -215,38 +210,19 @@ export default async function ArtistPage({
                         <p key={i}>{para}</p>
                       ))}
                   </div>
-                  {(artist.instagram || artist.facebook || artist.website) && (
+                  {links.length > 0 && (
                     <div className="flex flex-wrap gap-3 mt-8">
-                      {artist.website && (
+                      {links.map((l) => (
                         <a
-                          href={artist.website}
+                          key={l.url}
+                          href={l.url}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="t-run border border-floor-line px-4 py-2.5 text-chalk-dim hover:text-tape hover:border-tape transition-colors"
                         >
-                          Website
+                          {l.label}
                         </a>
-                      )}
-                      {artist.instagram && (
-                        <a
-                          href={`https://instagram.com/${artist.instagram}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="t-run border border-floor-line px-4 py-2.5 text-chalk-dim hover:text-tape hover:border-tape transition-colors"
-                        >
-                          Instagram
-                        </a>
-                      )}
-                      {artist.facebook && (
-                        <a
-                          href={`https://facebook.com/${artist.facebook}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="t-run border border-floor-line px-4 py-2.5 text-chalk-dim hover:text-tape hover:border-tape transition-colors"
-                        >
-                          Facebook
-                        </a>
-                      )}
+                      ))}
                     </div>
                   )}
                 </div>
