@@ -325,6 +325,10 @@ export const profiledArtists: Artist[] = [
     // 2026 removed 2026-09-04 — he bowed out of playing and Johnny Hastings took
     // his two rounds. The entry stays: he genuinely played 2024 and 2025, and the
     // site filters by year, so deleting him would erase that history.
+    // 2026-09-24: he fills Cody Neeb's Saturday 3 P.M. round, which the schedule
+    // card's schedule.js marks `subFor`. He stays off the 2026 bill on purpose:
+    // the bill is the eighteen invited writers the site counts, and a fill-in
+    // plays one round without joining it. The digital booklet gives him a page.
     year: [2024, 2025],
     instagram: "throughtheheath",
     facebook: "heathjohnsonmusic",
