@@ -249,11 +249,12 @@ body.weekend-tv{
 
 .cta .url{
   font-family:"Courier Prime",ui-monospace,monospace;
-  font-size:15px;
-  letter-spacing:.1em;
+  font-size:13px;
+  letter-spacing:.06em;
   text-transform:uppercase;
   color:var(--tape-ink);
   margin:0;
+  word-break:break-all;
 }
 
 .cta .note{
