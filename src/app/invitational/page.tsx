@@ -3,6 +3,7 @@ import Image from "next/image";
 import { venues } from "@/data/artists";
 import { Tape, RunRow, MarginNote, Slug, Action } from "@/components/run";
 import { TicketCheckout } from "@/components/TicketCheckout";
+import { BookletRow } from "@/components/BookletRow";
 import { ticketUrl, FRIDAY_RSVP_URL } from "@/data/tickets";
 
 export const metadata: Metadata = {
@@ -151,6 +152,14 @@ export default function InvitationalPage() {
               </div>
             </div>
           ))}
+          <div>
+            <p className="t-run text-tape mb-1">Both days</p>
+            <div className="border-t border-floor-line">
+              <BookletRow
+                index={runSheet.reduce((n, d) => n + d.rows.length, 0)}
+              />
+            </div>
+          </div>
         </div>
 
         <div className="mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5">

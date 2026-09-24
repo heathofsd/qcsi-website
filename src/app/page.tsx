@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Tape, RunRow, MarginNote, Slug, Action } from "@/components/run";
 import { ticketUrl } from "@/data/tickets";
 import { TicketCheckout } from "@/components/TicketCheckout";
+import { BookletRow } from "@/components/BookletRow";
 
 const testimonials = [
   {
@@ -131,6 +132,7 @@ export default function Home() {
                 )}
               </RunRow>
             ))}
+            <BookletRow index={weekend.length} />
           </div>
           {/* What is settled, what is not, and the capture attached to it —
               rather than one dim line saying "soon". */}
